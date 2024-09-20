@@ -8,16 +8,6 @@ type Props = {
     notes: string
 }
 
-// type StarRatingProps = {
-//     rating: number
-// }
-
-// const StarRating = (props: StarRatingProps) =>{
-//     return (
-//         <span className={`text-slate-${600-props.rating*100}`}>★</span>
-//     )
-// }
-
 const MemberSkills = ({name, role, imgUrl, skills, notes}: Props) => {
   return (
     <div className="border-2 p-8 rounded-md dark:border-2 dark:border-slate-800 min-h-[360px]">

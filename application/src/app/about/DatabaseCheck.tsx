@@ -1,5 +1,5 @@
 import React from 'react'
-import prisma from '../../db/prisma';
+import prisma from "../../../prisma/prisma"
 
 const DatabaseCheck = async () => {
     const user = await prisma.user.findUnique({
