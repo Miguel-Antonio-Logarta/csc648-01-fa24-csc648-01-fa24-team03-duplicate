@@ -1,22 +1,20 @@
 import styles from "./page.module.css"
 import TeamCard from "./TeamCard";
-// import { promises as fs } from 'fs';
-// import MemberSkills from "./MemberSkills";
-import DatabaseCheck from "./DatabaseCheck";
+import { promises as fs } from 'fs';
+import MemberSkills from "./MemberSkills";
+// import DatabaseCheck from "./DatabaseCheck";
 
-// type MemberSkillsType = {
-//     name: string
-//     role: string
-//     imgUrl: string
-//     skills: {[id: string]: number}
-//     notes: string
-// }
+type MemberSkillsType = {
+    name: string
+    role: string
+    imgUrl: string
+    skills: {[id: string]: number}
+    notes: string
+}
 
 const Page = async () => {
-    // const file = await fs.readFile(process.cwd() + '/src/app/about/memberSkills.json', 'utf8');
-    // const data: MemberSkillsType[] = JSON.parse(file);
-
-    
+    const file = await fs.readFile(process.cwd() + '/src/app/about/memberSkills.json', 'utf8');
+    const data: MemberSkillsType[] = JSON.parse(file);
 
     return (
         <div className={styles.outer}>
@@ -82,7 +80,7 @@ const Page = async () => {
                             <p className="m-0"><b>4</b> = I&apos;ve used it (maybe once or twice)</p>
                             <p><b>5</b> = Significantly familiar (I&apos;ve used it in past projects)</p>
                         </div>
-                        {/* <div className="flex flex-col flex-wrap gap-8">
+                        <div className="flex flex-col flex-wrap gap-8">
                             {data.map((member: MemberSkillsType) =>
                                 <MemberSkills
                                     key={member.name}
@@ -93,9 +91,9 @@ const Page = async () => {
                                     notes={member.notes}
                                     />
                             )}
-                        </div> */}
+                        </div>
                     </section>
-                    <DatabaseCheck />
+                    {/* <DatabaseCheck /> */}
                 </section>
             </main>
         </div>
