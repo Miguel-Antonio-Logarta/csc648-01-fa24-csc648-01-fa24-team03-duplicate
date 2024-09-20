@@ -2,7 +2,7 @@ import styles from "./page.module.css"
 import TeamCard from "./TeamCard";
 // import { promises as fs } from 'fs';
 // import MemberSkills from "./MemberSkills";
-// import DatabaseCheck from "./DatabaseCheck";
+import DatabaseCheck from "./DatabaseCheck";
 
 // type MemberSkillsType = {
 //     name: string
@@ -95,7 +95,7 @@ const Page = async () => {
                             )}
                         </div> */}
                     </section>
-                    {/* <DatabaseCheck /> */}
+                    <DatabaseCheck />
                 </section>
             </main>
         </div>
