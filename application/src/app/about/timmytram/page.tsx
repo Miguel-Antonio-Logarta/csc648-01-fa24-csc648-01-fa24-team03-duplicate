@@ -22,7 +22,7 @@ const Page = () => {
                     <div className="flex flex-col justify-center items-center">
                         <p className="font-bold underline underline-offset-2">About Me:</p>
                         <p className="max-w-96 text-wrap">
-                            Hi, my name's Timmy Tram and I plan on graduating 
+                            Hi, my name&apos;s Timmy Tram and I plan on graduating 
                             from SFSU with a Computer Science Major  and Video Game Studies Minor by the 
                             end of the Fall 2024 semester.
                         </p>
@@ -31,7 +31,7 @@ const Page = () => {
                         </p>
                         <p className="max-w-96 text-wrap">
                             My hobbies include playing video games, coding on the side, and working out.
-                            I'm currently playing Deadlock, but I enjoy a variety of games including FPS, RPGs, MOBAs, etc.
+                            I&apos;m currently playing Deadlock, but I enjoy a variety of games including FPS, RPGs, MOBAs, etc.
                             I also really like Bugcat Capoo.
                         </p>
                     </div>

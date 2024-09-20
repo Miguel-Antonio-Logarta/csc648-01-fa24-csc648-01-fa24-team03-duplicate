@@ -1,12 +1,8 @@
-"use client";
-
 import styles from "./page.module.css";
-import { useState } from "react";
 import Image from 'next/image';
 import cat from './cat.png';
 
 const Page = () => {
-    const [visible, setVisible] = useState(false);
 
     return (
         <div className={styles.outer}>

@@ -1,5 +1,5 @@
-import { profile } from 'console';
 import styles from './page.module.css';
+import Image from 'next/image';
 
 const Page = () => {
     return (
@@ -8,7 +8,7 @@ const Page = () => {
                 Welcome to my about page, my name is John!
             </div>
             <div className={styles.imageContainer}>
-                <img src="/cryingjordanmeme.jpg" className={styles.profileImage} />
+                <Image src="/cryingjordanmeme.jpg" width={200} height={200} className={styles.profileImage} alt='Crying Jordan'/>
             </div>
             <div className={styles.body}>
                 I am a software engineer with a passion for building applications that are both functional and beautiful.

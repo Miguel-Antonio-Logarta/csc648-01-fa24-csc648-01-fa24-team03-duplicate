@@ -16,10 +16,10 @@ const Page = () => {
             <p style={{ marginTop: '20px', fontSize: '16px', lineHeight: '1.5' }}>
                 I am your friendly neighborhood Scrum Master, ready to make everyone <strong>document</strong>, 
                 schedule endless <strong>meetings</strong>, and just be an overall <strong>pain</strong> to the dev teams.
-                When I'm not terrorizing developers with meetings, I’m probably plotting the next retrospective. 
+                When I&apos;m not terrorizing developers with meetings, I&apos;m probably plotting the next retrospective. 
             </p>
             <p style={{ marginTop: '20px', fontSize: '16px', lineHeight: '1.5' }}>
-                Don't worry, I come with coffee… and maybe some donuts, if you’re lucky. 
+                Don&apos;t worry, I come with coffee… and maybe some donuts, if you&apos;re lucky. 
                 My special skills include creating meeting invites faster than you can say “deploy”.
             </p>
         </div>
