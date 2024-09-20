@@ -1,0 +1,149 @@
+[
+  {
+    "name": "Miguel Logarta",
+    "role": "Team Lead",
+    "imgUrl": "/teammembers/miguellogarta.jpg",
+    "skills": {
+      "Javascript": 5,
+      "React.js": 5,
+      "Next.js": 3,
+      "Typescript": 5,
+      "Tailwind CSS": 3,
+      "MongoDB": 2,
+      "Prisma": 3,
+      "MongoDB Atlas": 1,
+      "Vercel": 2,
+      "NextAuth.js": 1,
+      "Figma": 4,
+      "Trello": 5,
+      "Jest": 5
+    },
+    "notes": "Next.js: Quickly familiarize myself with Next.js within 2 weeks using the course offered by Vercel or on YouTube. Make a simple app. Tailwind CSS: Slowly incorporate Tailwind CSS in a project to learn Tailwind.\nMongoDB: Take an online course in MongoDB\nPrisma: Read the documentation this week while trying to set up our MongoDB instance.\nMongoDB Atlas: Read the documentation in the upcoming future when we try to deploy our database to AWS\nVercel: Read the documentation this week to help scrum master deploy the website\nNextAuth.js: Read the documentation once the project needs to incorporate authentication (login system)"
+  },
+  {
+    "name": "Alan Yu",
+    "role": "Scrum Master",
+    "imgUrl": "/teammembers/alanyu.png",
+    "skills": {
+      "Javascript": 4,
+      "React.js": 3,
+      "Next.js": 3,
+      "Typescript": 3,
+      "Tailwind CSS": 2,
+      "MongoDB": 3,
+      "Prisma": 1,
+      "MongoDB Atlas": 2,
+      "Vercel": 1,
+      "NextAuth.js": 2,
+      "Figma": 5,
+      "Trello": 1,
+      "Jest": 1
+    },
+    "notes": "MongoDB Atlas: Primary technology to learn. Over the next 3-4 weeks, Alan will learn the ins and outs of MongoDB Atlas to reliably deploy our MongoDB instance and also quickly diagnose any problems if anything happens. \nVercel: Primary technology to learn. Over the next 3-4 weeks, Alan will learn the ins and outs of Vercel to reliably deploy our Next.js website and also quickly diagnose any problems should anything happen. \nTrello: Learn Trello, a project management tool, to maximize team efficiency and coordination."
+  },
+  {
+    "name": "Timmy Tram",
+    "role": "Back-end",
+    "imgUrl": "/teammembers/timmytram.png",
+    "skills": {
+      "Javascript": 5,
+      "React.js": 4,
+      "Next.js": 2,
+      "Typescript": 3,
+      "Tailwind CSS": 4,
+      "MongoDB": 4,
+      "Prisma": 2,
+      "MongoDB Atlas": 4,
+      "Vercel": 1,
+      "NextAuth.js": 2,
+      "Figma": 2,
+      "Trello": 2,
+      "Jest": 2
+    },
+    "notes": "Next.js: Primary technology to learn. Timmy along with his other back-end team member, John, will learn how to use Next.js over the next 3-4 weeks to familiarize themselves with Server Side Rendering. They will also learn how to handle API routes in Next.js.\nTypescript: Timmy will learn Typescript by slowly incorporating it into his projects over the course of the semester.\nPrisma: Primary technology to learn. Timmy will have to learn how to use an ORM to interact with our MongoDB instance. Over the next 3-4 weeks he will learn how to use Prisma.\nNextAuth.js: Primary technology to learn. Timmy will have to get familiar with NextAuth.js once we start implementing authentication into our project. Learning this can be postponed until we need to use it in the project. \nJest: Familiarize with Jest so that we can have reliable bug-free code." 
+  },
+  {
+    "name": "Halia Tavares",
+    "role": "Front-end",
+    "imgUrl": "/teammembers/haliatavares.png",
+    "skills": {
+      "Javascript": 3,
+      "React.js": 2,
+      "Next.js": 2,
+      "Typescript": 1,
+      "Tailwind CSS": 1,
+      "MongoDB": 2,
+      "Prisma": 2,
+      "MongoDB Atlas": 2,
+      "Vercel": 1,
+      "NextAuth.js": 2,
+      "Figma": 3,
+      "Trello": 2,
+      "Jest": 1
+    },
+    "notes": "Next.js: Primary technology to learn. Halia along with her other front-end team member, Diane, will learn how to use Next.js over the next 3-4 weeks to familiarize themselves with React components. They will also learn how to style these components in Next.js.\nTailwind CSS: Primary technology to learn. Halia will learn how to use Tailwind CSS over the course of 3-4 weeks so that she can quickly build and design responsive modern UI for our website.\nFigma: Figma is an optional tool to learn, but it can be a great way to prototype designs before moving on to development. Halia will learn how to use Figma over the next 3-4 weeks as she tries to incorporate it into her front-end work."
+  },
+  {
+    "name": "Diane Blise",
+    "role": "Front-end",
+    "imgUrl": "/teammembers/dianeblise.jpg",
+    "skills": {
+      "Javascript": 5,
+      "React.js": 4,
+      "Next.js": 4,
+      "Typescript": 2,
+      "Tailwind CSS": 1,
+      "MongoDB": 4,
+      "Prisma": 2,
+      "MongoDB Atlas": 3,
+      "Vercel": 3,
+      "NextAuth.js": 2,
+      "Figma": 2,
+      "Trello": 1,
+      "Jest": 1
+    },
+    "notes": "Next.js: Primary technology to learn. Diane along with her other front-end team member, Halia, will learn how to use Next.js over the next 3-4 weeks to familiarize themselves with React components. They will also learn how to style these components in Next.js.\nTailwind CSS: Primary technology to learn. Diane will learn how to use Tailwind CSS over the course of 3-4 weeks so that she can quickly build and design responsive modern UI for our website.\nFigma: Figma is an optional tool to learn, but it can be a great way to prototype designs before moving on to development. Halia will learn how to use Figma over the next 3-4 weeks as she tries to incorporate it into her front-end work."  
+  },
+  {
+    "name": "John Bagwell",
+    "role": "Back-end",
+    "imgUrl": "/teammembers/johnbagwell.jpg",
+    "skills": {
+      "Javascript": 5,
+      "React.js": 3,
+      "Next.js": 3,
+      "Typescript": 2,
+      "Tailwind CSS": 1,
+      "MongoDB": 4,
+      "Prisma": 1,
+      "MongoDB Atlas": 3,
+      "Vercel": 1,
+      "NextAuth.js": 2,
+      "Figma": 2,
+      "Trello": 1,
+      "Jest": 1
+    },
+    "notes": "Next.js: Primary technology to learn. John along with his other back-end team member, Timmy, will learn how to use Next.js over the next 3-4 weeks to familiarize themselves with Server Side Rendering. They will also learn how to handle API routes in Next.js.\nTypescript: John will learn Typescript by slowly incorporating it into his projects over the course of the semester.\nPrisma: Primary technology to learn. John will have to learn how to use an ORM to interact with our MongoDB instance. Over the next 3-4 weeks he will learn how to use Prisma.\nNextAuth.js: Primary technology to learn. John will have to get familiar with NextAuth.js once we start implementing authentication into our project. Learning this can be postponed until we need to use it in the project. \nJest: Familiarize with Jest so that we can have reliable bug-free code."
+  },
+  {
+    "name": "Su Tun",
+    "role": "Git Master",
+    "imgUrl": "/teammembers/sutun.png",
+    "skills": {
+      "Javascript": 4,
+      "React.js": 2,
+      "Next.js": 3,
+      "Typescript": 2,
+      "Tailwind CSS": 1,
+      "MongoDB": 2,
+      "Prisma": 1,
+      "MongoDB Atlas": 2,
+      "Vercel": 1,
+      "NextAuth.js": 2,
+      "Figma": 2,
+      "Trello": 1,
+      "Jest": 1
+    },
+    "notes": "Next.js: Primary technology to learn. Su will learn how to use Next.js over the next 3-4 weeks to familiarize herself with Next.js. She can choose to focus on front-end or back-end work.\nVercel: Su will have to familiarize herself with Vercel to make it easier to deploy the project to the web server.\nTrello: Learn Trello, a project management tool, to maximize team efficiency and coordination.\nJest: Primary technology to learn. Su will be the main person in charge of making test cases for the project. She will learn how to use this technology over the course of 3-4 weeks."
+  }
+]

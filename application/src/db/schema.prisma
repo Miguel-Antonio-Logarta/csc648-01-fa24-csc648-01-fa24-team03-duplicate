@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+
+// When setting up your local .env variable,
+// Acquire the connection string from mongodb atlas and click on the connect button
+// It should give you a connection string that looks similar to this:
+// DATABASE_URL="mongodb+srv://<username>:<password>@csc648-01-team03-cluste.g1ef0.mongodb.net/<db_name>retryWrites=true&w=majority&appName=CSC648-01-Team03-Cluster"
+// Replace <username> with your username, <password> with your password, and <db_name> to the name of your database. We're using "test_db" as our <db_name> for now.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+}

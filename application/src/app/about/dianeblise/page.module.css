@@ -1,0 +1,79 @@
+.pageContainer{
+    padding: 5%;
+    background-color: black;
+    background-image: url("nightsky2.jpg");
+    background-repeat: repeat-x;
+    background-position: top;
+    background-attachment: fixed;
+    position: relative;
+    min-height: 100vh;
+}
+
+.profileHeader{
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    background-color: rgba(7,53,87,0.8);
+    border: none;
+    border-radius: .35em;
+    
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.profileImage{
+    margin: 1.5%;
+    width: 18%;
+    border: none;
+    overflow: hidden;
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+
+}
+
+.profileName{
+    margin: 2%;
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+}
+
+.bioWrap{
+    color: white;
+    background-color: rgb(113,155,183, 0.7);
+    border: none;
+    border-radius: .55em;
+    font-size: 20px;
+
+    display: flex;
+    /* grid-template-columns: 25% 25% 25% 25%; */
+    flex-flow: row wrap;
+    justify-content: center;
+    row-gap: 8px;
+    column-gap: 20px;
+    padding-top: 15px;
+    padding-left: 12%;
+    padding-right: 12%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.bioText{
+    margin: 1%;
+    align-self: center;
+    justify-self: center;
+}
+
+.bioImage{
+    margin: 1%;
+    align-self: center;
+    justify-self: center;
+    overflow: hidden;
+    border-radius: .65em;
+}

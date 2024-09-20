@@ -1,0 +1,28 @@
+.header {
+    text-align: center;
+}
+
+.body {
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.profileImage {
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    align-items: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Add a container class for centering */
+.image-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+}

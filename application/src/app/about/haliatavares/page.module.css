@@ -1,0 +1,20 @@
+.outer {
+    /* background-color: white; */
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    max-width: 100%; /* Responsive sizing */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space below the image */
+}
+
+.text {
+    margin: 0; /* Optional: reset margin if needed */
+    padding: 10px 0; /* Optional: add vertical padding for spacing */
+    padding-left: 30px;
+}
