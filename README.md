@@ -1,11 +1,14 @@
 
+<h1 align="center">
+Coffee Spot: an Application Focused on Finding Third Spaces
+</h1>
+<p align="center">
+   Created by: CSC648-01-FA24-team03
+</p>
+
 <div align="center">
    <img src="Milestones/M1/logo.png" alt="Coffee Spot Logo" width="256" align="center"/>
 </div>
-
-# Coffee Spot: an Application Focused on Finding Third Spaces
-Created by: CSC648-01-FA24-team03
-
 
 **Application URL: <https://csc648-01-fa24-csc648-01-fa24-team03-duplicate-w53a.vercel.app/>**
 
