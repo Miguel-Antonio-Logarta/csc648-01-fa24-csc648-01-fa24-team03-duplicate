@@ -4,7 +4,7 @@ import prisma from "../../../../../../prisma/prisma";
 // defining the expected data for a review
 interface ReviewData {
     rating: number;
-    description: string;
+    content: string;
     userId: string;
 }
 
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
 
         const requiredFields: (keyof ReviewData)[] = [
             'rating',
-            'description',
+            'content',
             'userId'
         ]
 
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
         const review = await prisma.review.create({
             data: {
                 rating: body.rating,
-                description: body.description,
+                content: body.content,
                 locationId: locationId,
                 userId: body.userId
             }

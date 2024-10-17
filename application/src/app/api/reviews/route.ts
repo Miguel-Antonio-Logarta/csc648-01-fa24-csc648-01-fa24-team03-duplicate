@@ -12,8 +12,8 @@ export async function GET() {
             select: {
                 id: true,
                 rating: true,
-                description: true,
-                timestamp: true
+                content: true,
+                creationDate: true
             }
         });
 

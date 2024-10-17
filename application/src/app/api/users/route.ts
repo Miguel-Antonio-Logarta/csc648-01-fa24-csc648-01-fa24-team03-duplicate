@@ -25,7 +25,7 @@ export async function GET() {
         username: true,
         email: true,
         role: true,
-        timestamp: true,
+        creationDate: true,
       },
     });
 
@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
         username: newUser.username,
         email: newUser.email,
         role: newUser.role,
-        createdAt: newUser.timestamp,
+        creationDate: newUser.creationDate,
       },
       { status: 201 }
     );

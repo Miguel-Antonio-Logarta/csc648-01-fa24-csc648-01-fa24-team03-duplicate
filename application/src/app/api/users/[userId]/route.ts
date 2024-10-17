@@ -102,7 +102,7 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
             email: user.email,
             username: user.username,
             role: user.role,
-            timestamp: user.timestamp,
+            creationDate: user.creationDate,
         });
     } catch (error: any) {
         console.log(`[ERROR]: Error in GET of api/users/[userId]/route.ts: ${error}`);
