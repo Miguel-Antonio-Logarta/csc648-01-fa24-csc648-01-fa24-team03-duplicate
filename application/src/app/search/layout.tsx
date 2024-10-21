@@ -1,11 +1,11 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 
 const Layout = ({children}: {children: React.ReactNode}) => {
     return (
-        <body className="min-h-screen max-w-full">
+        <div className="min-h-screen max-w-full grid grid-rows-[auto_1fr]">
             <Navbar />
             {children}
-        </body>
+        </div>
     );
 }
 

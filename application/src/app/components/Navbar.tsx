@@ -3,7 +3,7 @@ import UserCircle from "./icons/UserCircle";
 
 const Navbar = () => {
     return (
-        <nav className="flex h-16 px-8 no-wrap items-stretch min-w-full shadow-md justify-between">
+        <nav className="z-50 flex h-16 px-8 no-wrap items-stretch min-w-full shadow-md justify-between">
             <div className="flex items-stretch gap-x-4">
                 <div className="font-josefin uppercase text-xl flex items-center mr-4">Coffee Spot</div>
                 <div className="font-shantell flex items-stretch py-3">
