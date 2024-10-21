@@ -1,11 +1,12 @@
 "use client"
 
+import SearchResults from "./SearchResults";
 import Map from "./Map";
 
 const Page = () => {
     return (
         <main className="grid grid-cols-[2fr_3fr]">
-            <div className="shadow-2xl z-10">Search</div>
+            <SearchResults />
             <Map />
         </main>
     );
