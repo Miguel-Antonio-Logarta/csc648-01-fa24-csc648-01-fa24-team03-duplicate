@@ -56,10 +56,12 @@ const Page = async () => {
 
     // example of how to fetch data from the API
     // in production YOU MUST DEFINE NEXT_PUBLIC_API_URL in your .env configuration for VERCEL
-    const locationsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations`);
-    const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`);
-    const reviewsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews`);
-    const bookmarksResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookmarks`);
+    // no cache is needed for this page, as we want to fetch the latest data.
+    // should read more on optional values for fetch with respect to caching.
+    const locationsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations` , { cache: 'no-store' });
+    const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users` , { cache: 'no-store' });
+    const reviewsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews`, { cache: 'no-store' });
+    const bookmarksResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/bookmarks`, { cache: 'no-store' });
 
     // we should handle errors here
     // what we could do is make an error page component and show it if we cannot fetch data.
@@ -81,6 +83,7 @@ const Page = async () => {
     const users = await usersResponse.json();
     const reviews = await reviewsResponse.json();
     const bookmarks = await bookmarksResponse.json();
+    
 
     return (
         <div>
