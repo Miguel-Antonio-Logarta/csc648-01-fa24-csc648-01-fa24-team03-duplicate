@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../../prisma/prisma";
 
+export const dynamic = 'force-dynamic'
+
 /**
  * @Endpoint - GET /api/locations/locationReview/{locationId}
  * @description - Fetches all reviews for a specific location given its id. 

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../../prisma/prisma";
 
+export const dynamic = 'force-dynamic'
+
 // defining the data that is required to create a bookmark.
 interface BookmarkData {
     userId: string;

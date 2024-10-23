@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../prisma/prisma";
 
+export const dynamic = 'force-dynamic'
+
 /**
  * @Endpoint - GET /api/reviews/{reviewId}
  * @description - Fetches a single review from the database given a review id. 
