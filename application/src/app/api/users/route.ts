@@ -88,6 +88,11 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // create user settings for this user
+    await prisma.userSettings.create({
+      data: { id: newUser.id }
+    });
+
     return NextResponse.json(
       {
         username: newUser.username,
