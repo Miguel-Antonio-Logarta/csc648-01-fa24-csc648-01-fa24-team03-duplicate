@@ -82,7 +82,7 @@ const Page = async () => {
     const bookmarks = await fetchData<Bookmark[]>('/api/bookmarks');
 
     return (
-        <div>
+        <div className="p-10">
             <h1 className="justify-self-center">Prototype Database Check</h1>
 
             <div className="grid grid-cols-4 gap-4">
@@ -97,7 +97,7 @@ const Page = async () => {
                                 {locations.map((location: Location) => (
                                     <li
                                         key={location.id}
-                                        className="p-4 border border-gray-600 rounded-lg shadow-md bg-black text-white"
+                                        className="p-4 border border-gray-600 rounded-lg shadow-md bg-white text-black"
                                     >
                                         <p className="font-bold text-lg mb-2">Name: {location.name}</p>
                                         <div className="text-gray-300">
@@ -182,7 +182,7 @@ const Page = async () => {
                                 {users.map((user: User) => (
                                     <li
                                         key={user.id}
-                                        className="p-4 border border-gray-600 rounded-lg shadow-md bg-black text-white"
+                                        className="p-4 border border-gray-600 rounded-lg shadow-md bg-white text-black"
                                     >
                                         <p className="font-bold text-lg mb-2">Username: {user.username}</p>
                                         <div className="text-gray-300">
@@ -217,7 +217,7 @@ const Page = async () => {
                         reviews.length > 0 ? (
                             <ul className="space-y-4">
                                 {reviews.map((review: Review) => (
-                                    <li key={review.id} className="p-4 border border-gray-600 rounded-lg shadow-md bg-black text-white">
+                                    <li key={review.id} className="p-4 border border-gray-600 rounded-lg shadow-md bg-white text-black">
                                         <p className="mb-1">Rating: {review.rating}</p>
                                         <p className="mb-1">Content: {review.content}</p>
                                         <p className="mb-1">Creation Date: {new Date(review.creationDate).toLocaleDateString()}</p>
@@ -244,7 +244,7 @@ const Page = async () => {
                         bookmarks.length > 0 ? (
                             <ul className="space-y-4">
                                 {bookmarks.map((bookmark: Bookmark) => (
-                                    <li key={bookmark.id} className="p-4 border border-gray-600 rounded-lg shadow-md bg-black text-white">
+                                    <li key={bookmark.id} className="p-4 border border-gray-600 rounded-lg shadow-md bg-white text-black">
                                         <p className="mb-1">User: {bookmark.user.username}</p>
                                         <p className="mb-1">Creation Date: {new Date(bookmark.creationDate).toLocaleDateString()}</p>
                                     </li>
