@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../../prisma/prisma";
 
+export const dynamic = 'force-dynamic'
+
 /**
  * @Endpoint - GET /api/bookmarks/userBookmarks/{userId}
  * @description - Fetches all bookmarks for a specific user given their id. 

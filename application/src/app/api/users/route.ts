@@ -3,6 +3,8 @@ import { Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import prisma from "../../../../prisma/prisma";
 
+export const dynamic = 'force-dynamic'
+
 // defining the expected data from client
 interface UserData {
   username: string;

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../../prisma/prisma";
 
+export const dynamic = 'force-dynamic'
+
 // defining the expected data for a review
 interface ReviewData {
     rating: number;
