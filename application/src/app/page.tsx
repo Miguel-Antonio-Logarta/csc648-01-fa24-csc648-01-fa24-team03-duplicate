@@ -8,8 +8,12 @@ export default function Home() {
       <main className={styles.main}>
         <p>This is the home page of</p>
         <b><h1>CSC648-01-FA24-team03</h1></b>
-        <Link href="about" className={componentStyles.button}>See our about page →</Link>
-        <Link href="prototype" className={componentStyles.button}>See our Database information →</Link>
+        <div className="flex flex-col gap-5">
+          <Link href="prototype" className={componentStyles.button}>See our vertical prototype! →</Link>
+          {/* <Link href="home" className={componentStyles.button}>Go to test home page →</Link> */}
+          <Link href="search" className={componentStyles.button}>Go to search page →</Link>
+          <Link href="about" className={`${componentStyles.button}`}>See our about page →</Link>
+        </div>
       </main>
     </div>
   );
