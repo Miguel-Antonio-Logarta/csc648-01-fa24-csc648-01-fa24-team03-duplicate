@@ -2,6 +2,10 @@ import { useState, useCallback, memo } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import { Marker } from '@react-google-maps/api';
 
+interface coordinate extends google.maps.LatLngLiteral {
+    id: number
+}
+
 const containerStyle = {
     width: '100%',
     height: '100%',
@@ -29,20 +33,24 @@ const mapOptions: google.maps.MapOptions = {
       ],
 }
 
-const testCoordinates: google.maps.LatLngLiteral[] = [
+const testCoordinates:  coordinate[] = [
     {
+        id: 1,
         lat: 37.72145834654513, 
         lng: -122.47828226733533
     },
     {
+        id: 2,
         lat: 37.76882261237542, 
         lng: -122.46731071747753
     },
     {
+        id: 3,
         lat: 37.72212295611043, 
         lng: -122.47859151267485
     },
     {
+        id: 4,
         lat: 37.740810098737626, 
         lng: -122.50549875122867
     },
@@ -84,7 +92,7 @@ function Map() {
           {/* Child components, such as markers, info windows, etc. */}
           {/* TODO: On click, scroll to the listing on the left */}
           {/* TODO: On click, have a label appear that shows the title and an image of the location */}
-          {testCoordinates.map((coordinate) => <Marker position={coordinate} />)}
+          {testCoordinates.map((coordinate) => <Marker key={coordinate.id} position={coordinate} />)}
         </GoogleMap>
       ) : (
         <div className="bg-slate-500 flex align-center justify-center">

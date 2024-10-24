@@ -3,6 +3,7 @@ import Listing from "./Listing"
 
 const testData = [
   {
+    id: 1,
     img: "",
     title: "J. Paul Leonard Library",
     category: "University Library",
@@ -11,6 +12,7 @@ const testData = [
     busyness: 3
   },
   {
+    id: 2,
     img: "",
     title: "Ocean View Branch Library",
     category: "University Library",
@@ -19,6 +21,7 @@ const testData = [
     busyness: 2
   },
   {
+    id: 3,
     img: "",
     title: "Marigold Cafe",
     category: "Cafe",
@@ -27,6 +30,7 @@ const testData = [
     busyness: 2
   },
   {
+    id: 4,
     img: "",
     title: "Home Coffee Roasters",
     category: "Cafe",
@@ -49,6 +53,7 @@ function SearchResults() {
         <div className="flex flex-col gap-6 mt-6">
           {testData.map((data) => 
             <Listing 
+              key={data.id}
               img={data.img}
               title={data.title}
               category={data.category}
