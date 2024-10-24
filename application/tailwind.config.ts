@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        josefin: ['var(--font-josefin-sans)'],
+        shantell: ['var(--font-shantell-sans)'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
