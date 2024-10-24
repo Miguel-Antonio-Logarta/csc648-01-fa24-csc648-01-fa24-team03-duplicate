@@ -21,7 +21,7 @@ const LoginForm: React.FC = () => {
           <label htmlFor="password" className="sr-only">Password</label>
           <input type="password" id="password" className="w-full bg-transparent border-b-2 border-rose-400 border-dashed" aria-label="Password" />
         </div>
-        <a href="/signup" className="mt-3 text-xs tracking-wider">don't have an account?</a>
+        <a href="/signup" className="mt-3 text-xs tracking-wider">don&apos;t have an account?</a>
         <button type="submit" className="self-center px-4 py-1.5 mt-10 text-sm font-bold text-center text-white drop-shadow-mdç bg-sage rounded-[35px] w-[86px] max-md:mt-10">
           Log In!
         </button>
@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
         <div className="self-stretch mt-1.5 max-md:max-w-full">
           <div className="flex gap-5 max-md:flex-col">
             <div className="flex flex-col w-[55%] max-md:ml-0 max-md:w-full">
-              <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0540ee4e9866f761379c86adda960de2ef26a725a46efeb28976bd1c2e7fecf?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225" alt="Login illustration" className="object-contain grow w-full aspect-[1.03] max-w-[279px]" />
+              {/* <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0540ee4e9866f761379c86adda960de2ef26a725a46efeb28976bd1c2e7fecf?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225" alt="Login illustration" className="object-contain grow w-full aspect-[1.03] max-w-[279px]" /> */}
             </div>
             <LoginForm />
           </div>

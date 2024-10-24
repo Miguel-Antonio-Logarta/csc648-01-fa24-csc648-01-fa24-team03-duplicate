@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 // Header Component
@@ -44,7 +45,7 @@ const MainContent: React.FC<MainContentProps> = ({ imageSrc }) => {
 
   return (
     <main className="flex flex-col items-center mt-10 max-w-full text-xs tracking-wider">
-      <img loading="lazy" src={imageSrc} alt="Main content" className="object-contain max-w-full aspect-[1.91] w-[507px]" />
+      <Image loading="lazy" src={imageSrc} alt="Main content" className="object-contain max-w-full aspect-[1.91] w-[507px]" width={507} height={100}/>
       <Footer links={footerLinks} />
     </main>
   );
@@ -80,7 +81,7 @@ interface ImageComponentProps {
 }
 
 const ImageComponent: React.FC<ImageComponentProps> = ({ src, alt, className }) => {
-  return <img loading="lazy" src={src} alt={alt} className={className} />;
+  return <Image loading="lazy" src={src} alt={alt} className={className} />;
 };
 
 // Page (includes Header and MainContent)
