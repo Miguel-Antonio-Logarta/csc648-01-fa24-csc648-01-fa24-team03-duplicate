@@ -115,7 +115,6 @@ export async function POST(req: NextRequest) {
  * @returns - the user that was edited.
  */
 export async function PATCH(req: NextRequest) {
-  console.log("PATCH request received");
   const session = await getServerSession(authOptions);
 
   // check if user is logged in
