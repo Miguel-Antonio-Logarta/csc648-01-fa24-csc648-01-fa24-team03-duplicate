@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 import useCreateLocation from '../../hooks/useCreateLocation';
 import Unauthorized from '../../components/Unauthorized';
 
-
 const Page = () => {
     const { data: session, status } = useSession();
     const { createLocation, loading } = useCreateLocation();
@@ -32,7 +31,6 @@ const Page = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         formData.seatingCapacity = Number(formData.seatingCapacity);
-        console.log(formData);
         await createLocation(formData, session);
     }
 
@@ -45,10 +43,11 @@ const Page = () => {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-500 to-pink-500">
+        <div className="p-8 flex items-center justify-center min-h-screen" style={{ background: 'linear-gradient(to right, #FCE0D3, #E89CA8)'}}>
             <form
                 onSubmit={handleSubmit}
                 className="space-y-6 p-8 bg-white shadow-lg rounded-lg max-w-lg w-full"
+                autoComplete='off'
             >
                 <h2 className="text-3xl font-bold text-center text-gray-800">Create Location Form</h2>
 
@@ -118,6 +117,7 @@ const Page = () => {
                         <option value="">Select a category</option>
                         <option value="LIBRARY">Library</option>
                         <option value="CAFE">Cafe</option>
+                        <option value="PARK">Park</option>
                     </select>
                 </div>
 
@@ -183,9 +183,9 @@ const Page = () => {
 
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition duration-200 transform hover:scale-105"
+                    className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600"
                 >
-                    Submit
+                    {loading ? 'Creating Location...' : 'Create Location'}
                 </button>
             </form>
         </div>

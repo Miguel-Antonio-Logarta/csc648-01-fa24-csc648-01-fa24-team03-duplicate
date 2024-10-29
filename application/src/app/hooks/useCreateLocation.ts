@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 /**
  * @Notes - Use this hook in the frontend to create a location.
@@ -27,14 +28,16 @@ const useCreateLocation = () => {
 
             const data = await res.json();
             if(data.error) throw new Error(data.error);
-
+            toast.success('Location created successfully!');
         } catch (error: any) {
-
+            toast.error(error.message);
             return;
+        } finally {
+            setLoading(false);
         }
     };
 
-    return { createLocation, loading, status };
+    return { createLocation, loading };
 };
 
 export default useCreateLocation;

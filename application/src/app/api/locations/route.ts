@@ -44,7 +44,7 @@ export async function GET() {
                         openTime: true,
                         closeTime: true
                     },
-                    orderBy: { 
+                    orderBy: {
                         // Need to order the operating hours by day of the week, starting from Monday
                         // One would think we would do this by day: 'asc', but that doesn't work
                         id: 'asc'
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     if (!session || session.user.role !== 'ADMIN') {
         return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
     }
-    
+
     try {
         const body: LocationData = await req.json();
         const requiredFields: (keyof LocationData)[] = [
@@ -83,13 +83,18 @@ export async function POST(req: NextRequest) {
             'operatingHours'
         ];
 
-        const missingFields = requiredFields.filter(field => !body[field] === undefined);
+        // Check for missing fields and ensure fields are not empty strings
+        const missingFields = requiredFields.filter(field => {
+            const value = body[field];
+            return value === undefined || (typeof value === 'string' && value.trim() === '');
+        });
 
         if (missingFields.length > 0) {
-            return NextResponse.json({ error: `Missing fields: ${missingFields.join(', ')}` }, { status: 400 });
+            return NextResponse.json({ error: `Missing or empty fields: ${missingFields.join(', ')}` }, { status: 400 });
         }
 
-        if(body.operatingHours.length === 0) {
+        // Ensure operatingHours is an array and not empty
+        if (!Array.isArray(body.operatingHours) || body.operatingHours.length === 0) {
             return NextResponse.json({ error: "No operating hours provided." }, { status: 400 });
         }
 
@@ -103,7 +108,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Location already exists." }, { status: 400 });
         }
 
-        
+
 
         //do a transaction to create the location and its operating hours in one go
         const location = await prisma.$transaction(async (prisma) => {
