@@ -1,0 +1,4 @@
+.listing {
+    display: grid;
+    grid-template-areas: "image title";
+}
