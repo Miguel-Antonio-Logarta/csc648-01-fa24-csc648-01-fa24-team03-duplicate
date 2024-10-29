@@ -1,32 +1,44 @@
-import MagnifyingGlass from "./icons/MagnifyingGlass";
+"use client"
+
+import Image from "next/image";
 import UserCircle from "./icons/UserCircle";
+import { Suspense, useState } from "react";
+import Link from "next/link";
+import NavSearch from "./NavSearch";
 
 const Navbar = () => {
+
+    const [loggedIn, setLoggedIn] = useState(false);
+
     return (
-        <nav className="z-50 flex h-16 px-8 no-wrap items-stretch min-w-full shadow-md justify-between">
+        <nav className="z-50 flex h-20 px-8 no-wrap items-stretch min-w-full shadow-md justify-between">
             <div className="flex items-stretch gap-x-4">
-                <div className="font-josefin uppercase text-xl flex items-center mr-4">Coffee Spot</div>
-                <div className="font-shantell flex items-stretch py-3">
-                    <div className="flex items-stretch shadow-md bg-white px-6 rounded-full border-2 border-transparent hover:border-2 hover:border-slate-400">
-                        <input className="min-w-0 max-w-96 outline-none" placeholder="Cafes, libraries, parks..." />
-                        <MagnifyingGlass className="my-auto ml-4" size={20} />
-                    </div>
+                <Link href={"/"} passHref>
+                    <Image src={"/logo/Catffeine.png"} alt="Our mascot Catffeine" width={80} height={64} className="object-contain mr-4 h-auto"/>
+                </Link>
+                <div className="font-shantell flex items-stretch py-5">
+                    <Suspense fallback={<p>Searchbar is loading...</p>}>
+                        <NavSearch />
+                    </Suspense>
                 </div>
-                    {/* <div className="grid grid-cols-[1fr_auto] items-center shadow-md w-96 bg-white px-6 rounded-full">
-                        <input className="grow-1" placeholder="Cafes, libraries, parks..." />
-                        <MagnifyingGlass className="ml-4" size={20} />
-                    </div> */}
             </div>
 
             <div className="flex no-wrap items-stretch gap-x-4">
                 <ul className="font-josefin flex no-wrap gap-x-4 mx-6">
-                    <li className="flex items-center capitalize">Help</li>
-                    <li className="flex items-center capitalize">About Us</li>
-                    <li className="flex items-center capitalize">Contact</li>
+                    <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/help"}>Help</Link></li>
+                    <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/about" }>About</Link></li>
+                    <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/contact"}>Contact</Link></li>
                 </ul>
+                {loggedIn ?
                 <div className="flex no-wrap items-center">
                     <UserCircle size={32} />
+                </div> :
+                <div className="flex no-wrap items-center gap-5">
+                    <Link href={"/login"} className="bg-[#D1DAAF] border-[#D1DAAF] border-2 font-josefin px-4 py-2 shadow-md rounded-full hover:bg-white">Log in</Link>
+                    <Link href={"/signup"} className="bg-[#C6E2FF] border-[#C6E2FF] border-2 font-josefin px-4 py-2 shadow-md rounded-full hover:bg-white">Sign up</Link>
                 </div>
+                }
+                
             </div>
         </nav>
     );
