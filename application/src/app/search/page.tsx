@@ -1,7 +1,7 @@
 "use client"
 
 import SearchResults from "./SearchResults";
-import Map from "./Map";
+import Map from "../components/Map";
 
 const Page = () => {
     return (
