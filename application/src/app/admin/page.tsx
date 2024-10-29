@@ -19,7 +19,7 @@ const Page = () => {
 
     // show the page if authenticated and an admin
     return (
-        <div className="p-8 bg-gray-100 min-h-[calc(100vh-5rem)]">
+        <div className="p-8 bg-gray-100 min-h-[calc(100vh-5rem)] bg-gradient-to-r from-purple-500 to-pink-500">
             <div className="flex flex-col items-center justify-center">
                 <h1 className="text-2xl font-bold mb-4">Welcome Admin: {session?.user.username}</h1>
                 <h1 className="text-2xl font-semibold mb-6">Coffee Spot Analytics:</h1>

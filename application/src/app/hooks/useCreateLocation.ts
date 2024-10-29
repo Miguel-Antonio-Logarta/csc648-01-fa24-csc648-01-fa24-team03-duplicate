@@ -27,22 +27,14 @@ const useCreateLocation = () => {
 
             const data = await res.json();
             if(data.error) throw new Error(data.error);
-            
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert('Location created successfully!');
+
         } catch (error: any) {
 
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert(error.message);
             return;
         }
     };
 
-    return { createLocation, loading };
+    return { createLocation, loading, status };
 };
 
 export default useCreateLocation;
