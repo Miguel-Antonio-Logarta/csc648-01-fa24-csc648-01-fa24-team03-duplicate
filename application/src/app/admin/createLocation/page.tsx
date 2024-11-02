@@ -1,12 +1,18 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { DayOfWeek } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 import useCreateLocation from '../../hooks/useCreateLocation';
 import Unauthorized from '../../components/Unauthorized';
+import type { PutBlobResult } from '@vercel/blob';
+import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 const Page = () => {
     const { data: session, status } = useSession();
+    const inputFileRef = useRef<HTMLInputElement>(null);
+    const [locationImage, setLocationImage] = useState<string | null>(null);
+    const [blob, setBlob] = useState<PutBlobResult | null>(null);
     const { createLocation, loading } = useCreateLocation();
     const [formData, setFormData] = useState({
         name: '',
@@ -17,6 +23,7 @@ const Page = () => {
         category: '',
         animalFriendliness: false,
         locationWebsiteLink: '',
+        imageWebLink: '',
         operatingHours: [
             { day: DayOfWeek.MONDAY, openTime: '', closeTime: '' },
             { day: DayOfWeek.TUESDAY, openTime: '', closeTime: '' },
@@ -28,9 +35,35 @@ const Page = () => {
         ]
     });
 
+    const handleImageUpload = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            if (!inputFileRef.current?.files) throw new Error('No files selected');
+            const file = inputFileRef.current.files[0];
+            const response = await fetch(
+                `/api/upload?filename=${file.name}`,
+                {
+                    method: 'POST',
+                    body: file,
+                },
+            );
+            const newBlob = (await response.json()) as PutBlobResult;
+            setBlob(newBlob);
+            setLocationImage(newBlob.url);
+            toast.success('Image uploaded successfully');
+        } catch (error: any) {
+            toast.error(error.message);
+        }
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         formData.seatingCapacity = Number(formData.seatingCapacity);
+        if (!locationImage || locationImage.length === 0) {
+            toast.error('Please upload an image');
+            return;
+        }
+        formData.imageWebLink = locationImage;
         await createLocation(formData, session);
     }
 
@@ -43,7 +76,7 @@ const Page = () => {
     }
 
     return (
-        <div className="p-8 flex items-center justify-center min-h-screen" style={{ background: 'linear-gradient(to right, #FCE0D3, #E89CA8)'}}>
+        <div className="p-8 flex items-center justify-center min-h-screen" style={{ background: 'linear-gradient(to right, #FCE0D3, #E89CA8)' }}>
             <form
                 onSubmit={handleSubmit}
                 className="space-y-6 p-8 bg-white shadow-lg rounded-lg max-w-lg w-full"
@@ -141,6 +174,15 @@ const Page = () => {
                         value={formData.locationWebsiteLink}
                         onChange={(e) => setFormData({ ...formData, locationWebsiteLink: e.target.value })}
                     />
+                </div>
+
+                <div className="space-y-4">
+                    <h2 className="text-lg font-medium text-gray-800">Upload Image:</h2>
+                    <input name="file" ref={inputFileRef} type="file" className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200" />
+                    <button
+                        onClick={handleImageUpload}
+                        className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600">Upload Image</button>
+                    {blob && <Image src={blob.url} alt="Location Image" width={256} height={256} />}
                 </div>
 
                 <div className="space-y-4">
