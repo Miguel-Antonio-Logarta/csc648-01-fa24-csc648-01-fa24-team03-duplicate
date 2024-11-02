@@ -5,8 +5,3 @@
 - Create more as needed:
 - ideally need to create hooks for creating bookmarks given locationid
 
-### Note: Backend needs to create theses apis first before we can create these hooks
-- need to create some for deletion of locations, reviews, bookmarks
-- need to create some for updating location
-- Search hook
-

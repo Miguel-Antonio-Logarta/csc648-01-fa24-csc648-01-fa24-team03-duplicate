@@ -31,7 +31,6 @@ const useCreateLocation = () => {
             toast.success('Location created successfully!');
         } catch (error: any) {
             toast.error(error.message);
-            return;
         } finally {
             setLoading(false);
         }
