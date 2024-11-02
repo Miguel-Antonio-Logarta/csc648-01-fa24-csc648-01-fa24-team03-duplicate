@@ -13,11 +13,8 @@ const useCreateLocation = () => {
 
     const createLocation = async (formData: any, session: any) => {
         setLoading(true);
-
-        // user not logged in or is not an admin
-        if (!session || session?.user.role !== 'ADMIN') return;
-
         try {
+            if(!session || session.user.role !== 'ADMIN') throw new Error('Unauthorized');
             const res = await fetch(`/api/locations`, {
                 method: 'POST',
                 headers: {

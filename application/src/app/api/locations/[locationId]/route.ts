@@ -79,8 +79,14 @@ export async function DELETE(req: NextRequest, { params } : { params: { location
         if(!location) {
             return NextResponse.json({ error: "Location not found." }, { status: 404 });
         }
+        
+        // this only exists for now because we have items in the db that don't have an image
+        if(location.imageWebLink && location.imageWebLink.length !== 0 && location.imageWebLink !== "N/A") {
+            await del(location.imageWebLink as string);
+        } 
 
-        await del(location.imageWebLink as string);
+        // uncomment this when all locations have an image
+        //await del(location.imageWebLink as string);
 
         const deletedLocation = await prisma.location.delete({
             where: {
