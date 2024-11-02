@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { toast } from 'react-hot-toast'
 
 /**
  * @Notes - Use this hook in the frontend if you want to update the user data in the database (MUST BE A CLIENT COMPONENT)
@@ -25,10 +25,10 @@ const useUpdateUserData = () => {
     const updateUserData = async (formData: any, session: any) => {
         setLoading(true);
 
-        // user not logged in
-        if(!session) return;
-
+        
         try {
+            // user not logged in
+            if(!session) throw new Error('You must be logged in to update user data');
             const res = await fetch(`/api/users`, {
                 method: 'PATCH',
                 headers: {
@@ -40,17 +40,11 @@ const useUpdateUserData = () => {
             const data = await res.json();
             if(data.error) throw new Error(data.error);
 
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert('User data updated successfully!');
-
+            toast.success('User data updated successfully');
         } catch(error: any) {
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert(`${error.message}`);
-            return;
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
         }
     }
     
