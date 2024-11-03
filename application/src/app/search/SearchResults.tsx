@@ -20,6 +20,7 @@ import Listing from "../components/Listing"
 
 const testData: LocationData[] = [
   {
+    id: 1,
     name: "J. Paul Leonard Library",
     address: "",
     phoneNumber: "",
