@@ -32,6 +32,19 @@ interface Review {
     creationDate: string;
 }
 
+interface User {
+    id: string;
+    username: string;
+    email: string;
+    creationDate: string;
+}
+
+interface Bookmark {
+    id: string;
+    user: User;
+    creationDate: string;
+}
+
 const LocationInfo: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [location, setLocation] = useState<Location | null>(null);
