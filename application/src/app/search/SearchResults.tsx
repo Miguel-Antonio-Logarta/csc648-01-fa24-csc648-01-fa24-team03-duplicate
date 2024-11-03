@@ -31,6 +31,13 @@ const testData: LocationData[] = [
     imageWebLink: "https://lh3.googleusercontent.com/p/AF1QipMSkLezfmMvzT2qOVixF_mgIM-PeU0hep6LvC9f=s1360-w1360-h1020",
     locationWebsiteLink: "",
     animalFriendliness: false,
+    
+    // ----------------------------------------
+    // needed to add these causes i was getting a build error
+    latitude: 0,
+    longitude: 0,
+    // ----------------------------------------
+
     operatingHours: [
       {
         day: "MONDAY",
