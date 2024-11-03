@@ -1,7 +1,11 @@
+"use client"
+
 import { LocationType } from "@prisma/client"
 import { LocationData } from "../api/locations/route"
 import Filter from "../components/icons/Filter"
 import Listing from "../components/Listing"
+import styles from "../components/components.module.css"
+import { useEffect, useState } from "react"
 
 // On mount, read url query parameters
 // Query the database with these search parameters
@@ -82,8 +86,21 @@ const testData: LocationData[] = [
 
 
 function SearchResults() {
+  const [locations, setLocations] = useState<unknown | null>(null);
+  // let data = await fetch("/api/locations/search");
+  
+  useEffect(() => {
+    async function getLocations() {
+      let res = await fetch("/api/locations/search");
+      let data = await res.json();
+      console.log(data);
+      setLocations(data);
+    }
+    getLocations();
+  }, []);
+
   return (
-    <div className="shadow-2xl z-10 px-6 py-4">
+    <div className={`shadow-2xl z-10 px-6 py-4 ${styles["search-results"]}`}>
         <button className="flex no-wrap items-center gap-1.5 rounded-full bg-[#C6E2FF] px-6 py-2 font-josefin">
           <Filter size={20}/>
           {/* For some reason the text is a little higher than the icon */}
