@@ -13,7 +13,7 @@ function LibraryPage() {
 
     return (
       <main className="mx-auto border-rose-300 border-solid bg-[rgb(255,250,228)] border-[3px] w-[650px] rounded-[50px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-600 max-md:px-5">
-        <div className="flex overflow-hidden flex-col gap-[10px] items-start mx-auto m-[30px] ml-[30px] text-xl font-bold">
+        <div className="flex overflow-hidden flex-col gap-[10px] items-start mx-auto m-[30px] text-xl font-bold">
           <h1 className="font-shantell z-10 mx-auto max-w-full text-4xl font-extrabold text-center text-rose-500 bg-rose-300 rounded-[20px] border-rose-400 border-dashed border-[3px] tracking-[3.38px] w-[370px] max-md:px-5">
           J. Paul Lenard Library
           </h1>
@@ -39,7 +39,7 @@ function LibraryPage() {
                 ))}
               </div>
           </section>
-          <section className="w-full ml-[40px] max-md:max-w-full">
+          <section className="w-full ml-[90px]">
               <h2 className="font-josefin mt-[10px] mb-[10px] text-base font-bold tracking-widest text-stone-600">
                 Highlighted Features
               </h2>
