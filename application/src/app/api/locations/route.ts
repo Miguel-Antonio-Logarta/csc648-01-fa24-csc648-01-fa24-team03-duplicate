@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic'
 
 // defining the expected data for a location
 export interface LocationData {
+    id: number;
     name: string;
     address: string;
     phoneNumber: string;

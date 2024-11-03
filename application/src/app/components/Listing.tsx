@@ -12,6 +12,10 @@ type props = {
   data: LocationData
 }
 
+const featureFlags = {
+
+}
+
 /*
 * TODO:
 *   - Add review counter
@@ -31,10 +35,10 @@ function Listing({ data }: props) {
           <div className="font-josefin text-sm mb-3 flex flex-row items-center gap-2">
             <div className="bg-slate-200 font-bold px-2 rounded-sm py-[4px]">{formatCategory(data.category)}</div> 
             <span>•</span> 
-            <span className="text-base">Currently busy</span>
+            <span className="text-base text-stone/800">Currently busy</span>
           </div>
-          <Rating className="mb-2" rating={data.rating} size={20} />
-          <div className="flex flex-row gap-3">
+          <Rating className="mb-2 text-stone/800" rating={data.rating} size={20} />
+          <div className="flex flex-row gap-3 text-stone/800">
             {data.hasWifi && <div className="text-sm rounded-lg flex flex-row gap-1"><Wifi size={16} />Wifi available</div>}
             {data.hasWifi && <div className="text-sm rounded-lg flex flex-row gap-1"><ChargingAvailable size={16} />Charging available</div>}
             {data.animalFriendliness && <div className=" text-xs font-bold rounded-lg flex flex-row gap-2 items-center p-2 align-middle"><Pets size={14} />Pets allowed</div>}

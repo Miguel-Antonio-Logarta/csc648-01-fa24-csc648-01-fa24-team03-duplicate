@@ -27,9 +27,8 @@ function Rating({ rating, size, className }: props) {
           <StarEmpty key={index} size={size} />
         ))}
       </div>
-      {/* <span className="align-bottom text-base ml-2">{rating}</span> */}
-      <span className="align-bottom text-base ml-2">{rating} (45 reviews)</span>
-      {/* <span className="align-bottom text-base"> (45 reviews)</span> */}
+      <span className="align-bottom text-base ml-2">{rating.toFixed(1)}</span>
+      {/* <span className="align-bottom text-base ml-2">{rating} (45 reviews)</span> */}
     </div>
   );
 }
