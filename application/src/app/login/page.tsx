@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from 'react';
+import toast from 'react-hot-toast';
 
 
 const Header: React.FC = () => {
@@ -33,6 +34,7 @@ const LoginForm: React.FC = () => {
     if (result?.error) {
       setError(result.error);
     } else {
+      toast.success(`Welcome ${userInfo.login}!`);
       router.push("/");
     }
   }

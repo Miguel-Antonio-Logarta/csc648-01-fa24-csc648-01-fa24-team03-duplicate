@@ -52,7 +52,6 @@ const SignUpForm: React.FC = () => {
           className="w-full bg-transparent border-b-2 border-rose-400 border-dashed" 
           aria-label="Password"
           autoComplete="off"
-          required
            />
         </div>
         <div className="mt-3 text-xs text-stone-400">

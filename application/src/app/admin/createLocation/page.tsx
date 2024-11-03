@@ -24,6 +24,8 @@ const Page = () => {
         animalFriendliness: false,
         locationWebsiteLink: '',
         imageWebLink: '',
+        latitude: 0,
+        longitude: 0,
         operatingHours: [
             { day: DayOfWeek.MONDAY, openTime: '', closeTime: '' },
             { day: DayOfWeek.TUESDAY, openTime: '', closeTime: '' },
@@ -173,6 +175,26 @@ const Page = () => {
                         className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
                         value={formData.locationWebsiteLink}
                         onChange={(e) => setFormData({ ...formData, locationWebsiteLink: e.target.value })}
+                    />
+                </div>
+
+
+                <div className="space-y-4">
+                    <label htmlFor="latitude" className="block text-sm font-medium text-gray-700">Latitude:</label>
+                    <input
+                        type="number"
+                        id="latitude"
+                        className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                        value={formData.latitude}
+                        onChange={(e) => setFormData({ ...formData, latitude: Number(e.target.value) })}
+                    />
+                    <label htmlFor="longitude" className="block text-sm font-medium text-gray-700">Longitude:</label>
+                    <input
+                        type="number"
+                        id="longitude"
+                        className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200"
+                        value={formData.longitude}
+                        onChange={(e) => setFormData({ ...formData, longitude: Number(e.target.value) })}
                     />
                 </div>
 
