@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from 'react';
 import useCreateUser from "../hooks/useCreateUser";
+import { useSession } from "next-auth/react";
 
 const Header: React.FC = () => {
   return (
@@ -76,6 +77,14 @@ const SignUpForm: React.FC = () => {
 };
 
 const SignupPage: React.FC = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  
+  // user is already logged in, redirect to home page
+  if (status === 'authenticated') {
+    router.push('/');
+  }
+  
   return (
     <main className="flex flex-col max-w-[594px] mx-auto mt-larger">
       <section className="flex overflow-hidden flex-col pr-6 pb-16 pl-6 w-full bg-yellow-50 border-4 border-rose-400 border-solid shadow-sm rounded-[35px] max-md:px-5 max-md:max-w-full">

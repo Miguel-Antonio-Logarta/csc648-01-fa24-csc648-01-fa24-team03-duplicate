@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useSession } from "next-auth/react";
 
 
 const Header: React.FC = () => {
@@ -16,9 +17,10 @@ const Header: React.FC = () => {
 };
 
 const LoginForm: React.FC = () => {
-    const [userInfo, setUserInfo] = useState({ login: "", password: "" });
-    const [error, setError] = useState("");
-    const router = useRouter();
+  const [userInfo, setUserInfo] = useState({ login: "", password: "" });
+  const [error, setError] = useState("");
+  const router = useRouter();
+
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,35 +40,35 @@ const LoginForm: React.FC = () => {
       router.push("/");
     }
   }
-  
+
   return (
     <div className="flex flex-col ml-5 w-[45%] max-md:ml-0 max-md:w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 items-start self-stretch my-auto -ml-px text-stone-600 max-md:mt-10">
         <h2 className="text-2xl font-bold tracking-[2.25px]">log in</h2>
         <div className="mt-3 text-xs text-stone-400">
           <label htmlFor="name" className="sr-only">Name</label>
-          <input 
-          type="text" 
-          id="login" 
-          value={userInfo.login}
-          onChange={(e) => setUserInfo({ ...userInfo, login: e.target.value })}
-          className="w-full bg-transparent border-b-2 border-rose-400 border-dashed" 
-          aria-label="login" 
-          autoComplete="off" 
-          required 
+          <input
+            type="text"
+            id="login"
+            value={userInfo.login}
+            onChange={(e) => setUserInfo({ ...userInfo, login: e.target.value })}
+            className="w-full bg-transparent border-b-2 border-rose-400 border-dashed"
+            aria-label="login"
+            autoComplete="off"
+            required
           />
         </div>
         <div className="mt-3 text-xs text-stone-400">
           <label htmlFor="password" className="sr-only">Password</label>
-          <input 
-          type="password" 
-          id="password"
-          value={userInfo.password}
-          onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })} 
-          className="w-full bg-transparent border-b-2 border-rose-400 border-dashed" 
-          aria-label="Password" 
-          autoComplete="off" 
-          required />
+          <input
+            type="password"
+            id="password"
+            value={userInfo.password}
+            onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
+            className="w-full bg-transparent border-b-2 border-rose-400 border-dashed"
+            aria-label="Password"
+            autoComplete="off"
+            required />
         </div>
         <a href="/signup" className="mt-3 text-xs tracking-wider">don&apos;t have an account?</a>
         <button type="submit" className="self-center px-4 py-1.5 mt-10 text-sm font-bold text-center text-white drop-shadow-mdç bg-sage rounded-[35px] w-[86px] max-md:mt-10">
@@ -78,6 +80,14 @@ const LoginForm: React.FC = () => {
 };
 
 const LoginPage: React.FC = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  // user is already logged in, redirect to home page
+  if(status === 'authenticated') {
+    router.push('/');
+  }
+  
   return (
     <main className="flex flex-col max-w-[594px] mx-auto mt-larger">
       <section className="flex overflow-hidden flex-col pr-6 pb-16 pl-6 w-full bg-yellow-50 border-4 border-rose-400 border-solid shadow-sm rounded-[35px] max-md:px-5 max-md:max-w-full">
