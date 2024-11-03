@@ -8,8 +8,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "*", // this should be replaced with the actual hostname of vercel storage
-      },
+        hostname: "9otnordlgmffpjra.public.blob.vercel-storage.com"
+      }
     ],
   },
 };
