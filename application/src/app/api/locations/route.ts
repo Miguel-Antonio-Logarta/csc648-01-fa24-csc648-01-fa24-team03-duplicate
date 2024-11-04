@@ -132,8 +132,8 @@ export async function POST(req: NextRequest) {
                     imageWebLink: body.imageWebLink,
                     locationWebsiteLink: body.locationWebsiteLink,
                     animalFriendliness: body.animalFriendliness,
-                    latitude: body.latitude,
-                    longitude: body.longitude
+                    longitude: body.longitude,
+                    latitude: body.latitude
                 }
             })
 

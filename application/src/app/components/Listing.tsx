@@ -10,6 +10,7 @@ import { formatCategory } from "../utils/utils"
 
 type props = {
   data: LocationData
+  selectLocation: (data: LocationData) => void
 }
 
 const featureFlags = {
@@ -21,9 +22,9 @@ const featureFlags = {
 *   - Add review counter
 *   - Add "charging available" feature
 */
-function Listing({ data }: props) {
+function Listing({ data, selectLocation }: props) {
   return (
-    <div className="flex flex-row no-wrap bg-white shadow-md rounded-md p-6 gap-6 cursor-pointer">
+    <div onClick={() => selectLocation(data)} className="flex flex-row no-wrap bg-white shadow-md rounded-md p-6 gap-6 cursor-pointer">
         <div className="flex items-center">
           <div className="relative w-[150px] h-[150px] self-middle">
             {/* Add a placeholder image for when it is loading... */}

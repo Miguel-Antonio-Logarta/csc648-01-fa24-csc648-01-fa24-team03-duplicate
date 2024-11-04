@@ -73,6 +73,9 @@ model Location {
 
   // 1-1 relationship between location and its image gallery
   gallery LocationGallery?
+
+  longitude Float
+  latitude Float
 }
 
 model LocationGallery {
