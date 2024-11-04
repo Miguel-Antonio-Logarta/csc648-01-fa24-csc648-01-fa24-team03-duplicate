@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Josefin_Sans, Shantell_Sans } from "next/font/google"
 import Provider from "./context/Provider";
+import { Toaster } from "react-hot-toast";
 
 // Backup fonts
 const geistSans = localFont({
@@ -46,6 +47,7 @@ export default function RootLayout({
         <body
           className={`${josefinSans.variable} ${shantellSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <Toaster />
           {children}
         </body>
       </Provider>

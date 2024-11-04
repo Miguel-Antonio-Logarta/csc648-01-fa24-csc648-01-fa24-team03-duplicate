@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 /**
  * @Notes - Use this hook in the frontend to create a location.
@@ -12,11 +13,8 @@ const useCreateLocation = () => {
 
     const createLocation = async (formData: any, session: any) => {
         setLoading(true);
-
-        // user not logged in or is not an admin
-        if (!session || session?.user.role !== 'ADMIN') return;
-
         try {
+            if(!session || session.user.role !== 'ADMIN') throw new Error('Unauthorized');
             const res = await fetch(`/api/locations`, {
                 method: 'POST',
                 headers: {
@@ -27,18 +25,11 @@ const useCreateLocation = () => {
 
             const data = await res.json();
             if(data.error) throw new Error(data.error);
-            
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert('Location created successfully!');
+            toast.success('Location created successfully!');
         } catch (error: any) {
-
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert(error.message);
-            return;
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
         }
     };
 

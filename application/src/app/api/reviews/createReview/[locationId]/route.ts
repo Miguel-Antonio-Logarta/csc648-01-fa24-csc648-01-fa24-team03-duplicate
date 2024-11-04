@@ -63,6 +63,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
             return NextResponse.json({ error: "User does not exist." }, { status: 400 });
         }
 
+        // actually create the review
         const review = await prisma.review.create({
             data: {
                 rating: body.rating,
@@ -70,6 +71,26 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
                 locationId: locationId,
                 //userId: body.userId
                 userId: session.user.id
+            }
+        });
+
+        // get all the reviews for the location
+        const allReviews = await prisma.review.findMany({
+            where: {
+                locationId: locationId
+            }
+        });
+
+        // calculate the average rating for the location
+        const avgRating = allReviews.reduce((sum, review) => sum + review.rating, 0) / allReviews.length;
+
+        // update the location's rating
+        await prisma.location.update({
+            where: {
+                id: locationId
+            },
+            data: {
+                rating: avgRating
             }
         });
 
