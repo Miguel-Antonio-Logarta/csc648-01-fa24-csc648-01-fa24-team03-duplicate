@@ -7,6 +7,12 @@ interface Review {
   content: string;
   creationDate: string;
   userId: string;
+  user: User;
+}
+
+interface User {
+  id: string;
+  username: string;
 }
 
 interface ReviewProps {
@@ -21,7 +27,7 @@ const ReviewSection = async ({ reviews } : ReviewProps) => {
     <section>
       <h2 className="text-xl font-bold whitespace-nowrap text-stone-600 tracking-[2px] mb-6">Reviews</h2>
       {reviews.map((review, index) => (
-        <ReviewCard key={index} author={review.userId} rating={review.rating} review={review.content} />
+        <ReviewCard key={index} author={review.user.username} rating={review.rating} review={review.content} />
       ))}
     </section>
   );

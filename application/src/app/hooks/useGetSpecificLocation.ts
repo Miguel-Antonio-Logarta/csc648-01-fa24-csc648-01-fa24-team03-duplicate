@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 
 const useGetSpecificLocation = () => {
-    const [specificLocation, setSpecificLocation] = useState({});
+    const [specificLocation, setSpecificLocation] = useState();
     const [loading, setLoading] = useState(false);
 
     const fetchSpecificLocation = async (locationId: string) => {

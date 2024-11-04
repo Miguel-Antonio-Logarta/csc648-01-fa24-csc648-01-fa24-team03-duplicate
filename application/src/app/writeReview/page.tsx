@@ -9,7 +9,7 @@ function ReviewForm() {
         <header className="font-josefin text-3xl p-2 tracking-[3.2px] max-md:max-w-full">
           J. Paul Lenard Library
         </header>
-        <RatingSelector />
+        {/* <RatingSelector /> */}
         <textarea
           className="font-josefin flex shrink-0 self-stretch mt-9 p-smed w-[650px] bg-gray rounded-[8px] border border-rose-300 border-solid border-t- h-[229px]"
           aria-label="Write your review"
