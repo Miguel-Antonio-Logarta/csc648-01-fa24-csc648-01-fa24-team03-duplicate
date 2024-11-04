@@ -23,6 +23,9 @@ const config: Config = {
       spacing: {
         'larger': '7rem', 
       },
+      height: {
+        'h-nav': '80px',
+      }
     },
   },
   plugins: [],

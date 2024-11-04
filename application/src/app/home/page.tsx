@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import Image from 'next/image';
 import HomeImg from './home_img.png';
@@ -88,4 +89,49 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+// InputField Component
+interface InputFieldProps {
+  label: string;
+  type?: string;
+}
+
+const InputField: React.FC<InputFieldProps> = ({ label, type = 'text' }) => {
+  return (
+    <>
+      <label htmlFor={label.toLowerCase()} className="mt-3 text-xs text-stone-400">
+        {label}
+      </label>
+      <input
+        type={type}
+        id={label.toLowerCase()}
+        className="mt-2.5 border-2 border-rose-400 border-dashed"
+        aria-label={label}
+      />
+    </>
+  );
+};
+
+// Image 
+interface ImageComponentProps {
+  src: string;
+  alt: string;
+  className: string;
+}
+
+const ImageComponent: React.FC<ImageComponentProps> = ({ src, alt, className }) => {
+  return <Image loading="lazy" src={src} alt={alt} className={className} />;
+};
+
+// Page (includes Header and MainContent)
+const Page: React.FC = () => {
+  return (
+    <div className="flex flex-col items-center min-h-screen bg-white text-zinc-800">
+      <Header/>
+      <MainContent
+        imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/23426d6753aabde6b0bcafb61b6cadacda3463f2a92cc82b508010e50c3413d8?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225"
+      />
+    </div>
+  );
+};
+
+export default Page;
