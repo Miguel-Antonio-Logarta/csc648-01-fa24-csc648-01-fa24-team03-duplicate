@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import Link from 'next/link';
+import Rating from './Rating';
 
 interface LocationCardProps {
   backgroundColor: string;
@@ -38,10 +39,11 @@ const LocationCard: React.FC<LocationCardProps> = ({
               {subtitle}
             </p>
             <div className="flex gap-6 mt-5">
-              <StarRating rating={rating} />
-              <span className="my-auto text-2xl text-stone-600 tracking-[2.4px]">
+              {/* <StarRating rating={rating} /> */}
+              <Rating rating={rating} size={32} />
+              {/* <span className="my-auto text-2xl text-stone-600 tracking-[2.4px]">
                 {rating.toFixed(2)}
-              </span>
+              </span> */}
             </div>
             <div className='font-josefin'>
             Location Details

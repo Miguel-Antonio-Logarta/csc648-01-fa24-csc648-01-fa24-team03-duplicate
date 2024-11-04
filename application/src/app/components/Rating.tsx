@@ -5,7 +5,7 @@ import StarHalf from "./icons/StarHalf";
 type props = {
   rating: number;
   size: number;
-  className: string;
+  className?: string;
 };
 
 // Renders a rating. Do not let rating exceed a value of 5

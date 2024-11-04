@@ -7,6 +7,7 @@ import ChargingAvailable from "./icons/ChargingAvailable"
 import Pets from "./icons/Pets"
 import Rating from "./Rating"
 import { formatCategory } from "../utils/utils"
+import Link from "next/link"
 
 type props = {
   data: LocationData
@@ -43,6 +44,9 @@ function Listing({ data, selectLocation }: props) {
             {data.hasWifi && <div className="text-sm rounded-lg flex flex-row gap-1"><Wifi size={16} />Wifi available</div>}
             {data.hasWifi && <div className="text-sm rounded-lg flex flex-row gap-1"><ChargingAvailable size={16} />Charging available</div>}
             {data.animalFriendliness && <div className=" text-xs font-bold rounded-lg flex flex-row gap-2 items-center p-2 align-middle"><Pets size={14} />Pets allowed</div>}
+          </div>
+          <div className="flex justify-end">
+            <Link href={`/quickInfo/${data.id}`} className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"> View Details</Link>
           </div>
         </div>
     </div>
