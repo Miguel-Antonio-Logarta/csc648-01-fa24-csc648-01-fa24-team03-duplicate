@@ -15,6 +15,7 @@ const ReviewCard = ({ author, rating, review }: ReviewCardProps) => {
         <h3 className="text-base tracking-widest text-stone-600">{author}</h3>
         <Image src={FakeStars} alt="placeholder stars" className=''/>
       </div>
+      <p>Rating: {rating}</p>
       <p className="mt-4 text-sm text-stone-600 max-md:mr-2">{review}</p>
     </article>
   );

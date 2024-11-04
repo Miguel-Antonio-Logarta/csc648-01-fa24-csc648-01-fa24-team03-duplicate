@@ -1,8 +1,11 @@
 import React from 'react';
+import Image from "next/image";
+import Link from 'next/link';
 
 interface LocationCardProps {
   backgroundColor: string;
   borderColor: string;
+  id: string;
   title: string;
   subtitle: string;
   rating: number;
@@ -11,7 +14,8 @@ interface LocationCardProps {
 
 const LocationCard: React.FC<LocationCardProps> = ({ 
   backgroundColor, 
-  borderColor, 
+  borderColor,
+  id, 
   title, 
   subtitle, 
   rating, 
@@ -22,7 +26,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
       <div className="flex gap-5 max-md:flex-col">
         <div className="flex flex-col w-[34%] max-md:ml-0 max-md:w-full">
           <div className="flex shrink-0 mx-auto h-36 rounded-xl bg-neutral-400 w-[152px] max-md:mt-10">
-            {/* <img src={imageUrl} alt={title} className="w-full h-full object-cover rounded-xl" /> */}
+            <Image src={imageUrl} alt={title} width={256} height={256} />
           </div>
         </div>
         <div className="flex flex-col ml-5 w-[66%] max-md:ml-0 max-md:w-full">
@@ -36,12 +40,13 @@ const LocationCard: React.FC<LocationCardProps> = ({
             <div className="flex gap-6 mt-5">
               <StarRating rating={rating} />
               <span className="my-auto text-2xl text-stone-600 tracking-[2.4px]">
-                {rating}
+                {rating.toFixed(2)}
               </span>
             </div>
             <div className='font-josefin'>
             Location Details
             </div>
+            <Link href={`/quickInfo/${id}`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"> View Details</Link>
             {/* <img //make as individual icons
               loading="lazy" 
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/e9197e9dc0f9332e7157e8c35e4ae08655d77919c4ea037fa505b2315ad3c565?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225" 
