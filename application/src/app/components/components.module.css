@@ -1,0 +1,9 @@
+.listing {
+    display: grid;
+    grid-template-areas: "image title";
+}
+
+.search-results {
+    height: inherit;
+    overflow-y: scroll;
+}

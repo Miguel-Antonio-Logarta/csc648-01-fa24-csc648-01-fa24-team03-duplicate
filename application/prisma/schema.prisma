@@ -59,6 +59,8 @@ model Location {
   imageWebLink String? @default("N/A")
   locationWebsiteLink String? @default("N/A")
   animalFriendliness Boolean
+  latitude Float
+  longitude Float
 
   // A Location can have many reviews
   reviews Review[]

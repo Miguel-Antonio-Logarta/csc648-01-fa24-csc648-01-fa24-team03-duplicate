@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Josefin_Sans, Shantell_Sans } from "next/font/google"
+import Provider from "./context/Provider";
+import { Toaster } from "react-hot-toast";
 
 // Backup fonts
 const geistSans = localFont({
@@ -16,13 +18,13 @@ const geistMono = localFont({
 });
 
 // Our main fonts
-const josefinSans = Josefin_Sans({ 
+const josefinSans = Josefin_Sans({
   subsets: ['latin'],
   display: "swap",
   variable: "--font-josefin-sans"
 });
 
-const shantellSans = Shantell_Sans({ 
+const shantellSans = Shantell_Sans({
   subsets: ['latin'],
   display: "swap",
   variable: "--font-shantell-sans"
@@ -40,11 +42,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${josefinSans.variable} ${shantellSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      {/* MUST WRAP PROVIDER AROUND ENTIRE HTML PAGES TO ACCESS SESSION DATA */}
+      <Provider>
+        <body
+          className={`${josefinSans.variable} ${shantellSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Toaster />
+          {children}
+        </body>
+      </Provider>
     </html>
   );
 }

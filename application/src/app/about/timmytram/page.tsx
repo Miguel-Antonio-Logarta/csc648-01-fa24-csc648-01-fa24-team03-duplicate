@@ -4,7 +4,7 @@ import stars from './images/stars.png';
 
 const Page = () => {
     return (
-        <div className="bg-cover bg-center" style={{ backgroundImage: `url(${stars.src})` }}>
+        <div className="text-white bg-cover bg-center" style={{ backgroundImage: `url(${stars.src})` }}>
             <div className="flex justify-center items-center h-screen py-10">
                 <div className="flex flex-col items-center border-2 border-white p-4 min-w-96 min-h-full gap-2 bg-black bg-opacity-65">
                     
