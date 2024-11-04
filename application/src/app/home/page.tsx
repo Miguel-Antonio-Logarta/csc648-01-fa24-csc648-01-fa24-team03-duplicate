@@ -52,7 +52,6 @@ const HomePage = () => {
           className="object-cover absolute inset-0 size-full z-0" 
         />
         <Navbar />
-        {/* temporary buttons */}
         <a href='login' className="justify-items-end max-w-20 z-20 px-4 py-1.5 m-1 text-sm font-bold text-center text-white shadow-sm bg-sage rounded-[35px]">
               Log In!
             </a>
@@ -124,13 +123,16 @@ const ImageComponent: React.FC<ImageComponentProps> = ({ src, alt, className }) 
 // Page (includes Header and MainContent)
 const Page: React.FC = () => {
   return (
-    <div className="flex flex-col items-center min-h-screen bg-white text-zinc-800">
-      {/* <Header/>
-      <MainContent
-        imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/23426d6753aabde6b0bcafb61b6cadacda3463f2a92cc82b508010e50c3413d8?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225"
-      /> */}
-    </div>
-  );
+    <HomePage />
+  )
+  // return (
+  //   <div className="flex flex-col items-center min-h-screen bg-white text-zinc-800">
+  //     {/* <Header/>
+  //     <MainContent
+  //       imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/23426d6753aabde6b0bcafb61b6cadacda3463f2a92cc82b508010e50c3413d8?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225"
+  //     /> */}
+  //   </div>
+  // );
 };
 
 export default Page;
