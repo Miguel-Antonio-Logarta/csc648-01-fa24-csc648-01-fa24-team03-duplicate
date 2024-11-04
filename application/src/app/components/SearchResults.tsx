@@ -5,6 +5,7 @@ import Listing from "./Listing"
 import styles from "../components/components.module.css"
 import { useContext } from "react"
 import { SearchContext } from "../context/SearchContext"
+import { LocationData } from "../api/locations/route"
 
 // On mount, read url query parameters
 // Query the database with these search parameters
@@ -39,7 +40,12 @@ type SearchResultsProps = {
 }
 
 function SearchResults(props: SearchResultsProps) {
-  const { locations } = useContext(SearchContext);
+  const { locations, setSelectedLocation } = useContext(SearchContext);
+
+  const handleLocationSelect = (data: LocationData) => {
+    const newLocation = { ...data };  // Necessary to create a copy so that the map will update
+    setSelectedLocation(newLocation);
+  }
 
   return (
     <div className={`shadow-2xl z-10 px-6 py-4 ${styles["search-results"]}`}>
@@ -52,7 +58,8 @@ function SearchResults(props: SearchResultsProps) {
           {locations.map((location) => 
             <Listing
               key={location.id}
-              data={location} 
+              data={location}
+              selectLocation={handleLocationSelect}
             />
           )}
         </div>

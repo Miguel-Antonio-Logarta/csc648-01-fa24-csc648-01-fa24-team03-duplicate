@@ -21,6 +21,8 @@ export interface LocationData {
     locationWebsiteLink: string;
     animalFriendliness: boolean;
     operatingHours: OperatingHour[];
+    latitude: number;
+    longitude: number;
 }
 
 // defining the expected data for operating hours
@@ -121,7 +123,9 @@ export async function POST(req: NextRequest) {
                     busynessStatus: body.busynessStatus,
                     imageWebLink: body.imageWebLink,
                     locationWebsiteLink: body.locationWebsiteLink,
-                    animalFriendliness: body.animalFriendliness
+                    animalFriendliness: body.animalFriendliness,
+                    longitude: body.longitude,
+                    latitude: body.latitude
                 }
             })
 
