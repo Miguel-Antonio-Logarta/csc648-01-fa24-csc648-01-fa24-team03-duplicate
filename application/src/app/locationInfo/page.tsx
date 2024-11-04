@@ -69,7 +69,7 @@ function InformationPage() {
                         </div>
                     </header>
                     <section className="flex gap-7 items-start mt-16 mr-7 max-md:mt-10 max-md:mr-2.5">
-                        <ContactInfo />
+                        {/* <ContactInfo /> */}
                         <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-sage rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50">Save</button>
                         <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-blue-200 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50">
                             <Image src={Star} alt="clear star"/>

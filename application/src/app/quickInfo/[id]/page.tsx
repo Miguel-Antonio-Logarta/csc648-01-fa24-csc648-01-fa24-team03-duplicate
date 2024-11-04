@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Star from '../star.svg';
 import Icons from '../temp_icon_group.svg';
-import { convertTo12HourFormat } from "../../utils/utils";
+import Link from "next/link";
 
 const Page = async ({ params }: { params: { id: string } }) => {
     const features = [
@@ -15,13 +15,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
     const { id } = params;
 
     const locationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations/${id}`);
-    const reviewsReponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/${id}`,
-        { cache: "no-store" }
-    );
-
     const location = await locationResponse.json();
-    const reviews = await reviewsReponse.json();
-
 
     return (
         <>
@@ -73,13 +67,14 @@ const Page = async ({ params }: { params: { id: string } }) => {
                             </div>
                         </div>
                     </section>
-                    <button className="font-shantell self-end mr-[25px] w-[170px] h-[60px] text-xl font-bold text-center text-white bg-blue-200 shadow-sm rounded-[100px] tracking-[2px]">
+                    {/* <button className="font-shantell self-end mr-[25px] w-[170px] h-[60px] text-xl font-bold text-center text-white bg-blue-200 shadow-sm rounded-[100px] tracking-[2px]">
                         learn more!
-                    </button>
+                    </button> */}
+                    <Link href={`/locationInfo/${id}`} className="font-shantell self-end mr-[25px] w-[170px] h-[60px] text-xl font-bold text-center text-white bg-blue-200 shadow-sm rounded-[100px] tracking-[2px] flex items-center justify-center">Learn More!</Link>
                 </div>
             </main>
 
-            <main className="mt-10 mx-auto border-rose-300 border-solid bg-[rgb(255,250,228)] border-[3px] w-[650px] rounded-[50px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-600 max-md:px-5">
+            {/* <main className="mt-10 mx-auto border-rose-300 border-solid bg-[rgb(255,250,228)] border-[3px] w-[650px] rounded-[50px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-600 max-md:px-5">
                 <div className="p-5">
                     <h2 className="text-2xl font-bold text-stone-600 mb-4 text-center">Operating Hours</h2>
                     <ul className="space-y-3">
@@ -95,7 +90,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                         ))}
                     </ul>
                 </div>
-            </main>
+            </main> */}
         </>
     );
 }
