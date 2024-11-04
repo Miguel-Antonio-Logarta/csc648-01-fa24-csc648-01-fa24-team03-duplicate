@@ -8,6 +8,14 @@ import useGetLocationData from "./hooks/useGetLocationData";
 import Image from "next/image";
 import LocationCard from "./components/LocationCard";
 
+interface Location {
+  id: string;
+  name: string;
+  category: string;
+  rating: number;
+  imageWebLink: string;
+}
+
 export default function Home() {
 
   const { locations, loading, error } = useGetLocationData();
@@ -54,7 +62,7 @@ export default function Home() {
         </div> */}
         <div className="mt-2.5 w-full max-w-[1240px] max-md:max-w-full">
           <div className="grid justify-center grid-cols-2 gap-5 max-md:grid-cols-1">
-            {locations.map((location) => (
+            {locations.map((location: Location) => (
               <div key={location.id} className="flex flex-col">
                 <LocationCard
                   id={location.id}
