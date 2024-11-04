@@ -9,6 +9,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "9otnordlgmffpjra.public.blob.vercel-storage.com"
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.builder.io"
       }
     ],
   },

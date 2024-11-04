@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './BookmarksBox.module.css';
-import Listing from "../search/Listing"
+import Listing from '../components/Listing';
+
 
 
 
@@ -50,17 +51,12 @@ const BookmarksBox: React.FC = () => {
     <div className={styles.bookmarksBox}>
       <h2 className={styles.title}>Bookmarks</h2>
       <div className="flex flex-col gap-6 mt-6">
-          {testData.map((data) => 
+          {/* {testData.map((data) => 
             <Listing 
               key={data.id}
-              img={data.img}
-              title={data.title}
-              category={data.category}
-              rating={data.rating}
-              wifiEnabled={data.wifiEnabled}
-              busyness={data.busyness}
+              data={data}
               />)
-          }
+          } */}
         </div>
     {/* /* <div className={styles.bookmarkPlaceholder}>No bookmarks yet</div>*/ }
     </div>
