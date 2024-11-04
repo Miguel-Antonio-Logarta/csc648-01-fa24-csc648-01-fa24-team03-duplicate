@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from "next/image";
 
 interface LocationCardProps {
   backgroundColor: string;
@@ -23,6 +24,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
         <div className="flex flex-col w-[34%] max-md:ml-0 max-md:w-full">
           <div className="flex shrink-0 mx-auto h-36 rounded-xl bg-neutral-400 w-[152px] max-md:mt-10">
             {/* <img src={imageUrl} alt={title} className="w-full h-full object-cover rounded-xl" /> */}
+            <Image src={imageUrl} alt={title} width={256} height={256} />
           </div>
         </div>
         <div className="flex flex-col ml-5 w-[66%] max-md:ml-0 max-md:w-full">
