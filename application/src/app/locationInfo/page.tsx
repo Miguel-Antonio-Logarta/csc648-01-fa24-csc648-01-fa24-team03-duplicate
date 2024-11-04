@@ -53,7 +53,7 @@ function InformationPage() {
                                 </div>
                               </div>
                             </section>
-                            <ReviewSection />
+                            {/* <ReviewSection /> */}
                           </div>
                         </div>
                     </div>
