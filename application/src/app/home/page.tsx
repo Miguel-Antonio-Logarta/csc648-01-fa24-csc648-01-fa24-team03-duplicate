@@ -1,52 +1,90 @@
 import Image from 'next/image';
 import React from 'react';
+import Image from 'next/image';
+import HomeImg from './home_img.png';
+import LogoImg from './logo.png';
+import FeaturedSpots from './featured_spots.png';
+import LocationCard from '../components/LocationCard';
+import Navbar from '../components/Navbar';
 
-// Header Component
-const Header: React.FC = () => {
+const locations = [
+  {
+    title: "J. Paul Lenard Library",
+    subtitle: "University Library",
+    rating: 2.5,
+    backgroundColor: "bg-rose-100",
+    borderColor: "border-rose-300",
+    imageUrl: " "
+  },
+  {
+    title: "Marigold Cafe",
+    subtitle: "University Library",
+    rating: 2.5,
+    backgroundColor: "bg-sage",
+    borderColor: "border-darkSage",
+    imageUrl: " "
+  },
+  {
+    title: "New test cafe",
+    subtitle: "test",
+    rating: 2.5,
+    backgroundColor: "bg-sage",
+    borderColor: "border-darkSage",
+    imageUrl: " "
+  },
+  {
+    title: "Another test",
+    subtitle: "testing",
+    rating: 2.5,
+    backgroundColor: "bg-rose-100",
+    borderColor: "border-rose-300",
+    imageUrl: " "
+  }
+];
+
+const HomePage = () => {
   return (
-    <header className="flex flex-wrap gap-5 justify-between px-10 py-5 w-full text-xl bg-white shadow-sm tracking-[10px] max-md:px-5 max-md:max-w-full">
-      <input className="object-contain justify-start rounded-xl bg-gray aspect-[12.82] w-[562px]" placeholder="Search" />
-      <nav className="flex gap-10 my-auto">
-        <a href="/login" className="focus:outline-none focus:ring-2 focus:ring-blue-500">Login</a>
-        <a href="/signup" className="basis-auto focus:outline-none focus:ring-2 focus:ring-blue-500">Sign Up</a>
-      </nav>
-    </header>
-  );
-};
-
-// Footer Component
-type FooterProps = {
-  links: Array<{ text: string; href: string }>;
-};
-
-const Footer: React.FC<FooterProps> = ({ links }) => {
-  return (
-        <footer className="flex gap-5 self-end max-w-full mt-[593px] w-[241px] max-md:mt-10 mx-auto">
-          {links.map((link, index) => (
-            <a key={index} href={link.href} className="text-xs tracking-wider focus:outline-none focus:ring-2 focus:ring-blue-500">
-              {link.text}
+    <main className="flex overflow-hidden flex-col bg-white">
+      <header className="flex relative z-10 flex-col pb-6 w-full text-base min-h-[488px] text-zinc-800 max-md:max-w-full">
+        <Image 
+          loading="lazy" 
+          src={HomeImg} 
+          alt="Background header image" 
+          className="object-cover absolute inset-0 size-full z-0" 
+        />
+        <Navbar />
+        {/* temporary buttons */}
+        <a href='login' className="justify-items-end max-w-20 z-20 px-4 py-1.5 m-1 text-sm font-bold text-center text-white shadow-sm bg-sage rounded-[35px]">
+              Log In!
             </a>
-          ))}
-        </footer>
-      );
-};
-
-// Main Content Component
-type MainContentProps = {
-  imageSrc: string;
-};
-
-const MainContent: React.FC<MainContentProps> = ({ imageSrc }) => {
-  const footerLinks = [
-    { text: 'Help', href: '/help' },
-    { text: 'About Us', href: '/about' },
-    { text: 'Contact', href: '/contact' },
-  ];
-
-  return (
-    <main className="flex flex-col items-center mt-10 max-w-full text-xs tracking-wider">
-      <Image loading="lazy" src={imageSrc} alt="Main content" className="object-contain max-w-full aspect-[1.91] w-[507px]" width={507} height={100}/>
-      <Footer links={footerLinks} />
+        <a href='signup' className="justify-items-end max-w-24 z-20 px-3.5 py-1.5 text-sm font-bold text-center text-white bg-lightBlue shadow-sm rounded-[35px]">
+          Sign Up!
+        </a>
+        <Image 
+          loading="lazy" 
+          src={LogoImg} 
+          alt="Decorative element" 
+          className="object-contain self-end mt-60 max-w-full aspect-[1.92] w-[272px] max-md:mt-10 max-md:mr-2 z-20" 
+        />
+      
+      </header>
+      <section className="flex flex-col items-center px-16 pt-4 w-full bg-stone-50 max-md:px-5 max-md:max-w-full">
+        <Image 
+          loading="lazy" 
+          src={FeaturedSpots} 
+          alt="Section header" 
+          className="object-contain self-start max-w-full aspect-[3.58] w-[444px]" 
+        />
+        <div className="mt-2.5 w-full max-w-[1240px] max-md:max-w-full">
+          <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
+            {locations.map((location, index) => (
+              <div key={index} className="flex flex-col">
+                <LocationCard {...location} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 };

@@ -16,7 +16,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         gray: "rgb(217,217,217)",
-        sage: "rgb(209,218,175)"
+        sage: "rgb(209,218,175)",
+        darkSage: "rgb(187,200,135)",
+        lightBlue: "rgb(198,226,255)"
       },
       spacing: {
         'larger': '7rem', 

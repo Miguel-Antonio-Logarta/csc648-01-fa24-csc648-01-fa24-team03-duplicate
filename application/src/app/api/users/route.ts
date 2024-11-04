@@ -64,10 +64,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `Missing fields: ${missingFields.join(', ')}` }, { status: 400 });
     }
 
+    const conditions: { username?: string; email?: string }[] = [{ username: body.username }];
+
+    // only check for email if it is provided, email is technically optional
+    if(body.email && body.email.trim() !== '') {
+      conditions.push({ email: body.email })
+    }
+
     // validation check to make sure the username and email are unique and not already in the database
     const existingUser = await prisma.user.findFirst({
       where: {
-        OR: [{ email: body.email }, { username: body.username }],
+        OR: conditions,
       },
     });
 

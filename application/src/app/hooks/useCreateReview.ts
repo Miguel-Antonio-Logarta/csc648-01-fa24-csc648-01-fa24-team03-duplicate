@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { toast } from 'react-hot-toast';
 
 /**
  * @Notes - Use this hook in the frontend to create a review for a location.
@@ -16,11 +16,9 @@ const useCreateReview = () => {
 
     const createReview = async (locationId: string, content: string, rating: number, session: any) => {
         setLoading(true);
-
-        // user not logged in
-        if (!session) return;
-
         try {
+            // user not logged in
+            if (!session) throw new Error('You must be logged in to create a review');
             const res = await fetch(`/api/reviews/createReview/${locationId}`, {
                 method: 'POST',
                 headers: {
@@ -34,18 +32,11 @@ const useCreateReview = () => {
 
             const data = await res.json();
             if(data.error) throw new Error(data.error);
-
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert('Review created successfully!');
+            toast.success('Review created successfully');
         } catch(error: any) {
-            
-            // TODO: Remove this alert in production
-            // could use a react toast notification library here
-            // this should be removed in production
-            alert(error.message);
-            return;
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
         }
     }
 

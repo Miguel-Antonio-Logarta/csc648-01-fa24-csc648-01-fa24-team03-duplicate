@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../../prisma/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/authOptions";
+import { del } from "@vercel/blob";
 
 export const dynamic = 'force-dynamic'
 
@@ -43,6 +46,57 @@ export async function GET(req: NextRequest, { params }: { params: { locationId :
         return NextResponse.json(location);
     } catch (error: any) {
         console.log(`[ERROR]: Error in GET of api/locations/[locationId]/route.ts: ${error}`);
+        return NextResponse.json({ error: "Internal Server Error." }, { status: 500 });
+    }
+}
+
+/**
+ * @Auth - Required to be ADMIN
+ * @Endpoint - DELETE /api/locations/{locationId}
+ * @description - Deletes a single location from the database given a location id as well as the image in vercel blob.
+ * @returns - The deleted location.
+ */
+export async function DELETE(req: NextRequest, { params } : { params: { locationId : string}}) {
+    const session = await getServerSession(authOptions);
+
+    if(!session || session.user.role !== 'ADMIN') {
+        return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+    }
+
+    try {
+        const locationId = params.locationId;
+
+        if(!locationId) {
+            return NextResponse.json({ error: "No locationId provided." }, { status: 400 });
+        }
+
+        const location = await prisma.location.findFirst({
+            where: {
+                id: locationId
+            }
+        });
+
+        if(!location) {
+            return NextResponse.json({ error: "Location not found." }, { status: 404 });
+        }
+        
+        // this only exists for now because we have items in the db that don't have an image
+        if(location.imageWebLink && location.imageWebLink.length !== 0 && location.imageWebLink !== "N/A") {
+            await del(location.imageWebLink as string);
+        } 
+
+        // uncomment this when all locations have an image
+        //await del(location.imageWebLink as string);
+
+        const deletedLocation = await prisma.location.delete({
+            where: {
+                id: locationId
+            }
+        });
+
+        return NextResponse.json(deletedLocation);
+    } catch (err: any) {
+        console.log(`[ERROR]: Error in DELETE of api/locations/[locationId]/route.ts: ${err}`);
         return NextResponse.json({ error: "Internal Server Error." }, { status: 500 });
     }
 }
