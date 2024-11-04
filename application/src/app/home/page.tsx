@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 import Image from 'next/image';
 import HomeImg from './home_img.png';
@@ -126,10 +125,10 @@ const ImageComponent: React.FC<ImageComponentProps> = ({ src, alt, className }) 
 const Page: React.FC = () => {
   return (
     <div className="flex flex-col items-center min-h-screen bg-white text-zinc-800">
-      <Header/>
+      {/* <Header/>
       <MainContent
         imageSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/23426d6753aabde6b0bcafb61b6cadacda3463f2a92cc82b508010e50c3413d8?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225"
-      />
+      /> */}
     </div>
   );
 };

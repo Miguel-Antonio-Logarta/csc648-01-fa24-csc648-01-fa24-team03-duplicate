@@ -151,7 +151,7 @@ const LoginPage: React.FC = () => {
   return (
     <main className="flex flex-col max-w-[594px] mx-auto mt-larger">
       <section className="flex overflow-hidden flex-col pr-6 pb-16 pl-6 w-full bg-yellow-50 border-4 border-rose-400 border-solid shadow-sm rounded-[35px] max-md:px-5 max-md:max-w-full">
-        <Header />
+        {/* <Header /> */}
         <div className="self-stretch mt-1.5 max-md:max-w-full">
           <div className="flex gap-5 max-md:flex-col">
             <div className="flex flex-col w-[55%] max-md:ml-0 max-md:w-full">
