@@ -8,11 +8,12 @@ declare module 'next-auth' {
       username: string;
       email: string;
       role: 'ADMIN' | 'CUSTOMER' | 'BUSINESS_OWNER' | 'MODERATOR';
-    } & DefaultSession['CUSTOMER'];
+    } & DefaultSession['user'];
   }
 
   interface User extends DefaultUser {
     // extend the user object with additional fields
+    id: string;
     username: string;
     role: 'ADMIN' | 'CUSTOMER' | 'BUSINESS_OWNER' | 'MODERATOR';
   }
@@ -21,6 +22,7 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   interface JWT {
     // extend the JWT object with additional fields
+    id: string;
     username: string;
     role: 'ADMIN' | 'CUSTOMER' | 'BUSINESS_OWNER' | 'MODERATOR';
   }
