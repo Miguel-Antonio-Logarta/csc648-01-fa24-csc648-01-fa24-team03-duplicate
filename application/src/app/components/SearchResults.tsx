@@ -3,9 +3,10 @@
 import Filter from "./icons/Filter"
 import Listing from "./Listing"
 import styles from "../components/components.module.css"
-import { useContext } from "react"
+import { Suspense, useContext } from "react"
 import { SearchContext } from "../context/SearchContext"
 import { LocationData } from "../api/locations/route"
+import ListingLoading from "./loading/ListingLoading"
 
 // On mount, read url query parameters
 // Query the database with these search parameters
@@ -55,13 +56,16 @@ function SearchResults(props: SearchResultsProps) {
           <span className="align-text-bottom">Filters</span>
         </button>
         <div className="flex flex-col gap-6 mt-6">
-          {locations.map((location) => 
-            <Listing
-              key={location.id}
-              data={location}
-              selectLocation={handleLocationSelect}
-            />
-          )}
+          {/* Suspense UI is not working */}
+          <Suspense fallback={Array.from({length: 4},(_,index) => <ListingLoading key={index}/>)}>
+            {locations.map((location) => 
+              <Listing
+                key={location.id}
+                data={location}
+                selectLocation={handleLocationSelect}
+              />
+            )}
+          </Suspense>
         </div>
     </div>
   )
