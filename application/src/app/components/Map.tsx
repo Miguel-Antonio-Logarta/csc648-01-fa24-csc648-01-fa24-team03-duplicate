@@ -4,6 +4,8 @@ import { Marker } from "@react-google-maps/api";
 import { SearchContext } from "../context/SearchContext";
 import { renderToString } from "react-dom/server";
 import MarkerIcon from "./icons/Marker";
+import { LocationData } from "../api/locations/route";
+import Image from "next/image";
 
 // Different map pin styles
 const mapPinEdited = "M 5.0659545e-8,-176.125 A 40,40 0 1 0 40,-136.125 40,40 0 0 0 5.0659545e-8,-176.125 Z m 0,64 A 24,24 0 1 1 24,-136.125 24,24 0 0 1 5.0659545e-8,-112.125 Z m 0,-112 A 88.1,88.1 0 0 0 -88,-136.125 c 0,31.4 14.51,64.68 42,96.25 a 254.19,254.19 0 0 0 41.4500001,38.3 8,8 0 0 0 9.18,0 A 254.19,254.19 0 0 0 46,-39.875 c 27.45,-31.57 42,-64.85 42,-96.25 A 88.1,88.1 0 0 0 5.0659545e-8,-224.125 Z m 0,206 C -16.53,-31.125 -72,-78.875 -72,-136.125 a 72,72 0 0 1 144,0 c 0,57.23 -55.47,105 -71.999999949340448,118 z";
@@ -41,28 +43,10 @@ const mapOptions: google.maps.MapOptions = {
   ],
 };
 
-const testCoordinates: coordinate[] = [
-  {
-    id: 1,
-    lat: 37.72145834654513,
-    lng: -122.47828226733533,
-  },
-  {
-    id: 2,
-    lat: 37.76882261237542,
-    lng: -122.46731071747753,
-  },
-  {
-    id: 3,
-    lat: 37.72212295611043,
-    lng: -122.47859151267485,
-  },
-  {
-    id: 4,
-    lat: 37.740810098737626,
-    lng: -122.50549875122867,
-  },
-];
+const infoWindowOptions: google.maps.InfoWindowOptions = {
+  maxWidth: 300,
+  headerDisabled: true
+}
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -70,20 +54,11 @@ function Map() {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
   });
 
-  const { locations, selectedLocation } = useContext(SearchContext);
+  const { locations, selectedLocation, setSelectedLocation } = useContext(SearchContext);
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
 
   const onLoad = useCallback(function callback(map: google.maps.Map) {
-
-    // // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    // const bounds = new window.google.maps.LatLngBounds(center)
-    // map.fitBounds(bounds)
-
-    // When a user clicks on a listing/place move the map's camera to center on that location
-    // const newCoords = {lat: listing.lat, lng: listing.lng};
-    // map.panTo(newCoords);
-
     setMap(map);
   }, []);
 
@@ -106,6 +81,10 @@ function Map() {
     setMap(null);
   }, []);
 
+  const handleMarkerClick = (e: google.maps.MapMouseEvent, location: LocationData) => {
+    setSelectedLocation(location);
+  }
+
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -116,13 +95,12 @@ function Map() {
       {/* Child components, such as markers, info windows, etc. */}
       {/* TODO: On click, scroll to the listing on the left */}
       {/* TODO: On click, have a label appear that shows the title and an image of the location */}
-      {/* <InfoWindow>
-        <div>{selectedLocation?.name}</div>
-      </InfoWindow> */}
+      
       {locations.map((location) => (
         <Marker 
           key={location.id} 
           position={{ lat: location.latitude, lng: location.longitude }}
+          onClick={(e) => handleMarkerClick(e, location)}
           icon={{
             path: mapPinFilledEdited,
             fillColor: "#d1daaf",
@@ -131,8 +109,28 @@ function Map() {
             strokeColor: "#869747",
             strokeWeight: 4,
             anchor: new google.maps.Point(0, 0)
-          }}
-          />
+          }}>
+            {selectedLocation?.id === location.id &&
+              <InfoWindow options={infoWindowOptions}>
+                {/* TODO:
+                    - onClick lead to info page
+                    - Add rating, category, and business status below
+                    - onClick, scroll listing on the left
+                */}
+                <div className="flex flex-col items-center w-full h-full">
+                  <div className="relative w-full h-[150px]">
+                    <Image
+                      className="object-cover rounded-lg bg-slate"
+                      alt={location.name}
+                      fill={true}
+                      src={location.imageWebLink}
+                    />
+                  </div>
+                  <div className="font-shantell text-lg mb-2 text-center mt-2">{location.name}</div>
+                </div>
+              </InfoWindow>
+            }
+          </Marker>
       ))}
     </GoogleMap>
   ) : (
