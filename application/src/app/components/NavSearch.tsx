@@ -47,6 +47,7 @@ function NavSearch() {
             params.set("query", searchQuery.trim());
             push(`/search?${params.toString()}`);    // Go to search page with query
         } else {
+            console.log("Sending query to backend");
             handleSearch(searchQuery);                  // Send query to backend
         }
     }
@@ -66,14 +67,14 @@ function NavSearch() {
             />
             <div className='border-l-2 my-2 border-neutral-300'></div>
             {/* TODO: Add a location query */}
-            <input 
+            {/* <input 
                 name="searchOrigin"
                 className="min-w-0 max-w-96 outline-none pl-6 bg-transparent" 
                 placeholder="In San Francisco..." 
                 autoComplete='off'
                 onChange={(e) => e.preventDefault()} 
                 value={""}
-            />
+            /> */}
             <button type='submit' className='pr-6 '>
                 <MagnifyingGlass className="my-auto ml-4" size={20} />
             </button>
