@@ -32,11 +32,11 @@ function SearchResults(props: SearchResultsProps) {
   };
 
   return (
-      <NotebookPaper>
-          <div className='h-full px-6 py-4 h-full overflow-y-scroll'>
+      <NotebookPaper className='shadow-2xl'>
+          <div className='h-full px-6 py-4 h-full overflow-y-scroll z-0 relative'>
             <button
               onClick={props.onFilterClick}
-              className="flex no-wrap items-center gap-1.5 rounded-full bg-[#C6E2FF] px-6 py-2 font-josefin"
+              className="flex no-wrap items-center gap-1.5 rounded-full bg-columbia-blue hover:bg-jordy-blue px-6 py-2 font-josefin"
             >
               <Filter size={20} />
               <span className="align-text-bottom">Filters</span>

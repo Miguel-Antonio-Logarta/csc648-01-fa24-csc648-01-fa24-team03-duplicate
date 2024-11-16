@@ -8,7 +8,7 @@ type props = {
 const NotebookPaper = ({ children, className }: props) => {
   return (
     <div className={`${styles['notebook-paper']} ${className}`}>
-      {/* <div className={`${styles['red-line']}`}>yuh</div> */}
+      {/* <div className={`${styles['red-line']}`}></div> */}
       {children}
     </div>);
 };

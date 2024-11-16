@@ -33,7 +33,7 @@ function ListingControls({ data }: ListingControlProps) {
     session?.user.role == "BUSINESS_OWNER"
   ) {
     return (
-      <div className="flex flex-row gap-4 items-center border-t-2 border-neutral-200 mt-6 pt-6">
+      <div className="flex flex-row gap-4 items-center border-t-2 border-neutral-200 p-6">
         <span className="mr-auto text-sm">Location id: {data.id}</span>
         <Link
           href={`/`}

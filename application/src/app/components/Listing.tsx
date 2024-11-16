@@ -11,6 +11,8 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ListingControls from "./ListingControls";
 import Modal from "./Modal";
+import clsx from "clsx";
+import { useEffect } from "react";
 
 type props = {
   data: LocationData;
@@ -26,15 +28,23 @@ type props = {
 function Listing({ data, selectLocation }: props) {
   const { data: session } = useSession();
 
-  const conditionalClassnames = {};
+  const backgroundCategoryColors = clsx({
+    "bg-olivine": data.category === "CAFE",
+    "bg-cherry-blossom-pink": data.category === "LIBRARY",
+    "bg-gray": data.category === "PARK",
+  })
 
-  
+  const listingColors = clsx({
+    "bg-tea-green border-olivine hover:bg-tea-green-hover": data.category === "CAFE",
+    "bg-lavender-blush border-cherry-blossom-pink hover:bg-pink-hover": data.category === "LIBRARY",
+    "bg-white hover:bg-slate-200 border-black": data.category === "PARK"
+  })
 
   return (
-    <div className="flex flex-col bg-white shadow-md rounded-md p-6">
+    <div className={`flex flex-col shadow-md rounded-lg border-4 ${listingColors}`}>
       <div
         onClick={() => selectLocation(data)}
-        className="flex flex-row no-wrap gap-6 cursor-pointer"
+        className="flex flex-row no-wrap gap-6 cursor-pointer p-6"
       >
         <div className="flex items-center">
           <div className="relative w-[150px] h-[150px] self-start">
@@ -50,18 +60,18 @@ function Listing({ data, selectLocation }: props) {
         <div className="flex flex-col grow">
           <div className="font-shantell text-xl mb-2">{data.name}</div>
           <div className="font-josefin text-sm mb-3 flex flex-row items-center gap-2">
-            <div className="bg-slate-200 font-bold px-2 rounded-sm py-[4px]">
+            <div className={`font-bold px-2 rounded-sm py-[4px] ${backgroundCategoryColors}`}>
               {formatCategory(data.category)}
             </div>
             <span>•</span>
-            <span className="text-base text-stone/800">Currently busy</span>
+            <span className="text-base">Currently busy</span>
           </div>
           <Rating
-            className="mb-2 text-stone/800"
+            className="mb-2"
             rating={data.rating}
             size={20}
           />
-          <div className="flex flex-row gap-3 text-stone/800">
+          <div className="flex flex-row gap-3">
             {data.hasWifi && (
               <div className="text-sm rounded-lg flex flex-row gap-1">
                 <Wifi size={16} />
@@ -82,7 +92,7 @@ function Listing({ data, selectLocation }: props) {
             )}
           </div>
           <div className="flex justify-end">
-            <Link href={`/quickInfo/${data.id}`} className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">View Details</Link>
+            {/* <Link href={`/quickInfo/${data.id}`} className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">View Details</Link> */}
           </div>
         </div>
       </div>
