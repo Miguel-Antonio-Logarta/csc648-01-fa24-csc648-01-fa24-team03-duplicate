@@ -1,13 +1,16 @@
-import React from 'react'
+import styles from './components.module.css';
 
 type props = {
-    children?: React.ReactNode
-}
+  className?: string;
+  children?: React.ReactNode;
+};
 
-const NotebookPaper = ({ children }: props) => {
+const NotebookPaper = ({ children, className }: props) => {
   return (
-    <div>{children}</div>
-  )
-}
+    <div className={`${styles['notebook-paper']} ${className}`}>
+      {/* <div className={`${styles['red-line']}`}>yuh</div> */}
+      {children}
+    </div>);
+};
 
-export default NotebookPaper
+export default NotebookPaper;

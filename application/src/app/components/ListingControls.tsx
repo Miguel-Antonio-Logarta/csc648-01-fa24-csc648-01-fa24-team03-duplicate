@@ -51,9 +51,16 @@ function ListingControls({ data }: ListingControlProps) {
             Remove Listing
           </Link>
         )}
-        {/* <button onClick={openDeleteModal}>Here is a button</button> */}
-        {/* <Modal visible={deleteModal} close={closeDeleteModal}>
+
+        
+        {/* <button onClick={openDeleteModal}>Here is a button</button>
+        <Modal visible={deleteModal} close={closeDeleteModal}>
             <h1>Are you sure you want to delete!</h1>
+        </Modal> */}
+
+        {/* <button onClick={openDeleteModal}></button>
+        <Modal visible={deleteModal} close={closeDeleteModal}>
+
         </Modal> */}
       </div>
     );

@@ -7,3 +7,37 @@
     height: inherit;
     overflow-y: scroll;
 }
+
+.notebook-paper {
+    height: inherit;
+    background: linear-gradient(to bottom,white 29px,#00b0d7 1px);
+    background-size: 100% 30px;
+    position: relative;
+    border-radius: 5px;
+    z-index: 0;
+    box-shadow: 10px 5px 5px grey;
+}
+
+.notebook-paper:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 80px;
+    height: 100%;
+    width: 1px;
+    background: #db4034;
+}
+
+/* .red-line {
+    content:'';
+    display:block;
+    position:absolute;
+    z-index:-1;
+    top:0;
+    left:80px;
+    min-height: 100%;
+    width:1px;
+    background:#db4034;
+} */
