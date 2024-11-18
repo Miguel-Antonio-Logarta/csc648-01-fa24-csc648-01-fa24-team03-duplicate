@@ -12,21 +12,50 @@ import { useSession } from "next-auth/react";
 import ListingControls from "./ListingControls";
 import Modal from "./Modal";
 import clsx from "clsx";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { SearchContext } from "../context/SearchContext";
 
+// Now do I move 
 type props = {
   data: LocationData;
   selectLocation: (data: LocationData) => void;
+  isSelected: boolean;
 };
 
+function selectColors(data: LocationData, isSelected: boolean) {
+  const borderColors = {
+    "border-olivine": data.category === "CAFE",
+    "border-cherry-blossom-pink": data.category === "LIBRARY",
+    "border-black": data.category === "PARK"
+  }
+  
+  // If selection location is equal to the id, set it to be the active color instead of the default bg 
+  // console.log("I am being called!", data.id, selectionLocationId)
+  if (isSelected) {
+    return {
+      ...borderColors,
+      "bg-olivine": data.category === "CAFE",
+      "bg-cherry-blossom-pink": data.category === "LIBRARY",
+      "bg-gray": data.category === "PARK"
+    }
+  } else {
+    return {
+      ...borderColors,
+      "bg-tea-green-hover hover:bg-olivine": data.category === "CAFE",
+      "bg-pink-hover hover:bg-cherry-blossom-pink": data.category === "LIBRARY",
+      "bg-slate-200 hover:bg-gray": data.category === "PARK"
+    }
+  }
+}
 
 /*
  * TODO:
  *   - Add review counter
  *   - Add "charging available" feature
  */
-function Listing({ data, selectLocation }: props) {
-  const { data: session } = useSession();
+function Listing({ data, selectLocation, isSelected }: props) {
+  // const { selectedLocation } = useContext(SearchContext);
+  // const [clickStatus, setClickStatus] = useState<"DEFAULT" | "SELECTED" | ""
 
   const backgroundCategoryColors = clsx({
     "bg-olivine": data.category === "CAFE",
@@ -34,14 +63,10 @@ function Listing({ data, selectLocation }: props) {
     "bg-gray": data.category === "PARK",
   })
 
-  const listingColors = clsx({
-    "bg-tea-green border-olivine hover:bg-tea-green-hover": data.category === "CAFE",
-    "bg-lavender-blush border-cherry-blossom-pink hover:bg-pink-hover": data.category === "LIBRARY",
-    "bg-white hover:bg-slate-200 border-black": data.category === "PARK"
-  })
+  const bgColors = clsx(selectColors(data, isSelected));
 
   return (
-    <div className={`flex flex-col shadow-md rounded-lg border-4 ${listingColors}`}>
+    <div className={`flex flex-col shadow-md rounded-lg border-4 ${bgColors}`}>
       <div
         onClick={() => selectLocation(data)}
         className="flex flex-row no-wrap gap-6 cursor-pointer p-6"
@@ -78,6 +103,7 @@ function Listing({ data, selectLocation }: props) {
                 Wifi available
               </div>
             )}
+            {/* <div>{data.id}, {selectedLocation?.id}</div> */}
             {/* {data.ch && (
               <div className="text-sm rounded-lg flex flex-row gap-1">
                 <ChargingAvailable size={16} />

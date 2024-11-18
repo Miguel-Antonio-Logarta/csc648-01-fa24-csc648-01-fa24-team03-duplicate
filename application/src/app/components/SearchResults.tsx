@@ -8,6 +8,8 @@ import { SearchContext } from '../context/SearchContext';
 import { LocationData } from '../api/locations/route';
 import ListingLoading from './loading/ListingLoading';
 import NotebookPaper from './NotebookPaper';
+import { useRouter } from 'next/navigation';
+// import { Router } from 'next/router';
 
 // On mount, read url query parameters
 // Query the database with these search parameters
@@ -24,11 +26,18 @@ type SearchResultsProps = {
   Fix Suspense. It isn't showing the loading ui while fetching data.
 */
 function SearchResults(props: SearchResultsProps) {
-  const { locations, setSelectedLocation } = useContext(SearchContext);
+  const { locations, selectedLocation, setSelectedLocation } = useContext(SearchContext);
+  const router = useRouter(); 
 
   const handleLocationSelect = (data: LocationData) => {
-    const newLocation = { ...data }; // Necessary to create a copy so that the map will update
-    setSelectedLocation(newLocation);
+    if (data.id === selectedLocation?.id) {
+      router.push(`/locationInfo/${data.id}`);
+      // window.open(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
+      // window.open(`localhost:3000/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
+    } else {  
+      const newLocation = { ...data }; // Necessary to create a copy so that the map will update
+      setSelectedLocation(newLocation);
+    }
   };
 
   return (
@@ -53,6 +62,7 @@ function SearchResults(props: SearchResultsProps) {
                     key={location.id}
                     data={location}
                     selectLocation={handleLocationSelect}
+                    isSelected={selectedLocation?.id === location.id}
                   />
                 ))}
               </Suspense>
