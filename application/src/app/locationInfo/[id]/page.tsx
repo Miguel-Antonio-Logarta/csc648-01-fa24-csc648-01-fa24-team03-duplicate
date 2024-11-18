@@ -10,6 +10,7 @@ import Back from '../back_arrow.png';
 import Graph from '../sample_graph.png';
 import Navbar from "../../components/Navbar";
 import Link from "next/link";
+import BookmarkButton from "@/app/components/BookmarkButton";
 
 const Page = async ({ params }: { params: { id: string } }) => {
     const features = [
@@ -27,7 +28,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
     
     const location = await locationResponse.json();
     const reviews = await reviewsResponse.json();
-
 
     return (
         <main>
@@ -80,7 +80,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
                     </header>
                     <section className="flex gap-7 items-start mt-16 mr-7 max-md:mt-10 max-md:mr-2.5">
                         <ContactInfo location={location} />
-                        <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-sage rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50">Save</button>
+                        {/* <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-sage rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50">Save</button> */}
+                        <BookmarkButton locationId={id} />
                         <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-blue-200 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50">
                             <Image src={Star} alt="clear star" />
                             {/* <a href='/writeReview' className="my-auto basis-auto">Write a Review!</a> */}

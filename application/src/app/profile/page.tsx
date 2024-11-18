@@ -17,8 +17,8 @@ const Page = () => {
     
     return (
         <div style={{ display: 'flex', gap: '20px' }}>
-            <Bio session={session}/>
-            <BookmarksBox />
+            <Bio session={session} />
+            <BookmarksBox session={session} />
 
         </div>
     );
