@@ -25,6 +25,7 @@ function LoginForm() {
 
     if (result?.error) {
       setError(result.error);
+      toast.error(`Failed to Login: ${result.error}`);
     } else {
       toast.success(`Welcome ${userInfo.login}!`);
       router.push("/");
