@@ -7,7 +7,7 @@ const Page = () => {
             <h1>Hello, my name is Alan Yu</h1>
             <h2>Team Role: Scrum Master</h2>
             <Image 
-                src={pfp}
+                src="https://9otnordlgmffpjra.public.blob.vercel-storage.com/alanyu-vvmolpSMgXBtVF9uFRqJuV0zQBlp6I.png"
                 alt="Profile" 
                 width={150} 
                 height={150}
