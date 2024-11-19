@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import useGetLocationData from "./hooks/useGetLocationData";
 import Image from "next/image";
 import LocationCard from "./components/LocationCard";
+import useCount from "./hooks/counthook";
 
 interface Location {
   id: string;
@@ -19,10 +20,12 @@ interface Location {
 export default function Home() {
 
   const { locations, loading, error } = useGetLocationData();
+  const {count, setCount} = useCount({startingVal: 0});
 
   return (
     <div className="w-screen min-h-screen flex flex-col">
       <Navbar />
+      <div>{count} <button onClick={() => setCount(count + 1)}>Click me</button></div>
       <div className="flex flex-row no-wrap relative shadow-inner w-screen h-96 bg-red-200 items-center">
         {/* <div className="h-full w-full bg-blue-200"> */}
         <div className="flex flex-row no-wrap items-center z-10 px-32 gap-8">
