@@ -8,40 +8,42 @@ import SearchResults from '../components/SearchResults';
 import FilterOptions from '../components/FilterOptions';
 import { LocationData } from '../api/locations/route';
 
-function fetchLocations() {
-  let status = 'pending';
-  let result: unknown;
+// This is causing an error. Put fetch inside the component instead. Redo this later
+// When I want to use the suspense API for a loading ui 
+// function fetchLocations() {
+//   let status = 'pending';
+//   let result: unknown;
 
-  // const promise = fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations/`, {
-  const promise = fetch(`/api/locations/`, {
-    method: 'GET',
-  })
-    .then((response) => response.json())
-    .then((data: unknown) => {
-      console.log(data);
+//   const promise = fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations/`, {
+//     // const promise = fetch(`/api/locations/`, {
+//     method: 'GET',
+//   })
+//     .then((response) => { console.log("HIIIIIIIIIII"); return response.json()})
+//     .then((data: unknown) => {
+//       console.log(data);
 
-      status = 'success';
-      result = data;
-    })
-    .catch((error) => {
-      status = 'error';
-      result = error;
-    });
+//       status = 'success';
+//       result = data;
+//     })
+//     .catch((error) => {
+//       status = 'error';
+//       result = error;
+//     });
 
-  return {
-    read() {
-      if (status === 'pending') {
-        throw promise;
-      } else if (status === 'error') {
-        throw result;
-      } else if (status === 'success') {
-        return result;
-      }
-    },
-  };
-}
+//   return {
+//     read() {
+//       if (status === 'pending') {
+//         throw promise;
+//       } else if (status === 'error') {
+//         throw result;
+//       } else if (status === 'success') {
+//         return result;
+//       }
+//     },
+//   };
+// }
 
-const dataWrapper = fetchLocations();
+// const dataWrapper = fetchLocations();
 
 /**
  * Where do I place the rendering logic?
@@ -49,22 +51,23 @@ const dataWrapper = fetchLocations();
  * @returns read
  */
 const Page = () => {
-  const locationData = dataWrapper.read() as LocationData[];
+  // const locationData = dataWrapper.read() as LocationData[];
+
   const { setLocations } = useContext(SearchContext);
   const [filterSidebar, setFilterSidebar] = useState(false);
-  // //   Todo: Read from URL params and change filter search results from that
-  // useEffect(() => {
-  //   fetch("/api/locations/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setLocations(data);
-  //     });
-  // }, [setLocations]);
-
+  //   Todo: Read from URL params and change filter search results from that
   useEffect(() => {
-    setLocations(locationData);
-  });
+    fetch("/api/locations/")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setLocations(data);
+      });
+  }, [setLocations]);
+
+  // useEffect(() => {
+  //   setLocations(locationData);
+  // });
 
   const handleFilterClick = (e: React.SyntheticEvent) => {
     e.preventDefault();

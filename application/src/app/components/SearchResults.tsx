@@ -31,8 +31,9 @@ function SearchResults(props: SearchResultsProps) {
 
   const handleLocationSelect = (data: LocationData) => {
     if (data.id === selectedLocation?.id) {
-      router.push(`/locationInfo/${data.id}`);
-      // window.open(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
+      // console.log(`I am beign called ${process.env.NEXT_PUBLIC_API_URL}`)
+      // router.push(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`);
+      window.open(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
       // window.open(`localhost:3000/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
     } else {  
       const newLocation = { ...data }; // Necessary to create a copy so that the map will update
