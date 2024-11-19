@@ -1,0 +1,40 @@
+.listing {
+    display: grid;
+    grid-template-areas: "image title";
+}
+
+.search-results {
+    height: inherit;
+    overflow-y: scroll;
+}
+
+.notebook-paper {
+    height: inherit;
+    background: linear-gradient(to bottom,white 29px,#00b0d7 1px);
+    background-size: 100% 30px;
+    position: relative;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.notebook-paper:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 80px;
+    height: 100%;
+    width: 1px;
+    background: #db4034;
+}
+
+/* .red-line {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 80px;
+    min-height: 100%;
+    width: 1px;
+    background: #db4034;
+} */

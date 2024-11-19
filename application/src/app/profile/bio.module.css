@@ -1,0 +1,49 @@
+/* ProfileCard.module.css */
+
+.card {
+    background-color: #d1e3c3; 
+    border-width: 7px;
+    border-color: #FFFAE4;
+    width: 30%;
+    height: 60%;
+    margin-left: 5%;
+    margin-top: 5%;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatarPlaceholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff; /* White */
+    border-radius: 50%;
+    margin-bottom: 16px;
+  }
+  
+  .username {
+    font-family: 'Shantell', sans-serif;
+    font-size: 1.5em;
+    color: #000000;
+    margin: 0;
+  }
+  
+  .editButton {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #f4b6c2; /* Light pink */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .socialNumbers{
+    margin-top: 20px;
+
+  }
+  
