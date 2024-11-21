@@ -22,11 +22,13 @@ function LoginForm() {
       redirect: false,
       username: userInfo.login,
       password: userInfo.password,
+      
     });
 
     if (result?.error) {
       setError("Username or password is incorrect");
       setIsInvalid(true); // Set invalid state
+      setUserInfo({ ...userInfo, password: "" }); // Clear the password field
     } else {
       toast.success(`Welcome ${userInfo.login}!`);
       router.push("/");
@@ -64,7 +66,7 @@ function LoginForm() {
                     value={userInfo.login}
                     onChange={(e) => setUserInfo({ ...userInfo, login: e.target.value })}
                     placeholder='Username'
-                    className={`shrink-0 text-black self-stretch mt-1 pl-2 pr-6 py-3 h-10 text-lg bg-yellow-50 border-b-2 border-dashed w-full w-[18rem] hover:bg-[#fef9c3] ${isInvalid ? 'outline outline-2 outline-red-500 rounded-sm shadow-red-500/70' : ''}`}
+                    className={`shrink-0 text-black mt-1 pl-2 pr-14 py-3 h-10 text-lg bg-yellow-50 border-b-2 border-dashed w-full w-[18rem] hover:bg-[#fef9c3] ${isInvalid ? 'outline outline-2 outline-red-500 rounded-sm shadow-red-500/70' : ''}`}
                     aria-label="login"
                     autoComplete="off"
                     required
@@ -77,7 +79,7 @@ function LoginForm() {
                     id="password"
                     value={userInfo.password}
                     onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
-                    className={`shrink-0 text-black self-stretch mt-1 pl-2 pr-6 py-3 h-10 text-lg bg-yellow-50 border-b-2 border-dashed w-full w-[18rem] hover:bg-[#fef9c3] ${isInvalid ? 'outline outline-2 outline-red-500 rounded-sm' : ''}`}
+                    className={`shrink-0 text-black self-stretch mt-1 pl-2 pr-14 py-3 h-10 text-lg bg-yellow-50 border-b-2 border-dashed w-full w-[18rem] hover:bg-[#fef9c3] ${isInvalid ? 'outline outline-2 outline-red-500 rounded-sm' : ''}`}
                     placeholder='Password'
                     aria-label="Password"
                     autoComplete="off"
