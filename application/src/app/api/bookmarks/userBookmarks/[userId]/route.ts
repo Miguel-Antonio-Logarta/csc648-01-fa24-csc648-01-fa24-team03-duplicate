@@ -22,6 +22,8 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
                     select: {
                         id: true,
                         name: true,
+                        category: true,
+                        imageWebLink: true
                     }
                 },
                 creationDate: true

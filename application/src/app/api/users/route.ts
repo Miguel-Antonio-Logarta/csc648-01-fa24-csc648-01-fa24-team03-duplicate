@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
     const conditions: { username?: string; email?: string }[] = [{ username: body.username }];
 
     // only check for email if it is provided, email is technically optional
-    if(body.email && body.email.trim() !== '') {
+    if (body.email && body.email.trim() !== '') {
       conditions.push({ email: body.email })
     }
 
@@ -83,6 +83,12 @@ export async function POST(req: NextRequest) {
         { error: "username or email already exists" },
         { status: 400 }
       );
+    }
+
+    if (body.password.length < 6) {
+      return NextResponse.json(
+        { error: "Password must be at least 6 characters long." },
+        { status: 400 });
     }
 
     // hash the password before storing it in the database
