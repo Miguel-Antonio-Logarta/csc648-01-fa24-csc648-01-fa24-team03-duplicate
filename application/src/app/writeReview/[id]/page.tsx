@@ -25,9 +25,13 @@ const Page = ({ params }: { params: { id: string } }) => {
 
     // Handle loading state correctly
     useEffect(() => {
+        console.log("should call once")
         if (status === 'loading') return; // Early return if loading
         if (status === 'unauthenticated') return; // Early return if unauthenticated
         fetchSpecificLocation(id);
+
+        // DO NOT INCLUDE fetchSpecificLocation IN DEPENDENCIES | It will cause infinite loop
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, status]); // Include status in dependencies
 
     const handleRatingChange = (newRating: string) => {

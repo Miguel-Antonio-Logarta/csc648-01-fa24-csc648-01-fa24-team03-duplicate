@@ -67,7 +67,7 @@ const BookmarksBox: React.FC<BookmarksBoxProps> = ({ session }) => {
     if(session) {
       fetchUsersBookmarks(session.user.id);
     }
-  }, []);
+  });
 
   console.log(usersBookmarks);
 
