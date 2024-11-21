@@ -21,7 +21,7 @@ const SignUpForm: React.FC = () => {
   return (
     <div className="flex flex-col ml-5 w-[45%] max-md:ml-0 max-md:w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 items-start self-stretch my-auto -ml-px text-stone-600 max-md:mt-10">
-        <h2 className="text-2xl font-bold tracking-[2.25px]">Sign Up</h2>
+        <h2 className="text-2xl font-bold tracking-[2.25px]">Password reset</h2>
         <div className="mt-3 text-xs text-stone-400">
           <label htmlFor="usernname" className="sr-only">Username</label>
           <input
@@ -35,19 +35,7 @@ const SignUpForm: React.FC = () => {
             placeholder='Username'
             required />
         </div>
-        <div className="mt-3 text-xs text-stone-400">
-          <label htmlFor="password" className="sr-only">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={userInfo.email}
-            onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
-            className="w-full bg-transparent border-b-2 border-rose-400 border-dashed"
-            aria-label="Password"
-            autoComplete="off"
-            placeholder='Email'
-          />
-        </div>
+    
         <div className="mt-3 text-xs text-stone-400">
           <label htmlFor="password" className="sr-only">Password</label>
           <input 
@@ -62,8 +50,8 @@ const SignUpForm: React.FC = () => {
           required 
           />
         </div>
-        <button type="submit" className="self-center px-4 py-1.5 mt-10 text-sm font-bold text-center text-white drop-shadow-mdç bg-sage rounded-[35px] max-md:mt-10 hover:bg-white hover:text-sage border-[#D1DAAF] border-2">
-          Sign Up!
+        <button type="submit" className="self-center px-4 py-1.5 mt-10 text-sm font-bold text-center text-white drop-shadow-mdç bg-sage rounded-[35px]  max-md:mt-10 hover:bg-white hover:text-sage border-[#D1DAAF] border-2">
+          Reset password
         </button>
       </form>
     </div>
