@@ -408,7 +408,7 @@ The `/api/` is structured as follows:
 ```json
 {
   "rating": 5,
-  "content": Good place to study
+  "content": "Good place to study"
 }
 ```
 

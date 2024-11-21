@@ -67,9 +67,10 @@ const BookmarksBox: React.FC<BookmarksBoxProps> = ({ session }) => {
     if(session) {
       fetchUsersBookmarks(session.user.id);
     }
-  });
-
-  console.log(usersBookmarks);
+    
+    // DO NOT INCLUDE fetchUsersBookmarks IN DEPENDENCIES | It will cause infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   return (
     <div className={styles.bookmarksBox}>
