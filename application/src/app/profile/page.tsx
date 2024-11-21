@@ -19,7 +19,6 @@ const Page = () => {
         <div style={{ display: 'flex', gap: '20px' }}>
             <Bio session={session} />
             <BookmarksBox session={session} />
-
         </div>
     );
 }

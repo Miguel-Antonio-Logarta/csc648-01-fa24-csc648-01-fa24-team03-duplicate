@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
 import styles from './BookmarksBox.module.css';
-import Listing from '../components/Listing';
 import { Session } from 'next-auth';
 import useGetUsersBookmarks from '../hooks/useGetUsersBookmarks';
 import BookmarkCard from '../components/BookmarkCard';
@@ -25,9 +24,9 @@ interface Bookmark {
 
 const BookmarksBox: React.FC<BookmarksBoxProps> = ({ session }) => {
   const { usersBookmarks, fetchUsersBookmarks, loading } = useGetUsersBookmarks();
-  
+
   useEffect(() => {
-    if(session) {
+    if (session) {
       fetchUsersBookmarks(session.user.id);
     }
 
@@ -36,18 +35,16 @@ const BookmarksBox: React.FC<BookmarksBoxProps> = ({ session }) => {
   }, [session]);
 
   return (
-    <div className={styles.bookmarksBox}>
-      <h2 className={styles.title}>Bookmarks</h2>
-      <div className="flex flex-col gap-6 mt-6">
-
+    <div className={`${styles.bookmarksBox} overflow-y-scroll`}>
+      <h2 className={`${styles.title} font-josefin py-5`}>Bookmarks</h2>
+      <div className="flex flex-col gap-6 mt-6 px-5">
         {usersBookmarks.map((bookmark: Bookmark) => (
-          <BookmarkCard 
+          <BookmarkCard
             key={bookmark.id}
             bookmark={bookmark}
-            />
+          />
         ))}
-        </div>
-    {/* /* <div className={styles.bookmarkPlaceholder}>No bookmarks yet</div>*/ }
+      </div>
     </div>
   );
 };

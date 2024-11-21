@@ -44,7 +44,7 @@ const BookmarkCard = ({ bookmark }: BookmarkCardProps) => {
     }
 
     return (
-        <div onClick={handleClick} className={`flex flex-col shadow-md rounded-lg border-4 p-6 cursor-pointer ${backgroundColor} ${hoverColor} ${borderColors}`}>
+        <div onClick={handleClick} className={`z-10 flex flex-col shadow-md rounded-lg border-4 p-6 cursor-pointer ${backgroundColor} ${hoverColor} ${borderColors}`}>
             <div className="flex flex-row gap-6">
                 <div className="flex items-center">
                     <div className="relative w-[150px] h-[150px] self-start">
