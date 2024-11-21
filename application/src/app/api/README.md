@@ -67,10 +67,10 @@ The `/api/` is structured as follows:
 - **Response Body:**
 ```json
 {
-  numOfLocations: 1,
-  numOfUsers: 3,
-  numOfReviews: 3,
-  numOfBookmarks: 7
+  "numOfLocations": 1,
+  "numOfUsers": 3,
+  "numOfReviews": 3,
+  "numOfBookmarks": 7
 }
 ```
 
@@ -165,7 +165,7 @@ The `/api/` is structured as follows:
   {
     "id": "location-id",
     "name": "San Francisco State University J. Paul Leonard Library",
-    address: "1630 Holloway Ave, San Francisco, CA 94132",
+    "address": "1630 Holloway Ave, San Francisco, CA 94132",
     "phoneNumber": "(415) 338-1854",
     "hasWifi": true,
     "seatingCapacity": 648,
@@ -229,7 +229,7 @@ The `/api/` is structured as follows:
 {
   "id": "location-id",
   "name": "San Francisco State University J. Paul Leonard Library",
-  address: "1630 Holloway Ave, San Francisco, CA 94132",
+  "address": "1630 Holloway Ave, San Francisco, CA 94132",
   "phoneNumber": "(415) 338-1854",
   "hasWifi": true,
   "seatingCapacity": 648,
@@ -289,7 +289,7 @@ The `/api/` is structured as follows:
 {
   "id": "location-id",
   "name": "San Francisco State University J. Paul Leonard Library",
-  address: "1630 Holloway Ave, San Francisco, CA 94132",
+  "address": "1630 Holloway Ave, San Francisco, CA 94132",
   "phoneNumber": "(415) 338-1854",
   "hasWifi": true,
   "seatingCapacity": 648,
