@@ -47,7 +47,7 @@ await createLocation(formData, session);
 ```typescript
 const { createReview } = useCreateReview();
 ...
-await createReview(location.id, review, rating, session);
+await createReview(locationId, review, rating, session);
 ```
 
 ### `useCreateUser.ts`
