@@ -25,7 +25,6 @@ const Page = ({ params }: { params: { id: string } }) => {
 
     // Handle loading state correctly
     useEffect(() => {
-        console.log("should call once")
         if (status === 'loading') return; // Early return if loading
         if (status === 'unauthenticated') return; // Early return if unauthenticated
         fetchSpecificLocation(id);

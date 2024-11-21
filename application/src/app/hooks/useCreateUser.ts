@@ -6,7 +6,6 @@ const useCreateUser = () => {
 
     const createUser = async (formData: any) => {
         setLoading(true);
-
         try {
             const res = await fetch(`/api/users`, {
                 method: 'POST',
@@ -19,8 +18,10 @@ const useCreateUser = () => {
             const data = await res.json();
             if(data.error) throw new Error(data.error);
             toast.success('User created successfully!');
+            return true;
         } catch(err: any) {
             toast.error(err.message);
+            return false;
         } finally {
             setLoading(false);
         }
