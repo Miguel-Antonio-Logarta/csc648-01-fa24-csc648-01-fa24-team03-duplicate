@@ -7,7 +7,7 @@ const Page = () => {
         <div className={`h-screen v-screen flex items-center justify-center ${styles["grid-background"]}`}>
             <main className={`max-w-4xl ${styles["grid-container"]}`}>
                 <div className={`rounded-lg bg-white p-8 text-center text-neutral-700 ${styles["face"]}`}>
-                    <Image className="block bg-white rounded-lg size-40 mb-8" width={300} height={300} src="/teammembers/miguellogarta.jpg" alt="Miguel Logarta"/>
+                    <Image className="block bg-white rounded-lg size-40 mb-8" width={300} height={300} src="https://9otnordlgmffpjra.public.blob.vercel-storage.com/miguellogarta-Mg4phkzJys6CwBE77aY8ZpPcVrRyAr.jpg" alt="Miguel Logarta"/>
                     <div className="font-bold text-lg text-black">Miguel Logarta</div>
                     <div className="text-[#EE6C4D] font-semibold">Team Lead</div>
                 </div>

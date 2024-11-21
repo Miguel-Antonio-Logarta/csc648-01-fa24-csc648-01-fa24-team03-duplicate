@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="500"
+   height="500"
+   fill="#000000"
+   viewBox="0"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="mappinboldedited.svg"
+   inkscape:version="1.4 (e7c3feb, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="true"
+     showguides="true"
+     inkscape:zoom="8"
+     inkscape:cx="12.25"
+     inkscape:cy="-24.1875"
+     inkscape:window-width="1876"
+     inkscape:window-height="988"
+     inkscape:window-x="22"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="8"
+       spacingy="8"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+    <sodipodi:guide
+       position="0.03125,37.8125"
+       orientation="1,0"
+       id="guide1"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <path
+     d="M 5.0263818e-7,-184.5 A 44,44 0 1 0 44,-140.5 44.05,44.05 0 0 0 5.0263818e-7,-184.5 Z m 0,64 A 20,20 0 1 1 20,-140.5 20,20 0 0 1 5.0263818e-7,-120.5 Z m 0,-112 A 92.1,92.1 0 0 0 -92,-140.5 c 0,77.360001 81.640001,135.4000009 85.1200005,137.8300009 a 12,12 0 0 0 13.76,0 A 259,259 0 0 0 49.06,-41.669999 C 77.15,-73.929999 92,-108.13 92,-140.5 A 92.1,92.1 0 0 0 5.0263818e-7,-232.5 Z M 31.3,-57.789999 A 249.35,249.35 0 0 1 5.0263818e-7,-27.609999 249.35,249.35 0 0 1 -31.3,-57.789999 C -48,-77.129999 -68,-107.19 -68,-140.5 a 68,68 0 0 1 136,0 c 0,33.31 -20,63.370001 -36.7,82.710001 z"
+     id="path1" />
+</svg>
