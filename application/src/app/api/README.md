@@ -11,7 +11,8 @@ This document outlines the API routes for Coffee Spot
 2. [Bookmark Endpoints](#bookmark-endpoints)
     1. [Get All Bookmarks](#get-all-bookmarks)
     2. [Create a Bookmark](#create-a-bookmark)
-    3. [Get Bookmarks for Location](#get-all-bookmarks-for-a-specific-location)
+    3. [Delete a Bookmark](#delete-a-bookmark)
+    4. [Get Bookmarks for Location](#get-all-bookmarks-for-a-specific-location)
     4. [Get Bookmarks for User](#get-all-bookmarks-for-a-specific-user)
 3. [Location Endpoints](#location-endpoints)
     1. [Get All Locations](#get-all-locations)
@@ -105,6 +106,19 @@ The `/api/` is structured as follows:
 - **Authentication**: REQUIRED
 - **Authorization**: MUST BE CUSTOMER OR HIGHER ROLE
 - **Request Body:**
+```json
+{
+  "userId": session.user.id
+}
+```
+
+#### Delete a Bookmark
+- **Endpoint:** `/api/bookmarks/deleteBookmark/${locationId}`
+- **Method:** `DELETE`
+- **Description:** Delete a bookmark when signed in.
+- **Authentication**: REQUIRED
+- **Authorization**: MUST BE CUSTOMER OR HIGHER ROLE
+- **Response Body:**
 ```json
 {
   "userId": session.user.id

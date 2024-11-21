@@ -23,7 +23,9 @@ const useGetUsersBookmarks = () => {
             setUsersBookmarks(data);
         } catch(err: any) {
             console.error(err.message);
-            toast.error(err.message);
+
+            // do not render this error message in production
+            //toast.error(err.message);
         } finally {
             setLoading(false);
         }

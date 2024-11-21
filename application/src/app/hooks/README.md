@@ -13,6 +13,7 @@ This folder contains CUSTOM React hooks. These hooks serves as a way to abstract
 - **Parameters:**
   - `locationId`: The id of the given location to bookmark
   - `session`: The session object from useSession()
+- **Special Note:** This uses window.location.reload()
 - **Usage Example:**
 ```typescript
 const { createBookmark, loading } = useCreateBookmark();
@@ -62,6 +63,19 @@ const { createUser, loading } = useCreateUser();
 const success = await createUser(userInfo);
 ```
 
+### `useDeleteBookmark.ts`
+- **Purpose:**: Handles the deletion of a bookmark
+- **Parameters:**
+  - `locationId`: The id of location to which the bookmark is addressed to.
+  - `session`: The session object from useSession()
+- **Special Note:** This uses window.location.reload()
+- **Usage Example:**
+```typescript
+const { deleteBookmark, loading } = useDeleteBookmark();
+...
+await deleteBookmark(locationId, session);
+```
+
 ### `useDeleteLocation.ts`
 - **Purpose:**: Handles the deletion of a location
 - **Parameters:**
@@ -71,7 +85,7 @@ const success = await createUser(userInfo);
 ```typescript
 const { deleteLocation } = useDeleteLocation();
 ...
-await deleteLocation(locationId, session)
+await deleteLocation(locationId, session);
 ```
 
 ### `useGetAnalytics.ts`

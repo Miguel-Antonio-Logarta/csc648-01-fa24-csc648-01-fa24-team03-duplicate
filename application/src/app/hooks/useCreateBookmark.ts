@@ -28,6 +28,9 @@ const useCreateBookmark = () => {
             const data = await res.json();
             if(data.error) throw new Error(data.error);
             toast.success('Bookmark created');
+
+            // not a fan of this, could use react magic to update the UI
+            window.location.reload();
         } catch(err: any) {
             toast.error(err.message);
         } finally {
