@@ -55,6 +55,7 @@ function LoginForm() {
                       id="login"
                       value={userInfo.login}
                       onChange={(e) => setUserInfo({ ...userInfo, login: e.target.value })}
+                      placeholder='Username'
                       className="shrink-0 self-stretch mt-1 pl-1 h-6 bg-yellow-50 border-b-2 border-rose-400 border-dashed w-full"
                       aria-label="login"
                       autoComplete="off"
@@ -69,18 +70,19 @@ function LoginForm() {
                       value={userInfo.password}
                       onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
                       className="shrink-0 self-stretch mt-1 pl-1 h-6 bg-yellow-50 border-b-2 border-rose-400 border-dashed w-full"
+                      placeholder='Password'
                       aria-label="Password"
                       autoComplete="off"
                       required />
                   </div>
 
 
-                  <a href="signup" className="font-josefin mt-2.5 text-xs tracking-wider text-stone-600">
+                  <a href="signup" className="font-josefin mt-2.5 text-xs tracking-wider text-stone-600 hover:text-[#22c55e]">
                     don&apos;t have an account?
                   </a>
                   <button
                     type="submit"
-                    className="font-shantell self-center px-3.5 py-1.5 mt-10 text-sm font-bold text-center text-white bg-sage shadow-sm rounded-[35px] w-[86px]"
+                    className="font-shantell self-center px-3.5 py-1.5  mt-10 text-sm font-bold text-center text-white bg-sage shadow-md rounded-[35px] w-[86px] hover:bg-white hover:text-sage border-[#D1DAAF] border-2"
                   >
                     Log In!
                   </button>
