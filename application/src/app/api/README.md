@@ -143,7 +143,8 @@ The `/api/` is structured as follows:
     "location": {
       "id": "location-id",
       "name": "location-name",
-      "category": "LIBRARY | CAFE| PARK"
+      "category": "LIBRARY | CAFE| PARK",
+      "imageWebLink": "link to img"
     }
     "creationDate": "2024-10-08T18:58:32.977Z"
   },

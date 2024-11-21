@@ -6,46 +6,6 @@ import { Session } from 'next-auth';
 import useGetUsersBookmarks from '../hooks/useGetUsersBookmarks';
 import BookmarkCard from '../components/BookmarkCard';
 
-// const testData = [
-//   {
-//     id: 1,
-//     img: "",
-//     title: "J. Paul Leonard Library",
-//     category: "University Library",
-//     rating: 4.4,
-//     wifiEnabled: true,
-//     busyness: 3
-//   },
-//   {
-//     id: 2,
-//     img: "",
-//     title: "Ocean View Branch Library",
-//     category: "University Library",
-//     rating: 4.0,
-//     wifiEnabled: true,
-//     busyness: 2
-//   },
-//   {
-//     id: 3,
-//     img: "",
-//     title: "Marigold Cafe",
-//     category: "Cafe",
-//     rating: 4.5,
-//     wifiEnabled: true,
-//     busyness: 2
-//   },
-//   {
-//     id: 4,
-//     img: "",
-//     title: "Home Coffee Roasters",
-//     category: "Cafe",
-//     rating: 4.0,
-//     wifiEnabled: true,
-//     busyness: 2
-//   }
-// ]
-
-
 interface BookmarksBoxProps {
   session: Session | null;
 }
@@ -56,6 +16,7 @@ interface Bookmark {
     id: string;
     name: string;
     category: string;
+    imageWebLink: string;
   };
   creationDate: string;
 }
