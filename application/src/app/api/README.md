@@ -140,10 +140,10 @@ The `/api/` is structured as follows:
 [
   {
     "id": "bookmark-id",
-    "user": {
-      "id": "user-id",
-      "username": "username",
-      "email": "example@example.com"
+    "location": {
+      "id": "location-id",
+      "name": "location-name",
+      "category": "LIBRARY | CAFE| PARK"
     }
     "creationDate": "2024-10-08T18:58:32.977Z"
   },

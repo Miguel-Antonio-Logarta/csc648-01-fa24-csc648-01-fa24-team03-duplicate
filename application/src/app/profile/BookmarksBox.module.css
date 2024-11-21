@@ -18,6 +18,7 @@
     color: #000000;
     margin: 0;
     margin-bottom: 10px;
+    justify-self: center;
   }
   
   .bookmarkPlaceholder {

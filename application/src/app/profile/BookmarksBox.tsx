@@ -4,6 +4,7 @@ import styles from './BookmarksBox.module.css';
 import Listing from '../components/Listing';
 import { Session } from 'next-auth';
 import useGetUsersBookmarks from '../hooks/useGetUsersBookmarks';
+import BookmarkCard from '../components/BookmarkCard';
 
 // const testData = [
 //   {
@@ -54,6 +55,7 @@ interface Bookmark {
   location: {
     id: string;
     name: string;
+    category: string;
   };
   creationDate: string;
 }
@@ -67,7 +69,7 @@ const BookmarksBox: React.FC<BookmarksBoxProps> = ({ session }) => {
     if(session) {
       fetchUsersBookmarks(session.user.id);
     }
-    
+
     // DO NOT INCLUDE fetchUsersBookmarks IN DEPENDENCIES | It will cause infinite loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -78,18 +80,11 @@ const BookmarksBox: React.FC<BookmarksBoxProps> = ({ session }) => {
       <div className="flex flex-col gap-6 mt-6">
 
         {usersBookmarks.map((bookmark: Bookmark) => (
-          <div key={bookmark.id}>
-            <p>{bookmark.location.id}</p>
-            <p>{bookmark.location.name}</p>
-            <p>{bookmark.creationDate}</p>
-          </div>
+          <BookmarkCard 
+            key={bookmark.id}
+            bookmark={bookmark}
+            />
         ))}
-          {/* {testData.map((data) => 
-            <Listing 
-              key={data.id}
-              data={data}
-              />)
-          } */}
         </div>
     {/* /* <div className={styles.bookmarkPlaceholder}>No bookmarks yet</div>*/ }
     </div>
