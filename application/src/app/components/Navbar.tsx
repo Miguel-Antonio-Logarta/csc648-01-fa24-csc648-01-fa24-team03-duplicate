@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import NavSearch from './NavSearch';
 import NavbarUser from './NavbarUser';
+import { Suspense } from 'react';
 
 const Navbar = () => {
   return (
@@ -17,7 +18,9 @@ const Navbar = () => {
           />
         </Link>
         <div className="font-shantell flex items-stretch py-5">
-          <NavSearch />
+          <Suspense fallback={<div>Searchbar is loading...</div>}>
+              <NavSearch />
+          </Suspense>
         </div>
       </div>
       <NavbarUser />
