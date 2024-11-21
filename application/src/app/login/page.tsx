@@ -3,7 +3,7 @@ import React from 'react';
 import image from './login_cat_trimmed.png';
 import Image from 'next/image';
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import toast from 'react-hot-toast';
 import { useSession } from "next-auth/react";
@@ -13,6 +13,7 @@ function LoginForm() {
   const [error, setError] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
   const router = useRouter();
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +30,7 @@ function LoginForm() {
       setError("Username or password is incorrect");
       setIsInvalid(true); // Set invalid state
       setUserInfo({ ...userInfo, password: "" }); // Clear the password field
+      passwordRef.current?.focus(); // Set focus to password field
     } else {
       toast.success(`Welcome ${userInfo.login}!`);
       router.push("/");
@@ -77,6 +79,7 @@ function LoginForm() {
                   <input
                     type="password"
                     id="password"
+                    ref={passwordRef}
                     value={userInfo.password}
                     onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
                     className={`shrink-0 text-black self-stretch mt-1 pl-2 pr-14 py-3 h-10 text-lg bg-yellow-50 border-b-2 border-dashed w-full w-[18rem] hover:bg-[#fef9c3] ${isInvalid ? 'outline outline-2 outline-red-500 rounded-sm' : ''}`}
