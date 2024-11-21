@@ -2,6 +2,13 @@ import { Session } from 'next-auth';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
+/**
+ * @Notes - Use this hook in the frontend to create a bookmark. (Client Component)
+ * @param {string} locationId - The location id.
+ * @param {Session} session - The session object.   
+ * @description - A custom hook that creates a bookmark.
+ * @returns {Object} - Returns an object containing the createBookmark function and a loading state.
+ */
 const useCreateBookmark = () => {
     const [loading, setLoading] = useState(false);
 

@@ -7,6 +7,11 @@ interface Analytics {
     numOfBookmarks: number;
 }
 
+/**
+ * @Notes - Use this hook in the frontend to get analytics data.
+ * @description - This hook is used to get analytics data from the database.
+ * @returns - Returns the analytics data, a loading state, and an error state.
+ */
 const useGetAnalytics = () => {
     const [analytics, setAnalytics] = useState<Analytics | null>(null);
     const [loading, setLoading] = useState(false);
