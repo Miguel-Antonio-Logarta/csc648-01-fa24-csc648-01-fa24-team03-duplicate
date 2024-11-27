@@ -1,6 +1,6 @@
-import { PrismaClient, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { jest } from '@jest/globals';
-import { GET } from '../src/app/api/users/route';
+import { GET, POST, PATCH } from '../src/app/api/users/route';
 import { getServerSession } from "next-auth";
 import prisma from '../prisma/prisma';
 
@@ -10,7 +10,6 @@ interface Session {
     role: string;
   };
 }
-
 
 jest.mock('@prisma/client', () => {
   const mockPrisma = {
