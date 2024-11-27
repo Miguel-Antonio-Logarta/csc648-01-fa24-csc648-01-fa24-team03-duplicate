@@ -1,7 +1,7 @@
 import { Location } from "@prisma/client";
 import prisma from '../prisma/prisma';
 import { jest } from '@jest/globals';
-import { GET, OperatingHour } from '../src/app/api/locations/route';
+import { GET } from '../src/app/api/locations/route';
 
 jest.mock('@prisma/client', () => {
   const mockPrisma = {
