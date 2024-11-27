@@ -203,14 +203,13 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   transform: {
-    '^.+\\.ts$': 'ts-jest',  // Handle TypeScript files
+    '^.+\\.ts$': ['ts-jest', {
+      'ts-jest': {
+        isolatedModules: true,
+      },
+    }] // Handle TypeScript files
   },
   transformIgnorePatterns: [
     '/node_modules/(?!@prisma/client)/', // Add any other modules you need to transpile
   ],
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
-  },
 };
