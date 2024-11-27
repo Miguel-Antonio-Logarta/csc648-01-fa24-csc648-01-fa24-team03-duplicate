@@ -1,7 +1,5 @@
-import { PrismaClient, User } from '@prisma/client';
 import { jest } from '@jest/globals';
 import { GET } from '../src/app/api/analytics/route';
-import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import prisma from '../prisma/prisma';
 

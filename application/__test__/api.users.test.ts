@@ -1,16 +1,22 @@
 import { PrismaClient, User } from '@prisma/client';
 import { jest } from '@jest/globals';
 import { GET } from '../src/app/api/users/route';
+import { getServerSession } from "next-auth";
+import prisma from '../prisma/prisma';
 
-// witchcraft?
+// Type for the session object
+interface Session {
+  user: {
+    role: string;
+  };
+}
+
+
 jest.mock('@prisma/client', () => {
   const mockPrisma = {
     user: {
       findMany: jest.fn(),
-      findFirst: jest.fn(),
-      create: jest.fn(),
-      update: jest.fn(),
-    }
+    },
   }
   return {
     __esModule: true,
@@ -18,35 +24,71 @@ jest.mock('@prisma/client', () => {
   }
 });
 
-// testing /api/users GET
-test('Get All Users', async () => {
-  const prisma = new PrismaClient();
+jest.mock('next-auth', () => ({
+  getServerSession: jest.fn(),
+}));
 
-  const mockInput: User[] = [
-    { id: '1', username: 'john_doe', email: 'john@example.com', password: "123456", role: 'CUSTOMER', creationDate: new Date('2024-01-01'), settingsId: null },
-    { id: '2', username: 'jane_doe', email: 'jane@example.com', password: "123456", role: 'CUSTOMER', creationDate: new Date('2024-02-01'), settingsId: null }
-  ];
+describe('GET /api/users', () => {
 
-  const expectedMockResult: { 
-    id: string; 
-    username: string; 
-    email: string | null; 
-    password: string; 
-    role: string; 
-    creationDate: string; // Change to string here
-    settingsId: string | null; 
-  }[] = [
-    { id: '1', username: 'john_doe', email: 'john@example.com', password: "123456", role: 'CUSTOMER', creationDate: "2024-01-01T00:00:00.000Z", settingsId: null },
-    { id: '2', username: 'jane_doe', email: 'jane@example.com', password: "123456", role: 'CUSTOMER', creationDate: "2024-02-01T00:00:00.000Z", settingsId: null }
-  ];
+  it('should return 500 if there is an error querying the database', async () => {
+    // Mock the database error
+    (prisma.user.findMany as jest.MockedFunction<typeof prisma.user.findMany>).mockRejectedValue(new Error('Database Error'));
 
-  (prisma.user.findMany as jest.MockedFunction<typeof prisma.user.findMany>).mockResolvedValue(mockInput);
+    // Call the GET function
+    const response = await GET();
 
-  const response = await GET();
-  const data = await response.json();
-  
+    // Assert the status code
+    expect(response.status).toBe(500);
+
+    // Assert the response body
+    expect(await response.json()).toEqual({ error: 'Internal Server Error.' });
+  });
+
+  it('should return 200 if it successfully retrieves the users', async () => {
+    interface UserSelect {
+      id: string;
+      username: string;
+      email: string;
+      role: string;
+      creationDate: Date;
+    }
+    
+    const mockUsers: UserSelect[] = [
+      {
+        id: '1',
+        username: 'user1',
+        email: 'test1@test.com',
+        role: 'CUSTOMER',
+        creationDate: new Date('2024-11-27T20:38:45.177Z'),
+      },
+      {
+        id: '2',
+        username: 'user2',
+        email: 'test2@test.com',
+        role: 'CUSTOMER',
+        creationDate: new Date('2024-11-27T20:38:45.177Z'),
+      },
+    ];
 
 
-  expect(data).toEqual(expectedMockResult);
-  expect(response.status).toBe(200);
+    // Mock the database response | I hate typescript making this so hard
+    (prisma.user.findMany as jest.MockedFunction<typeof prisma.user.findMany>).mockResolvedValue(mockUsers as User[]);
+
+    const response = await GET();
+    const data = await response.json();
+
+    // Assert the status code
+    expect(response.status).toBe(200);
+
+    // Assert the response body
+    expect(data).toEqual(
+      mockUsers.map(user => ({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        creationDate: user.creationDate?.toISOString(), // Normalize to ISO string
+      })));
+
+  });
 });
