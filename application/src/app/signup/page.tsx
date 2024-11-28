@@ -17,7 +17,7 @@ const SignUpForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await createUser(userInfo);
-    router.push('/signup');
+    router.push('/login');
   };
 
   
