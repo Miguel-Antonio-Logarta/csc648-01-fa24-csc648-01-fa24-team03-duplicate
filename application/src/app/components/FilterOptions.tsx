@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 
+type FilterOptionsType = {
+  distance: number;
+  rating: number;
+  category: string,
+  amenities: string[],
+}
+
 const FilterOptions = () => {
   const [filters, setFilters] = useState({
     distance: 0,
@@ -10,21 +17,25 @@ const FilterOptions = () => {
 
   const categories = ["Cafes", "Library", "Parks", "Others"]; // Define category options
 
-  const handleDistanceChange = (e) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      distance: e.target.value,
-    }));
+  const handleDistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // setFilters((prevFilters) => ({
+    //   ...prevFilters,
+    //   distance: e.currentTarget.value,
+    // }));
+    setFilters({
+      ...filters,
+      distance: Number(e.currentTarget.value)
+    })
   };
 
-  const handleCategoryClick = (category) => {
+  const handleCategoryClick = (category: string) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       category: prevFilters.category === category ? "" : category, // Toggle category selection
     }));
   };
 
-  const handleRatingClick = (rating) => {
+  const handleRatingClick = (rating: number) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       rating: prevFilters.rating === rating ? 0 : rating, // Toggle rating selection
