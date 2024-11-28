@@ -57,10 +57,10 @@ const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId }: MapMarke
     >
       {/* Style 2: Imgae on the side */}
       {/* Style 1: Image on the top */}
-      {/* {selectedMarkerId === location.id && <InfoWindow options={infoWindowOptions}>
+      {selectedMarkerId === location.id && <InfoWindow options={infoWindowOptions}>
         
         <div
-          className="flex flex-col items-center w-[300px] h-full p-3 relative"
+          className="flex flex-col items-center w-[300px] h-full p-3 relative rounded-lg border-4 border-[#0000FF]"
         >
           <div className="absolute top-0 right-0 pt-4 pr-4 ">
               <button onClick={close} className="p-2">
@@ -93,7 +93,7 @@ const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId }: MapMarke
             />
           </div>
         </div>
-      </InfoWindow>} */}
+      </InfoWindow>}
     </Marker>
   );
 
