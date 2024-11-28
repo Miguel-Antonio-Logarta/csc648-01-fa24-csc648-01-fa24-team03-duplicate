@@ -40,7 +40,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
             </p>
             <div className="flex gap-6 mt-5">
               {/* <StarRating rating={rating} /> */}
-              <Rating rating={rating} size={32} />
+              <Rating rating={rating} size={32} style='full'/>
               {/* <span className="my-auto text-2xl text-stone-600 tracking-[2.4px]">
                 {rating.toFixed(2)}
               </span> */}

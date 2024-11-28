@@ -21,7 +21,8 @@
     "prisma": "^5.19.1",
     "react": "^18",
     "react-dom": "^18",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
