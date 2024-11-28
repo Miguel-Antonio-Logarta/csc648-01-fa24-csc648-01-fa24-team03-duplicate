@@ -58,11 +58,11 @@ export async function POST(req: NextRequest) {
     ];
 
     // Check if all required fields are provided
-    const missingFields = requiredFields.filter(field => !body[field] === undefined);
+const missingFields = requiredFields.filter(field => body[field] == null);
 
-    if (missingFields.length > 0) {
-      return NextResponse.json({ error: `Missing fields: ${missingFields.join(', ')}` }, { status: 400 });
-    }
+if (missingFields.length > 0) {
+  return NextResponse.json({ error: `Missing fields: ${missingFields.join(', ')}` }, { status: 400 });
+}
 
     const conditions: { username?: string; email?: string }[] = [{ username: body.username }];
 
