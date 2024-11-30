@@ -23,6 +23,9 @@ const AdminNavbar = () => {
                     <Link href={"/admin/createLocation"} className="bg-[#775df7] border-[#775df7] border-2 font-josefin px-4 py-2 shadow-md rounded-full hover:bg-white">
                         Create Location
                     </Link>
+                    <Link href={"/admin/editLocation"} className="bg-[#775df7] border-[#775df7] border-2 font-josefin px-4 py-2 shadow-md rounded-full hover:bg-white">
+                        Edit Location
+                    </Link>
                     <Link href={"/admin/deleteLocation"} className="bg-[#775df7] border-[#775df7] border-2 font-josefin px-4 py-2 shadow-md rounded-full hover:bg-white">
                         Delete Location
                     </Link>
