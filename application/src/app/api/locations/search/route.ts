@@ -43,16 +43,24 @@ export async function GET(req: NextRequest) {
         const busynessStatus = searchParams.get('busynessStatus');
         const radius = searchParams.get('radius');
 
+        // get all tokens from the name
+        // e.g: "San Francisco Library" -> ["San", "Francisco", "Library"]
+        const tokens = name ? name.split(' ') : [];
+
         // get all locations that match the search criteria
         const filter: {
-            name?: { contains: string, mode: 'insensitive' },
+            OR?: { name: { contains: string; mode: 'insensitive' } }[];
             category?: LocationType,
             hasWifi?: boolean,
             busynessStatus?: number,
             radius?: number
         } = {};
 
-        if (name) filter.name = { contains: name, mode: 'insensitive' };
+        // if there are tokens, add them to the filter
+        if(tokens.length > 0) {
+            filter.OR = tokens.map(token => ({ name: { contains: token, mode: 'insensitive' } }));
+        }
+        
         if (category) filter.category = category as LocationType;
         if (hasWifi) filter.hasWifi = hasWifi === 'true';
         if (busynessStatus) filter.busynessStatus = parseInt(busynessStatus);
