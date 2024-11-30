@@ -48,7 +48,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
             <div className='font-josefin'>
             Location Details
             </div>
-            <Link href={`/quickInfo/${id}`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"> View Details</Link>
+            <Link href={`/locationInfo/${id}`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"> View Details</Link>
             {/* <img //make as individual icons
               loading="lazy" 
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/e9197e9dc0f9332e7157e8c35e4ae08655d77919c4ea037fa505b2315ad3c565?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225" 
