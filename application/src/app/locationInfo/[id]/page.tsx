@@ -21,13 +21,19 @@ const Page = async ({ params }: { params: { id: string } }) => {
     ];
 
     const { id } = params;
-    const locationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations/${id}`);
-    const reviewsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/locationReviews/${id}`, 
+    const locationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations/${id}`, {
+        cache: "no-store"
+        }
+    );
+
+    const reviewsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/locationReviews/${id}`,
         { cache: "no-store" }
     );
-    
+
     const location = await locationResponse.json();
     const reviews = await reviewsResponse.json();
+
+    console.log("Location: ", location)
 
     return (
         <main>

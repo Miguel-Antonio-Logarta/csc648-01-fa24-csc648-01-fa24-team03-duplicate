@@ -88,6 +88,19 @@ const { deleteLocation } = useDeleteLocation();
 await deleteLocation(locationId, session);
 ```
 
+### `useEditLocation.ts`
+- **Purpose:**: Handles the editing of a location
+- **Parameters:**
+  - `locationId`: The id of the location to be deleted
+  - `formData`: Data that conforms to Backend API /api/locations/{locationId}
+  - `session`: The session object from useSession() | Must be ADMIN role
+- **Usage Example:**
+```typescript
+const { editLocation, loading } = useEditLocation();
+...
+await editLocation(locationId, formData, session);
+```
+
 ### `useGetAnalytics.ts`
 - **Purpose:** Handle getting the number of Users, Locations, Reviews and Bookmarks in the database
 - **Usage Example:**
@@ -165,3 +178,4 @@ const { updateUserData, loading } = useUpdateUserData();
 ...
 await updateUserData(formData, session);
 ```
+

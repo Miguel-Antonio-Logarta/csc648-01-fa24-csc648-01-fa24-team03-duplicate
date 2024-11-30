@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import { DayOfWeek } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 import Unauthorized from '../../../components/Unauthorized';
-import toast from 'react-hot-toast';
 import useGetSpecificLocation from '../../../hooks/useGetSpecificLocation';
-import { LocationData } from '../../../../app/api/locations/route';
+import useEditLocation from '../../../hooks/useEditLocation';
 
 const Page = ({ params }: { params: { locationId: string } }) => {
     const { data: session, status } = useSession();
-    const { specificLocation, fetchSpecificLocation, loading } = useGetSpecificLocation();
+    const { specificLocation, fetchSpecificLocation } = useGetSpecificLocation();
+    const { editLocation, loading } = useEditLocation();
     const locationId = params.locationId;
     const [formData, setFormData] = useState({
         name: '',
@@ -37,6 +37,9 @@ const Page = ({ params }: { params: { locationId: string } }) => {
     // run once to fetch the specific location data
     useEffect(() => {
         fetchSpecificLocation(locationId)
+
+        // DO NOT INCLUDE fetchSpecificLocation IN DEPENDENCIES | It will cause infinite loop
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [locationId]); // Dependency on locationId to refetch when it changes
 
     // run once to set the form data as what we previously had
@@ -69,7 +72,8 @@ const Page = ({ params }: { params: { locationId: string } }) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // do something with the form data
+        formData.seatingCapacity = Number(formData.seatingCapacity);
+        await editLocation(locationId, formData, session);
     };
 
     return (
@@ -232,7 +236,8 @@ const Page = ({ params }: { params: { locationId: string } }) => {
 
                 <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600"
+                    className={`w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+                    disabled={loading}
                 >
                     {loading ? 'Editing Location...' : 'Edit Location'}
                 </button>
