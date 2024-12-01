@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import image from './login_cat_trimmed.png';
+// import image from './login_cat_trimmed.png';
 import Image from 'next/image';
 import { signIn } from "next-auth/react";
 import { useState, useRef } from "react";
@@ -23,7 +23,7 @@ function LoginForm() {
       redirect: false,
       username: userInfo.login,
       password: userInfo.password,
-      
+
     });
 
     if (result?.error) {
@@ -47,9 +47,11 @@ function LoginForm() {
           <div className="grid grid-cols-8 mt-1.5 max-md:max-w-full">
             <figure className="col-span-3 items-center max-md:ml-0 max-md:w-full">
               <Image
-                src={image}
+                src="https://9otnordlgmffpjra.public.blob.vercel-storage.com/login_cat_trimmed-8cBhzQHseraBvAqW7578pVsK3Uq30p.png"
+                width={512}
+                height={512}
                 className="object-contain w-[120%] h-[120%] max-md:w-full max-md:h-full"
-                alt={'Login Cat Logo'}
+                alt="Login Cat Logo"
               />
             </figure>
             <div className="col-span-5 flex ml-5 max-md:ml-0 max-md:w-full">
@@ -122,7 +124,7 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-          <LoginForm />
+    <LoginForm />
   );
 };
 
