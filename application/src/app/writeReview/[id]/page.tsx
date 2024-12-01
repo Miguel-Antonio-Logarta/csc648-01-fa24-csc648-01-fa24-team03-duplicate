@@ -18,7 +18,9 @@ const Page = ({ params }: { params: { id: string } }) => {
     const { id } = params;
     const { specificLocation, fetchSpecificLocation, loading } = useGetSpecificLocation();
     const { createReview } = useCreateReview();
-    const location: SpecificLocation = specificLocation || { id: '', name: '' };
+    const location: SpecificLocation = specificLocation
+    ? { id: specificLocation.id.toString(), name: specificLocation.name }
+    : { id: '', name: '' };
     const [rating, setRating] = useState('1');
     const [review, setReview] = useState('');
     const router = useRouter();

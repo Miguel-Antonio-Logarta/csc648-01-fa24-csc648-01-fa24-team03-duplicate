@@ -21,6 +21,8 @@ const useDeleteLocation = () => {
             const data = await res.json();
             if(data.error) throw new Error(data.error);
             toast.success('Location deleted successfully!');
+
+            // dont like this solution.
             window.location.reload();
         } catch(err: any) {
             toast.error(err.message);

@@ -362,6 +362,35 @@ The `/api/` is structured as follows:
 - **Authentication**: REQUIRED
 - **Authorization**: MUST BE ADMIN ROLE
 
+#### Edit a Specific Location
+- **Endpoint:** `/api/locations/${locationId}`
+- **Method:** `PATCH`
+- **Description:** PATCH a location given its id
+- **Authentication**: REQUIRED
+- **Authorization**: MUST BE ADMIN ROLE
+- **Request Body**:
+```json
+{
+  "name": "updatedName",
+  "address": "updatedAddress",
+  "phoneNumber": "updatedPhoneNumber",
+  "hasWifi": true,
+  "seatingCapcity": 648,
+  "category": "PARK",
+  "locationWebsiteLink": "link",
+  "animalFriendliness": false,
+  "latitude": 1,
+  "longitude": 1,
+  "operatingHours": [
+    {
+      "day": "MONDAY",
+      "openTime": "09:00",
+      "closeTime": "18:00"
+    },
+  ]
+}
+```
+
 #### Search for Locations
 - **Endpoint:** `/api/locations/search`
 - **Method:** `GET`
