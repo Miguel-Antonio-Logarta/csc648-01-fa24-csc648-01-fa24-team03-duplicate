@@ -1,30 +1,44 @@
 /* BookmarksBox.module.css */
 
-.bookmarksBox {
+/* .bookmarksBox {
     border: 8px dashed #E5818D; 
     margin-left: 1%;
     margin-right: 5%;
     margin-top: 5%;
     width: 100%;
     height: 80%;
-    padding: 20px;
     border-radius: 12px;
     box-sizing: border-box;
-  }
-  
-  .title {
-    font-family: 'Arial', sans-serif;
-    font-size: 1.5em;
-    color: #000000;
-    margin: 0;
-    margin-bottom: 10px;
-  }
-  
-  .bookmarkPlaceholder {
-    font-size: 1em;
-    color: #555555;
-    text-align: center;
-    margin-top: 20px;
-    opacity: 0.6;
-  }
-  
+  } */
+
+.bookmarksBox {
+  border: 8px dashed #E5818D;
+  margin-left: 1%;
+  margin-right: 5%;
+  margin-top: 5%;
+  width: 100%;
+  height: 80vh;
+  /* Use viewport height for a more predictable result */
+  max-height: 80vh;
+  /* Optional: Ensure it doesn't grow taller than the viewport */
+  border-radius: 12px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  /* Ensure scroll is enabled when content overflows */
+}
+
+.title {
+  font-size: 1.5em;
+  color: #000000;
+  margin: 0;
+  margin-bottom: 10px;
+  justify-self: center;
+}
+
+.bookmarkPlaceholder {
+  font-size: 1em;
+  color: #555555;
+  text-align: center;
+  margin-top: 20px;
+  opacity: 0.6;
+}

@@ -26,7 +26,7 @@ export async function GET() {
             numOfBookmarks: numOfBookmarks
         });
     } catch (error: any) {
-        console.log(`[ERROR]: Error in POST of api/analytics/route.ts: ${error}`);
+        console.log(`[ERROR]: Error in GET of api/analytics/route.ts: ${error}`);
         return NextResponse.json({ error: "Internal Server Error." }, { status: 500 });
     }
 

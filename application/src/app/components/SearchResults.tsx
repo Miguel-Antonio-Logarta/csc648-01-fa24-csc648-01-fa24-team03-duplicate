@@ -9,37 +9,27 @@ import { LocationData } from '../api/locations/route';
 import ListingLoading from './loading/ListingLoading';
 import NotebookPaper from './NotebookPaper';
 import { useRouter } from 'next/navigation';
-// import { Router } from 'next/router';
-
-// On mount, read url query parameters
-// Query the database with these search parameters
-// Render results out as a list of components
 
 type SearchResultsProps = {
   onFilterClick: (e: React.SyntheticEvent) => void;
+  locations: LocationData[];
 };
 
-/*
-  TODO:
-  Shadow is not working. This might be because of the CSS of the notebook paper.
-  The filters button should also always be visible (optional feature).
-  Fix Suspense. It isn't showing the loading ui while fetching data.
-*/
 function SearchResults(props: SearchResultsProps) {
-  const { locations, selectedLocation, setSelectedLocation } = useContext(SearchContext);
+  // const { locations, selectedLocation, setSelectedLocation } = useContext(SearchContext);
   const router = useRouter(); 
 
-  const handleLocationSelect = (data: LocationData) => {
-    if (data.id === selectedLocation?.id) {
-      // console.log(`I am beign called ${process.env.NEXT_PUBLIC_API_URL}`)
-      // router.push(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`);
-      window.open(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
-      // window.open(`localhost:3000/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
-    } else {  
-      const newLocation = { ...data }; // Necessary to create a copy so that the map will update
-      setSelectedLocation(newLocation);
-    }
-  };
+  // const handleLocationSelect = (data: LocationData) => {
+  //   if (data.id === selectedLocation?.id) {
+  //     // console.log(`I am beign called ${process.env.NEXT_PUBLIC_API_URL}`)
+  //     // router.push(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`);
+  //     window.open(`${process.env.NEXT_PUBLIC_API_URL}/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
+  //     // window.open(`localhost:3000/locationInfo/${data.id}`, '_blank'); // Opens in a new tab
+  //   } else {  
+  //     const newLocation = { ...data }; // Necessary to create a copy so that the map will update
+  //     setSelectedLocation(newLocation);
+  //   }
+  // };
 
   return (
       <NotebookPaper className='shadow-2xl'>
@@ -53,7 +43,7 @@ function SearchResults(props: SearchResultsProps) {
             </button>
             <div className="flex flex-col gap-6 mt-6">
               {/* Suspense UI is not working */}
-              <Suspense
+              {/* <Suspense
                 fallback={Array.from({ length: 4 }, (_, index) => (
                   <ListingLoading key={index} />
                 ))}
@@ -66,7 +56,21 @@ function SearchResults(props: SearchResultsProps) {
                     isSelected={selectedLocation?.id === location.id}
                   />
                 ))}
-              </Suspense>
+              </Suspense> */}
+              {/* <Listing
+                key={props.location.id}
+                data={location}
+                selectLocation={handleLocationSelect}
+                isSelected={selectedLocation?.id === location.id}
+              /> */}
+              {props.locations.map((location) =>
+                  <Listing
+                  key={location.id}
+                  data={location}
+                  // selectLocation={() => {}}
+                  // isSelected={false}
+                />
+              )}
             </div>
           </div>
       </NotebookPaper>

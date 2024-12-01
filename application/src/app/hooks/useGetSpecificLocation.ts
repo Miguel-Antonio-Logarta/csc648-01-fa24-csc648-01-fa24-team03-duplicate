@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-
+/**
+ * @Notes - Use this hook in the frontend if you want to fetch a specific location from the backend (MUST BE A CLIENT COMPONENT)
+ * @params - locationId: string
+ * @description - Custom hook to fetch a specific location
+ * @returns {specificLocation} - Object of a specific location
+ */
 const useGetSpecificLocation = () => {
     const [specificLocation, setSpecificLocation] = useState();
     const [loading, setLoading] = useState(false);
