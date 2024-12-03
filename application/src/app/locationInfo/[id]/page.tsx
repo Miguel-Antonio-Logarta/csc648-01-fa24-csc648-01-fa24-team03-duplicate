@@ -2,25 +2,17 @@ import React from "react";
 import Image from "next/image";
 import ReviewSection from "../ReviewSection";
 import Star from '../white_star.svg';
-import Icons from "../temp_icon_group.svg";
 import ContactInfo from "../ContactInfo";
 import Paper from "../paper_bg.svg";
 import Logo from '../logo.png';
 import Back from '../back_arrow.png';
-import Graph from '../sample_graph.png';
 import Navbar from "../../components/Navbar";
 import Link from "next/link";
 import BookmarkButton from "@/app/components/BookmarkButton";
 import BusyRating from "@/app/components/BusyRating";
+import BusynessIndicator from "@/app/components/BusynessIndictator";
 
 const Page = async ({ params }: { params: { id: string } }) => {
-    // const features = [
-    //     "stable wifi",
-    //     "high noise level",
-    //     "highly busy",
-    //     "outlets available"
-    // ];
-
     const { id } = params;
     const locationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations/${id}`, {
         cache: "no-store"
@@ -34,8 +26,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
     const location = await locationResponse.json();
     const reviews = await reviewsResponse.json();
 
-    console.log("[INFO]: Location Details: ", location);
-    console.log("[INFO]: Reviews: ", reviews);
+    // console.log("[INFO]: Location Details: ", location);
+    // console.log("[INFO]: Reviews: ", reviews);
 
     return (
         <main>
@@ -58,18 +50,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
                         <div className="max-md:mr-1 max-md:max-w-full">
                             <div className="flex gap-5 flex-col">
                                 <section className="grid grid-flow-col">
-                                    <div className="grid grid-cols-2 gap-4 text-xl font-bold whitespace-nowrap text-stone-600 tracking-[2px] max-md:mt-9">
-                                        {/* column 1 */}
-                                        <div>
-                                            <h2 className="text-xl self-start pt-4">Images</h2>
-                                            <div className="mt-6 rounded-[10px] bg-neutral-400 h-[200px]" role="img" aria-label="Cafe image 1"></div>
-                                            <div className="mt-7 rounded-[10px] bg-neutral-400 h-[200px]" role="img" aria-label="Cafe image 2"></div>
-                                        </div>
-                                        {/* column 2 */}
-                                        <div className="self-center">
-                                            <div className="rounded-[10px] bg-neutral-400 h-[200px]" role="img" aria-label="Cafe image 3"></div>
-                                        </div>
-                                    </div>
+                                    <Image
+                                        src={location.imageWebLink}
+                                        width={512}
+                                        height={512}
+                                        alt="Location Image"
+                                        className="border-8 border-cherry-blossom-pink rounded-lg"
+                                    />
                                 </section>
                                 <ReviewSection reviews={reviews} />
                             </div>
@@ -172,6 +159,10 @@ const Page = async ({ params }: { params: { id: string } }) => {
                                     {/* Busy Rating */}
                                     <div className="flex justify-center items-center">
                                         <BusyRating busynessStatus={location.busynessStatus} size={32} style="full" />
+                                    </div>
+
+                                    <div>
+                                        <BusynessIndicator busynessStatus={location.busynessStatus} />
                                     </div>
                                 </div>
                             </div>

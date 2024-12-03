@@ -29,7 +29,7 @@ function BusyRating({ busynessStatus, size, style, className }: props) {
             <PersonEmpty key={index} size={size} />
           ))}
         </div>
-        <span className="align-bottom text-base ml-2">{busynessStatus.toFixed(1)}</span>
+        <span className="align-bottom text-base ml-2 font-bold">{busynessStatus.toFixed(1)}</span>
         {/* <span className="align-bottom text-base ml-2">{rating} (45 reviews)</span> */}
       </div>
     );
@@ -38,7 +38,7 @@ function BusyRating({ busynessStatus, size, style, className }: props) {
       <div className={`flex flex-row no-wrap ${className}`}>
         {/* <StarFull size={size} />           */}
         <PersonFull size={size} />
-        <span className="align-bottom text-base ml-1">({busynessStatus.toFixed(1)})</span>
+        <span className="align-bottom text-base ml-1 font-bold">({busynessStatus.toFixed(1)})</span>
         {/* <span className="align-bottom text-base ml-2">{rating} (45 reviews)</span> */}
       </div>
     );
