@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic'
 // defining the expected data for a review
 interface ReviewData {
     rating: number;
+    busynessStatus: number;
     content: string;
     userId: string;
 }
@@ -32,6 +33,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
 
         const requiredFields: (keyof ReviewData)[] = [
             'rating',
+            'busynessStatus',
             'content',
             //'userId'
         ]
@@ -67,6 +69,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
         const review = await prisma.review.create({
             data: {
                 rating: body.rating,
+                busynessStatus: body.busynessStatus,
                 content: body.content,
                 locationId: locationId,
                 //userId: body.userId
@@ -84,13 +87,17 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
         // calculate the average rating for the location
         const avgRating = allReviews.reduce((sum, review) => sum + review.rating, 0) / allReviews.length;
 
+        // calcuate the average busyness status for the location
+        const avgBusynessStatus = allReviews.reduce((sum, review) => sum + review.busynessStatus, 0) / allReviews.length;
+
         // update the location's rating
         await prisma.location.update({
             where: {
                 id: locationId
             },
             data: {
-                rating: avgRating
+                rating: avgRating,
+                busynessStatus: avgBusynessStatus,
             }
         });
 

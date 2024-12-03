@@ -43,12 +43,13 @@ await createLocation(formData, session);
   - `locationId`: The id of the given location
   - `content`: The comment / users thoughts
   - `rating`: A float between 1 - 5 Inclusive
+  - `busynessStatus`: A float between 1 - 5 Inclusive
   - `session`: The session object from useSession()
 - **Usage Example:**
 ```typescript
 const { createReview } = useCreateReview();
 ...
-await createReview(locationId, review, rating, session);
+await createReview(locationId, review, rating, busynessStatus, session);
 ```
 
 ### `useCreateUser.ts`

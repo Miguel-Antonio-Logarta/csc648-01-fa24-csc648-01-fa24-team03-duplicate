@@ -31,6 +31,7 @@ describe('GET /api/reviews', () => {
     interface ReviewSelect {
       id: string;
       rating: number;
+      busynessStatus: number;
       content: string;
       creationDate: string;
     }
@@ -39,6 +40,7 @@ describe('GET /api/reviews', () => {
       {
         id: '1',
         rating: 3,
+        busynessStatus: 5,
         content: 'This is a review.',
         creationDate: '2021-09-01T00:00:00.000Z',
       },
@@ -53,6 +55,7 @@ describe('GET /api/reviews', () => {
     expect(data).toEqual(mockReviews.map(review => ({
       id: review.id,
       rating: review.rating,
+      busynessStatus: review.busynessStatus,
       content: review.content,
       creationDate: new Date(review.creationDate).toISOString()
     })))

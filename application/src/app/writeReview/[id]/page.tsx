@@ -22,6 +22,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     ? { id: specificLocation.id.toString(), name: specificLocation.name }
     : { id: '', name: '' };
     const [rating, setRating] = useState('1');
+    const [busynessStatus, setBusynessStatus] = useState('1');
     const [review, setReview] = useState('');
     const router = useRouter();
 
@@ -38,6 +39,12 @@ const Page = ({ params }: { params: { id: string } }) => {
     const handleRatingChange = (newRating: string) => {
         setRating(newRating);
     }
+
+    const handleBusynessStatusChange = (newBusynessStatus: string) => {
+        setBusynessStatus(newBusynessStatus);
+    }
+
+
     const handleReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setReview(e.target.value);
     }
@@ -45,12 +52,12 @@ const Page = ({ params }: { params: { id: string } }) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!review) return;
-
+        if (!session) return;
         //console.log(`{ location.id: ${location.id}, review: ${review}, rating: ${parseInt(rating)}, session: ${session} }`);
-
-        await createReview(location.id, review, parseInt(rating), session);
-
-        router.push(`/locationInfo/${location.id}`);
+        // will flash success or error msg on its own
+        const status = await createReview(location.id, review, parseInt(rating), parseInt(busynessStatus), session);
+        // if created successfully, redirect to location info page
+        if(status) router.push(`/locationInfo/${location.id}`);
     }
 
     if (status === 'loading') return;
@@ -65,7 +72,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                 <header className="font-josefin text-3xl p-2 tracking-[3.2px] max-md:max-w-full">
                     {location.name}
                 </header>
-                <RatingSelector onRatingChange={handleRatingChange} />
+                <RatingSelector onRatingChange={handleRatingChange} onBusynessStatusChange={handleBusynessStatusChange} />
                 <textarea
                     className="font-josefin flex shrink-0 self-stretch mt-9 p-smed w-[650px] bg-gray rounded-[8px] border border-rose-300 border-solid border-t- h-[229px]"
                     aria-label="Write your review"

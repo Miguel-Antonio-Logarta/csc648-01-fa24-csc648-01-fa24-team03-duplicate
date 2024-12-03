@@ -416,13 +416,15 @@ The `/api/` is structured as follows:
 	{
 		"id": "review-id",
 		"rating": 3,
-		"description": "Place isn't great",
+    "busynessStatus": 3,
+		"content": "Place isn't great",
 		"creationDate": "2024-10-08T18:58:32.977Z"
 	},
 	{
 		"id": "review-id",
 		"rating": 5,
-		"description": "I like this library to study",
+    "busynessStatus": 3,
+		"content": "I like this library to study",
 		"creationDate": "2024-10-08T18:58:32.977Z"
 	}
 ]
@@ -437,7 +439,8 @@ The `/api/` is structured as follows:
 {
 	"id": "review-id",
 	"rating": 3,
-	"description": "Place isn't great",
+  "busynessStatus": 3,
+	"content": "Place isn't great",
 	"creationDate": "2024-10-08T18:58:32.977Z"
 }
 ```
@@ -452,6 +455,7 @@ The `/api/` is structured as follows:
 ```json
 {
   "rating": 5,
+  "busynessStatus": 3,
   "content": "Good place to study"
 }
 ```
@@ -466,7 +470,8 @@ The `/api/` is structured as follows:
   {
 	  "id": "review-id",
 	  "rating": 3,
-	  "description": "Place isn't great",
+    "busynessStatus": 3,
+	  "content": "Place isn't great",
 	  "creationDate": "2024-10-08T18:58:32.977Z"
   },
   ...
@@ -483,7 +488,7 @@ The `/api/` is structured as follows:
   {
 	  "id": "review-id",
 	  "rating": 3,
-	  "description": "Place isn't great",
+	  "content": "Place isn't great",
 	  "creationDate": "2024-10-08T18:58:32.977Z"
   },
   ...

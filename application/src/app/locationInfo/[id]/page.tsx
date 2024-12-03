@@ -13,12 +13,12 @@ import Link from "next/link";
 import BookmarkButton from "@/app/components/BookmarkButton";
 
 const Page = async ({ params }: { params: { id: string } }) => {
-    const features = [
-        "stable wifi",
-        "high noise level",
-        "highly busy",
-        "outlets available"
-    ];
+    // const features = [
+    //     "stable wifi",
+    //     "high noise level",
+    //     "highly busy",
+    //     "outlets available"
+    // ];
 
     const { id } = params;
     const locationResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/locations/${id}`, {
@@ -33,7 +33,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
     const location = await locationResponse.json();
     const reviews = await reviewsResponse.json();
 
-    console.log("Location: ", location)
+    console.log("[INFO]: Location Details: ", location);
+    console.log("[INFO]: Reviews: ", reviews);
 
     return (
         <main>
@@ -104,11 +105,10 @@ const Page = async ({ params }: { params: { id: string } }) => {
                                 <div className="flex gap-5 max-md:flex-col">
                                     <div className="flex flex-col w-6/12 max-md:ml-0">
                                         <div className="flex gap-2.5 text-base tracking-widest text-stone-600 max-md:mt-10">
-                                            <Image src={Icons} alt='placeholder icons' />
+                                            {/* <Image src={Icons} alt='placeholder icons' /> */}
                                             <ul className="flex flex-col pl-[10px]">
-                                                {features.map((feature, index) => (
-                                                    <li key={index} className={index > 0 ? "mt-2" : ""}>{feature}</li>
-                                                ))}
+                                                {location.hasWifi && <li className="mt-2">Has Wifi</li>}
+                                                {location.animalFriendliness && <li className="mt-2">Animal Friendly</li>}
                                             </ul>
                                         </div>
                                     </div>
@@ -116,7 +116,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
                             </section>
                             <div className="flex flex-col ml-5 w-[67%] max-md:ml-0 max-md:w-full">
                                 <div className="flex flex-col mx-auto m-4 justify-center rounded-[10px] bg-sage text-stone-600 h-[157px] w-[362px] shadow-[0px_2px_4px_rgba(0,0,0,0.25)]">
-                                    <Image src={Graph} alt="sample ocupancy graph" className="h-[117px] w-[361px]" />
+                                    {/* <Image src={Graph} alt="sample ocupancy graph" className="h-[117px] w-[361px]" /> */}
+                                    <div>Busyness number: {location.busynessStatus}</div>
                                 </div>
                             </div>
                         </div>
