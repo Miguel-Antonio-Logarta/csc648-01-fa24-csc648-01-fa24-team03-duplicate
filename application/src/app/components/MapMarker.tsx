@@ -5,11 +5,15 @@ import Image from 'next/image';
 import X from './icons/X';
 import Rating from './Rating';
 import { formatCategory } from '../utils/utils';
+import { LocationType } from '@prisma/client';
+
+type MapMarkerStyle = "default" | "bold" | "filled";
 
 type MapMarkerProps = {
   location: LocationData;
   selectedMarkerId: number | undefined;
   setSelectedMarkerId: (_: number) => void;
+  style: MapMarkerStyle;
 };
 
 // Different map pin styles
@@ -25,7 +29,43 @@ const infoWindowOptions: google.maps.InfoWindowOptions = {
   headerDisabled: true,
 };
 
-const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId }: MapMarkerProps) => {
+const getSvgPath = (style: MapMarkerStyle): string => {
+  if (style == "default") {
+    return mapPinEdited;
+  } else if (style == "bold") {
+    return mapPinBoldEdited;
+  } else if (style == "filled") {
+    return mapPinFilledEdited;
+  } else {
+    return "";
+  }
+}
+
+const getFillColor = (category: LocationType): string => {
+  if (category == "CAFE") {
+    return "#D1DAAF"; // Tea green color
+  } else if (category == "LIBRARY") {
+    return "#FFE7EC" // Lavender blush color
+  } else if (category == "PARK") {
+    return "#C6E2FF" // Columbia blue color
+  } else {
+    return "#FFFFFF" // White
+  }
+}
+
+const getStrokeColor = (category: LocationType): string => {
+  if (category == "CAFE") {
+    return "#BBC887" // Olivine color
+  } else if (category == "LIBRARY") {
+    return "#F4A4B1"  // Cherry blossom pink color
+  } else if (category == "PARK") {
+    return "#85C0FF" // Jordy blue color
+  } else {
+    return "#000000"  // Black color
+  }
+}
+
+const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId, style }: MapMarkerProps) => {
   const [showInfo, setShowInfo] = useState(false);
   const [hoveringInfoWindow, setHoveringInfoWindow] = useState(false);
 
@@ -45,11 +85,11 @@ const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId }: MapMarke
       key={location.id}
       position={{ lat: location.latitude, lng: location.longitude }}
       icon={{
-        path: mapPinFilledEdited,
-        fillColor: '#d1daaf',
+        path: getSvgPath(style),
+        fillColor: getFillColor(location.category),
         fillOpacity: 1.0,
         scale: 0.15,
-        strokeColor: '#869747',
+        strokeColor: getStrokeColor(location.category),
         strokeWeight: 4,
         anchor: new google.maps.Point(0, 0),
       }}

@@ -99,7 +99,7 @@ function Map({ locations }: MapProps) {
       options={mapOptions}
     >
       {locations && locations.map((location) => 
-      <MapMarker key={location.id} location={location} selectedMarkerId={selectedMarkerId} setSelectedMarkerId={setSelectedMarkerId} />)}
+      <MapMarker key={location.id} location={location} selectedMarkerId={selectedMarkerId} setSelectedMarkerId={setSelectedMarkerId} style="filled" />)}
       {/* Child components, such as markers, info windows, etc. */}
       {/* TODO: On click, scroll to the listing on the left */}
       {/* TODO: On click, have a label appear that shows the title and an image of the location */}
