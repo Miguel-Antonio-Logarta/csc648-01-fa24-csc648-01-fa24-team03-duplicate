@@ -1,15 +1,30 @@
 'use client';
 import React from 'react';
-import styles from './bio.module.css';
 import { Session } from 'next-auth';
 import UserCircle from '../components/icons/UserCircle';
 import Link from 'next/link';
+import useGetSpecificUserInfo from "@/app/hooks/useGetSpecificUserInfo";
+import { useEffect } from 'react';
 
 interface BioProps {
   session: Session | null;
 }
 
-const bio: React.FC<BioProps> = ({ session }) => {
+const Bio: React.FC<BioProps> = ({ session }) => {
+  const { specificUserInfo, fetchSpecificUserInfo, loading } = useGetSpecificUserInfo();
+
+  useEffect(() => { 
+    // we have to dynamically fetch the user's information, 
+    // because the session object will have the old email on the token
+    // the email on the token gets reset on login, but the session object doesn't update
+    if (session) {
+      fetchSpecificUserInfo(session.user.id);
+    }
+    
+    // DO NOT INCLUDE fetchSpecificUserInfo IN DEPENDENCIES | It will cause infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
+
   return (
     <div className="gap-5 bg-[#d1e3c3] border-7 border-[#FFFAE4] w-[30%] h-[60%] ml-[5%] mt-[5%] p-5 rounded-lg flex flex-col items-center shadow-[0px_4px_4px_rgba(0,0,0,0.1)]">
 
@@ -33,7 +48,7 @@ const bio: React.FC<BioProps> = ({ session }) => {
             Email:
           </div>
           <p className="font-shantell text-xl text-black m-0 text-left w-32 h-12 flex items-center overflow-hidden whitespace-nowrap text-ellipsis">
-            {session?.user.email || "No Email provided."}
+            {specificUserInfo && specificUserInfo.email || "No Email provided."}
           </p>
         </div>
       </div>
@@ -42,13 +57,13 @@ const bio: React.FC<BioProps> = ({ session }) => {
       <div className="w-full border-t-8 border-cherry-blossom-pink my-4"></div>
 
       <div className="flex flex-col items-center space-y-4">
-        <Link href={'/profile/UserSettings'}>
-          <button className="mt-2 p-2 px-4 text-sm bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
-            Change User Credentials
+        <Link href={'/profile/AccountSettings'}>
+          <button className="font-shantell mt-2 p-2 px-4 text-sm bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
+            Account Settings
           </button>
         </Link>
         <Link href={'/profile/UsersReviews'}>
-          <button className="mt-2 p-2 px-4 text-sm bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
+          <button className="font-shantell mt-2 p-2 px-4 text-sm bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
             My Reviews
           </button>
         </Link>
@@ -57,4 +72,4 @@ const bio: React.FC<BioProps> = ({ session }) => {
   );
 };
 
-export default bio;
+export default Bio;

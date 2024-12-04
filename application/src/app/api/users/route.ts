@@ -140,6 +140,8 @@ export async function PATCH(req: NextRequest) {
     const { email, password, settings } = await req.json();
     const userId = session.user.id;
 
+    console.log(`[INFO]: Email: ${email}, Password: ${password}, Settings: ${settings}`);
+
     if (!email && !password && !settings) {
       return NextResponse.json({ error: "No email or password or settings provided." }, { status: 400 });
     }
@@ -158,7 +160,7 @@ export async function PATCH(req: NextRequest) {
     const updateData: any = {};
 
     // if they provided a request to change emails
-    if (email) {
+    if (email && email.length !== 0) {
       // check if email is already taken
       const existingEmail = await prisma.user.findFirst({
         where: { email },
@@ -173,7 +175,14 @@ export async function PATCH(req: NextRequest) {
     }
 
     // if they provided a request to change passwords
+    // password cannot be blank and must be at least 6 characters long
     if (password) {
+      if (password.length < 6) {
+        return NextResponse.json(
+          { error: "Password must be at least 6 characters long." },
+          { status: 400 });
+      }
+
       // hash the password before storing it in the database
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(password, salt);

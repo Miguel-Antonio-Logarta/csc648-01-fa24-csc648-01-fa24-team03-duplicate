@@ -1,3 +1,4 @@
+import { Session } from 'next-auth';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast'
 
@@ -22,10 +23,8 @@ import { toast } from 'react-hot-toast'
 const useUpdateUserData = () => {
     const [loading, setLoading] = useState(false);
 
-    const updateUserData = async (formData: any, session: any) => {
+    const updateUserData = async (formData: any, session: Session) => {
         setLoading(true);
-
-        
         try {
             // user not logged in
             if(!session) throw new Error('You must be logged in to update user data');
@@ -41,8 +40,10 @@ const useUpdateUserData = () => {
             if(data.error) throw new Error(data.error);
 
             toast.success('User data updated successfully');
+            return true;
         } catch(error: any) {
             toast.error(error.message);
+            return false;
         } finally {
             setLoading(false);
         }

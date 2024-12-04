@@ -1,6 +1,6 @@
 "use client";
 
-import Bio from "./bio"; // Import the Bio component from its folder
+import Bio from "./Bio"; // Import the Bio component from its folder
 import Layout from "./layout"; // Import Layout if you want to use it to wrap the page content
 import BookmarksBox from "./BookmarksBox"; // Capitalize component name
 import { useSession } from "next-auth/react";
