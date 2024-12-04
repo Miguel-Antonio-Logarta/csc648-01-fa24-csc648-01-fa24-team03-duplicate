@@ -10,19 +10,10 @@ export type FilterOptionsType = {
   distance: number;
   rating: number;
   category: string,
-  // amenities: string[],
-  amenities: { amenity: string; selected: boolean }[]; // Update to an array of objects
+  amenities: string[],
 }
 
 const FilterOptions: React.FC<FilterOptionsProps> = ({ filters, setFilters }) => {
-  // const [filters, setFilters] = useState({
-  //   distance: 0,
-  //   rating: 0,
-  //   category: "",
-  //   amenities: [],
-  // });
-
-  // match backend categories
   const categories = [
     "CAFE",
     "LIBRARY",
@@ -61,7 +52,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({ filters, setFilters }) =>
       distance: 0,
       rating: 0,
       category: "",
-      amenities: [],
+      amenities: [], // Reset amenities to an empty array
     });
   };
 
@@ -131,11 +122,12 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({ filters, setFilters }) =>
                 <input
                   type="checkbox"
                   value={amenity.toLowerCase()}
+                  checked={filters.amenities.includes(amenity)}  // Check if the amenity is in the selected list
                   className="mr-2"
                   onChange={(e) => {
                     const updatedAmenities = e.target.checked
-                      ? [...filters.amenities, { amenity, selected: true }]
-                      : filters.amenities.filter((item) => item.amenity !== amenity);
+                      ? [...filters.amenities, amenity]
+                      : filters.amenities.filter((item) => item !== amenity);
                     setFilters({
                       ...filters,
                       amenities: updatedAmenities,

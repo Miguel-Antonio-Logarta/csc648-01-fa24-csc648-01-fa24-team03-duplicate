@@ -61,19 +61,22 @@ export async function GET(req: NextRequest) {
         } = {};
 
         // if there are tokens, add them to the filter
-        if(tokens.length > 0) {
+        if (tokens.length > 0) {
             filter.OR = tokens.map(token => ({ name: { contains: token, mode: 'insensitive' } }));
         }
-        
+
         if (category) filter.category = category as LocationType;
         if (rating) filter.rating = { gte: parseInt(rating) }; // Modify to use gte for rating comparison
         if (hasWifi) filter.hasWifi = hasWifi === 'true';
         if (animalFriendliness) filter.animalFriendliness = animalFriendliness === 'true';
         if (busynessStatus) filter.busynessStatus = parseInt(busynessStatus);
         if (radius) filter.radius = parseInt(radius);
+        
+        console.log("[INFO]: Filter: ", filter);
 
+        // If no filters are applied, return all locations
         const locations = await prisma.location.findMany({
-            where: filter,
+            where: Object.keys(filter).length > 0 ? filter : {}, // If there are filters, apply them; otherwise, return all locations
             include: { operatingHours: true }
         });
 

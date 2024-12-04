@@ -12,6 +12,7 @@ import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
 import Loading from './loading';
 import ListingLoading from '../components/loading/ListingLoading';
 import { useRouter } from "next/navigation";
+import { featureMapping } from '../utils/maps';
 
 
 // This is causing an error. Put fetch inside the component instead. Redo this later
@@ -71,7 +72,7 @@ import { useRouter } from "next/navigation";
 
 /**
  * @Notes - This function is used to handle the filter change
- * @Developer Notes - This function could be better programmed
+ * @Developer Notes - This function could be better programmed its really hacky
  * @param filters - The Filter Options
  * @param router - Used to update the URL
  */
@@ -97,30 +98,34 @@ function handleFilterChange(filters: FilterOptionsType, router: any, searchParam
     filterParams.delete('category');
   }
 
-  // Handle amenities: set selected ones and delete unselected ones
-  const selectedAmenities = filters.amenities.filter(amenity => amenity.selected);
-  const amenityKeys = selectedAmenities.map(amenity => amenity.amenity);
+  // Handle amenities (set/unset for each one)
+  // Object.keys(amenityMap).forEach((amenity) => {
+  //   const internalField = amenityMap[amenity as keyof typeof amenityMap]; // Cast amenity to a key of amenityMap
+  //   if (filters.amenities.includes(amenity)) {
+  //     filterParams.set(internalField, 'true');
+  //   } else {
+  //     filterParams.delete(internalField);
+  //   }
+  // });
 
-  // Remove all amenities from URL that are not selected anymore
-  filters.amenities.forEach((amenity) => {
-    if (!amenity.selected) {
-      filterParams.delete(amenity.amenity);
-    }
-  });
+  // filters.amenities.forEach((amenity) => {
+  //   const property = featureMapping[amenity as keyof typeof featureMapping];
+  //   if (property) {
+  //     filterParams.set(property, 'true');
+  //   } else {
+  //     filterParams.delete(property);
+  //   }
+  // });
 
-  // Add selected amenities to URL
-  selectedAmenities.forEach((amenity) => {
-    filterParams.set(amenity.amenity, 'true');
-  });
 
   // If filterParams has content, update the URL with the new search parameters
   if (filterParams.toString()) {
     router.push(`?${filterParams.toString()}`, undefined, { shallow: true });
+  } else {
+    // If filterParams is empty, remove the query from the URL
+    router.push(`/search?`, undefined, { shallow: true });
   }
-
-  console.log("[INFO]: Filter Params: ", filterParams.toString());
 }
-
 
 
 const testData = async () => {
@@ -152,11 +157,12 @@ const Page = () => {
     setFilterSidebar(!filterSidebar);
   };
   useEffect(() => {
-    // console.log(searchParams);
-    // console.log(locations);
-    // console.log(filters);
+    //console.log("[INFO]: useEffect should be called here?");
+    console.log("[INFO] Search Params: ", searchParams);
+    console.log("[INFO] Locations: ", locations);
+    console.log("[INFO] Filters: ", filters);
     handleFilterChange(filters, router, searchParams);
-  }, [locations, searchParams, filters]);
+  }, [locations, searchParams, filters, router]);
 
   // return (<Loading />)
 
