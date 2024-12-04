@@ -3,13 +3,13 @@ import React from 'react';
 import styles from './bio.module.css';
 import { Session } from 'next-auth';
 import UserCircle from '../components/icons/UserCircle';
+import Link from 'next/link';
 
 interface BioProps {
   session: Session | null;
 }
 
 const bio: React.FC<BioProps> = ({ session }) => {
-
   return (
     <div className="gap-5 bg-[#d1e3c3] border-7 border-[#FFFAE4] w-[30%] h-[60%] ml-[5%] mt-[5%] p-5 rounded-lg flex flex-col items-center shadow-[0px_4px_4px_rgba(0,0,0,0.1)]">
 
@@ -20,7 +20,7 @@ const bio: React.FC<BioProps> = ({ session }) => {
 
       <div className="text-left">
         <div className="flex items-center space-x-4">
-          <div className="font-bold bg-cherry-blossom-pink font-shantell text-xl text-black m-0 text-center border-8 border-cherry-blossom-pink p-2 rounded-lg w-32 h-12 flex items-center justify-center">
+          <div className="bg-cherry-blossom-pink font-shantell text-xl text-black m-0 text-center border-8 border-cherry-blossom-pink p-2 rounded-lg w-32 h-12 flex items-center justify-center">
             Username:
           </div>
           <p className="font-shantell text-xl text-black m-0 text-left w-32 h-12 flex items-center overflow-hidden whitespace-nowrap text-ellipsis">
@@ -29,7 +29,7 @@ const bio: React.FC<BioProps> = ({ session }) => {
         </div>
 
         <div className="flex items-center space-x-4 mt-2">
-          <div className="font-bold bg-cherry-blossom-pink font-shantell text-xl text-black m-0 text-center border-8 border-cherry-blossom-pink p-2 rounded-lg w-32 h-12 flex items-center justify-center">
+          <div className="bg-cherry-blossom-pink font-shantell text-xl text-black m-0 text-center border-8 border-cherry-blossom-pink p-2 rounded-lg w-32 h-12 flex items-center justify-center">
             Email:
           </div>
           <p className="font-shantell text-xl text-black m-0 text-left w-32 h-12 flex items-center overflow-hidden whitespace-nowrap text-ellipsis">
@@ -38,14 +38,22 @@ const bio: React.FC<BioProps> = ({ session }) => {
         </div>
       </div>
 
-      <button className="mt-2 p-2 px-4 text-sm text-white bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
-        Change User Credentials
-      </button>
-      <button className="mt-2 p-2 px-4 text-sm text-white bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
-        My Reviews
-      </button>
-    </div>
+      {/* Full-width divider */}
+      <div className="w-full border-t-8 border-cherry-blossom-pink my-4"></div>
 
+      <div className="flex flex-col items-center space-y-4">
+        <Link href={'/profile/UserSettings'}>
+          <button className="mt-2 p-2 px-4 text-sm bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
+            Change User Credentials
+          </button>
+        </Link>
+        <Link href={'/profile/UsersReviews'}>
+          <button className="mt-2 p-2 px-4 text-sm bg-cherry-blossom-pink border-none rounded-lg cursor-pointer w-48 h-12 overflow-hidden text-ellipsis transition-all duration-300 hover:bg-pink-hover">
+            My Reviews
+          </button>
+        </Link>
+      </div>
+    </div>
   );
 };
 
