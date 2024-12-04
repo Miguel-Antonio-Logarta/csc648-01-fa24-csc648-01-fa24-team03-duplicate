@@ -98,25 +98,16 @@ function handleFilterChange(filters: FilterOptionsType, router: any, searchParam
     filterParams.delete('category');
   }
 
-  // Handle amenities (set/unset for each one)
-  // Object.keys(amenityMap).forEach((amenity) => {
-  //   const internalField = amenityMap[amenity as keyof typeof amenityMap]; // Cast amenity to a key of amenityMap
-  //   if (filters.amenities.includes(amenity)) {
-  //     filterParams.set(internalField, 'true');
-  //   } else {
-  //     filterParams.delete(internalField);
-  //   }
-  // });
-
-  // filters.amenities.forEach((amenity) => {
-  //   const property = featureMapping[amenity as keyof typeof featureMapping];
-  //   if (property) {
-  //     filterParams.set(property, 'true');
-  //   } else {
-  //     filterParams.delete(property);
-  //   }
-  // });
-
+  // find the amenities that are selected and add them to the URL
+  // otherwise remove them from the URL
+  Object.keys(featureMapping).forEach((amenity) => {
+    const property = featureMapping[amenity as keyof typeof featureMapping];
+    if (filters.amenities.includes(amenity)) {
+      filterParams.set(property, 'true');
+    } else {
+      filterParams.delete(property);
+    }
+  });
 
   // If filterParams has content, update the URL with the new search parameters
   if (filterParams.toString()) {
@@ -126,7 +117,6 @@ function handleFilterChange(filters: FilterOptionsType, router: any, searchParam
     router.push(`/search?`, undefined, { shallow: true });
   }
 }
-
 
 const testData = async () => {
   setTimeout(() => {
@@ -158,9 +148,9 @@ const Page = () => {
   };
   useEffect(() => {
     //console.log("[INFO]: useEffect should be called here?");
-    console.log("[INFO] Search Params: ", searchParams);
-    console.log("[INFO] Locations: ", locations);
-    console.log("[INFO] Filters: ", filters);
+    // console.log("[INFO] Search Params: ", searchParams);
+    // console.log("[INFO] Locations: ", locations);
+    // console.log("[INFO] Filters: ", filters);
     handleFilterChange(filters, router, searchParams);
   }, [locations, searchParams, filters, router]);
 

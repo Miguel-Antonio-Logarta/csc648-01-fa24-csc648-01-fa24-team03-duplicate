@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
         if (busynessStatus) filter.busynessStatus = parseInt(busynessStatus);
         if (radius) filter.radius = parseInt(radius);
         
-        console.log("[INFO]: Filter: ", filter);
+        //console.log("[INFO]: Filter: ", filter);
 
         // If no filters are applied, return all locations
         const locations = await prisma.location.findMany({
