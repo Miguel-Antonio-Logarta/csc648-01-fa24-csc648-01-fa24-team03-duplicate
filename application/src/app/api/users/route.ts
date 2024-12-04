@@ -136,11 +136,8 @@ export async function PATCH(req: NextRequest) {
   }
 
   try {
-
     const { email, password, settings } = await req.json();
     const userId = session.user.id;
-
-    console.log(`[INFO]: Email: ${email}, Password: ${password}, Settings: ${settings}`);
 
     if (!email && !password && !settings) {
       return NextResponse.json({ error: "No email or password or settings provided." }, { status: 400 });
