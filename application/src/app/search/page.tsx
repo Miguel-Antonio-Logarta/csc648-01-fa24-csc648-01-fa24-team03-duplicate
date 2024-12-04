@@ -76,35 +76,52 @@ import { useRouter } from "next/navigation";
  * @param router - Used to update the URL
  */
 function handleFilterChange(filters: FilterOptionsType, router: any, searchParams: ReadonlyURLSearchParams) {
-  const filterParams = new URLSearchParams();
+  const filterParams = new URLSearchParams(searchParams.toString()); // Start with the current search params
 
-  // Set filter parameters
-  if (filters.distance) filterParams.set('distance', filters.distance.toString());
-  if (filters.rating) filterParams.set('rating', filters.rating.toString());
-  if (filters.category) filterParams.set('category', filters.category);
-  if (filters.amenities.length) {
-    filters.amenities.forEach((amenity) => {
-      if (amenity.selected) {
-        filterParams.set(amenity.amenity, 'true');
-      }
-    });
+  // Set or unset filter parameters
+  if (filters.distance) {
+    filterParams.set('distance', filters.distance.toString());
+  } else {
+    filterParams.delete('distance');
   }
 
-  // If filterParams has content, update the URL with the new search parameters
-  if (filterParams.size > 0) {
-    // Remove the existing query params related to filters
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    filterParams.forEach((value, key) => {
-      newSearchParams.set(key, value); // Replace or add the new filters
-    });
+  if (filters.rating) {
+    filterParams.set('rating', filters.rating.toString());
+  } else {
+    filterParams.delete('rating');
+  }
 
-    // Update the URL only if the search parameters changed
-    const newUrl = `?${newSearchParams.toString()}`;
-    router.push(newUrl, undefined, { shallow: true });
+  if (filters.category) {
+    filterParams.set('category', filters.category);
+  } else {
+    filterParams.delete('category');
+  }
+
+  // Handle amenities: set selected ones and delete unselected ones
+  const selectedAmenities = filters.amenities.filter(amenity => amenity.selected);
+  const amenityKeys = selectedAmenities.map(amenity => amenity.amenity);
+
+  // Remove all amenities from URL that are not selected anymore
+  filters.amenities.forEach((amenity) => {
+    if (!amenity.selected) {
+      filterParams.delete(amenity.amenity);
+    }
+  });
+
+  // Add selected amenities to URL
+  selectedAmenities.forEach((amenity) => {
+    filterParams.set(amenity.amenity, 'true');
+  });
+
+  // If filterParams has content, update the URL with the new search parameters
+  if (filterParams.toString()) {
+    router.push(`?${filterParams.toString()}`, undefined, { shallow: true });
   }
 
   console.log("[INFO]: Filter Params: ", filterParams.toString());
 }
+
+
 
 const testData = async () => {
   setTimeout(() => {

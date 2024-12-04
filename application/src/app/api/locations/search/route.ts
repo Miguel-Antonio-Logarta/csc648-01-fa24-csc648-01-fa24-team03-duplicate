@@ -38,6 +38,7 @@ export async function GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.nextUrl);
         const name = searchParams.get('name');
+        const rating = searchParams.get('rating');
         const category = searchParams.get('category');
         const hasWifi = searchParams.get('hasWifi');
         const animalFriendliness = searchParams.get('animalFriendliness');
@@ -52,7 +53,9 @@ export async function GET(req: NextRequest) {
         const filter: {
             OR?: { name: { contains: string; mode: 'insensitive' } }[];
             category?: LocationType,
+            rating?: { gte: number };
             hasWifi?: boolean,
+            animalFriendliness?: boolean,
             busynessStatus?: number,
             radius?: number
         } = {};
@@ -63,7 +66,9 @@ export async function GET(req: NextRequest) {
         }
         
         if (category) filter.category = category as LocationType;
+        if (rating) filter.rating = { gte: parseInt(rating) }; // Modify to use gte for rating comparison
         if (hasWifi) filter.hasWifi = hasWifi === 'true';
+        if (animalFriendliness) filter.animalFriendliness = animalFriendliness === 'true';
         if (busynessStatus) filter.busynessStatus = parseInt(busynessStatus);
         if (radius) filter.radius = parseInt(radius);
 
