@@ -40,6 +40,7 @@ export async function GET(req: NextRequest) {
         const name = searchParams.get('name');
         const category = searchParams.get('category');
         const hasWifi = searchParams.get('hasWifi');
+        const animalFriendliness = searchParams.get('animalFriendliness');
         const busynessStatus = searchParams.get('busynessStatus');
         const radius = searchParams.get('radius');
 

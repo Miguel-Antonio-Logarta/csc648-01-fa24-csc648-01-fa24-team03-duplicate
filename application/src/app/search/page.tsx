@@ -5,12 +5,14 @@ import styles from './page.module.css';
 import { useContext, useEffect, useState } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import SearchResults from '../components/SearchResults';
-import FilterOptions from '../components/FilterOptions';
+import FilterOptions, { FilterOptionsType } from '../components/FilterOptions';
 import { LocationData } from '../api/locations/route';
 import useLocationSearch from '../hooks/useLocationSearch';
-import { useSearchParams } from 'next/navigation';
+import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
 import Loading from './loading';
 import ListingLoading from '../components/loading/ListingLoading';
+import { useRouter } from "next/navigation";
+
 
 // This is causing an error. Put fetch inside the component instead. Redo this later
 // When I want to use the suspense API for a loading ui 
@@ -50,22 +52,59 @@ import ListingLoading from '../components/loading/ListingLoading';
 // const dataWrapper = fetchLocations();
 // const locationData = dataWrapper.read() as LocationData[];
 
-  // const { setLocations } = useContext(SearchContext);
-  // const searchParams = useSearchParams();
-  // const { locations, loading } = useLocationSearch(searchParams.get("query")!.toString())
-  //   Todo: Read from URL params and change filter search results from that
-  // useEffect(() => {
-  //   fetch("/api/locations/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setLocations(data);
-  //     });
-  // }, [setLocations]);
+// const { setLocations } = useContext(SearchContext);
+// const searchParams = useSearchParams();
+// const { locations, loading } = useLocationSearch(searchParams.get("query")!.toString())
+//   Todo: Read from URL params and change filter search results from that
+// useEffect(() => {
+//   fetch("/api/locations/")
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log(data);
+//       setLocations(data);
+//     });
+// }, [setLocations]);
 
-  // useEffect(() => {
-  //   setLocations(locationData);
-  // });
+// useEffect(() => {
+//   setLocations(locationData);
+// });
+
+/**
+ * @Notes - This function is used to handle the filter change
+ * @Developer Notes - This function could be better programmed
+ * @param filters - The Filter Options
+ * @param router - Used to update the URL
+ */
+function handleFilterChange(filters: FilterOptionsType, router: any, searchParams: ReadonlyURLSearchParams) {
+  const filterParams = new URLSearchParams();
+
+  // Set filter parameters
+  if (filters.distance) filterParams.set('distance', filters.distance.toString());
+  if (filters.rating) filterParams.set('rating', filters.rating.toString());
+  if (filters.category) filterParams.set('category', filters.category);
+  if (filters.amenities.length) {
+    filters.amenities.forEach((amenity) => {
+      if (amenity.selected) {
+        filterParams.set(amenity.amenity, 'true');
+      }
+    });
+  }
+
+  // If filterParams has content, update the URL with the new search parameters
+  if (filterParams.size > 0) {
+    // Remove the existing query params related to filters
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    filterParams.forEach((value, key) => {
+      newSearchParams.set(key, value); // Replace or add the new filters
+    });
+
+    // Update the URL only if the search parameters changed
+    const newUrl = `?${newSearchParams.toString()}`;
+    router.push(newUrl, undefined, { shallow: true });
+  }
+
+  console.log("[INFO]: Filter Params: ", filterParams.toString());
+}
 
 const testData = async () => {
   setTimeout(() => {
@@ -80,28 +119,35 @@ const testData = async () => {
  * @returns read
  */
 const Page = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const { locations, loading } = useLocationSearch(searchParams.toString());
   const [filterSidebar, setFilterSidebar] = useState(false);
-
+  const [filters, setFilters] = useState<FilterOptionsType>({
+    distance: 0,
+    rating: 0,
+    category: "",
+    amenities: [],
+  });
 
   const handleFilterClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setFilterSidebar(!filterSidebar);
   };
-
   useEffect(() => {
-    console.log(searchParams);
-    console.log(locations);
-  }, [locations, searchParams]);
-  
+    // console.log(searchParams);
+    // console.log(locations);
+    // console.log(filters);
+    handleFilterChange(filters, router, searchParams);
+  }, [locations, searchParams, filters]);
+
   // return (<Loading />)
 
   return (
     <main className={`grid grid-cols-[auto_2fr_3fr] ${styles['main-content']}`}>
-      {filterSidebar ? <FilterOptions /> : <div></div>}
+      {filterSidebar ? <FilterOptions filters={filters} setFilters={setFilters} /> : <div></div>}
       {loading ? <ListingLoading /> : <SearchResults locations={locations} onFilterClick={handleFilterClick} />}
-      <Map locations={locations}/>
+      <Map locations={locations} />
     </main>
   );
 
