@@ -57,6 +57,7 @@ The `/api/` is structured as follows:
   - `/api/reviews/userReviews/[userId]`
 - `/api/upload`
 - `/api/users`
+  - `/api/users/[userid]`
 
 ---
 
