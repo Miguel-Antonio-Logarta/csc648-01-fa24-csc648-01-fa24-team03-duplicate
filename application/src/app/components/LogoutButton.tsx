@@ -2,6 +2,7 @@
 
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function LogoutButton() {
     const { data: session } = useSession();
@@ -9,8 +10,13 @@ export default function LogoutButton() {
 
     const handleLogout = async () => {
         // must prevent the page reloading on signout or else we can't redirect to home
-        await signOut({ redirect: false });
-        router.push('/');
+        const status = await signOut({ redirect: false });
+        if(status) {
+            toast.success('You have been logged out successfully!');
+            router.push('/');
+        } else {
+            toast.error('An error occurred while logging out. Please try again.');
+        }
     };
 
     // there is no session, do not show the button

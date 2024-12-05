@@ -236,7 +236,7 @@ const Page = ({ params }: { params: { locationId: string } }) => {
 
                 <button
                     type="submit"
-                    className={`w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+                    className={`w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 ${loading ? 'bg-blue-700 text-white cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
                     disabled={loading}
                 >
                     {loading ? 'Editing Location...' : 'Edit Location'}

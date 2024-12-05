@@ -17,7 +17,7 @@ const Page = () => {
     password: '',
   });
 
-  useEffect(() => { 
+  useEffect(() => {
     // we have to dynamically fetch the user's information, 
     // because the session object will have the old email on the token
     if (session) {
@@ -93,9 +93,11 @@ const Page = () => {
         <div className="space-y-4 py-4">
           <button
             type="submit"
-            className="w-full p-3 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition duration-200"
+            className={`w-full p-3 rounded-md shadow-md transition duration-200 
+    ${loading ? 'bg-blue-700 text-white cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+            disabled={loading}
           >
-            Save Changes
+            {loading ? 'Saving Changes . . .' : 'Save Changes'}
           </button>
         </div>
       </form>
