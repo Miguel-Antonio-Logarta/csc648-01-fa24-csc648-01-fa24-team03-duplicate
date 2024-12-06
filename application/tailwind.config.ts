@@ -35,7 +35,12 @@ const config: Config = {
       },
       height: {
         'h-nav': '80px',
-      }
+      },
+      borderWidth: {
+        // Used for the triangles on infoboxes
+        '20': '20px', // Adds 'border-t-20'
+        '16': '16px', // Adds 'border-t-16'
+      },
     },
   },
   plugins: [],

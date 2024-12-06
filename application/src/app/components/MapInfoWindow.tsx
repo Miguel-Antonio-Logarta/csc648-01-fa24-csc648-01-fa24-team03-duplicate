@@ -6,7 +6,9 @@ import { LocationData } from "../api/locations/route";
 import X from "./icons/X";
 
 type MapInfoWindowProps = {
-  location: LocationData
+  location: LocationData;
+  anchor: google.maps.Marker;
+  // position: google.maps.LatLng;
 }
 
 const infoWindowOptions: google.maps.InfoWindowOptions = {
@@ -14,10 +16,12 @@ const infoWindowOptions: google.maps.InfoWindowOptions = {
   headerDisabled: true,
 };
 
-const MapInfoWindow = ({ location }: MapInfoWindowProps) => {
+// Refer to figma for design.
+// When we get amenities, just show the icons instead of the icons and the text at the same time. 
+// That way the listing can be more compact
+const MapInfoWindow = ({ location, anchor }: MapInfoWindowProps) => {
   return (
-    <InfoWindow options={infoWindowOptions}>
-        
+    <InfoWindow options={infoWindowOptions} anchor={anchor}>
         <div
           className="flex flex-col items-center w-[300px] h-full p-3 relative rounded-lg border-4 border-[#0000FF]"
         >

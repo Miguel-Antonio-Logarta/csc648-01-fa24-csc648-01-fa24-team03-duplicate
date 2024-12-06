@@ -1,4 +1,4 @@
-import { InfoWindow, Marker } from '@react-google-maps/api';
+import { InfoBox, InfoWindow, Marker } from '@react-google-maps/api';
 import { LocationData } from '../api/locations/route';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -7,6 +7,7 @@ import Rating from './Rating';
 import { formatCategory } from '../utils/utils';
 import { LocationType } from '@prisma/client';
 import MapInfoWindow from './MapInfoWindow';
+import InfoBoxCustom from './InfoBoxCustom';
 
 type MapMarkerStyle = "default" | "bold" | "filled";
 
@@ -14,7 +15,9 @@ type MapMarkerProps = {
   location: LocationData;
   selectedMarkerId: number | undefined;
   setSelectedMarkerId: (_: number) => void;
+  setSelectedLocation: (_: LocationData) => void;
   style: MapMarkerStyle;
+  setAnchorRef?: (marker: google.maps.Marker) => void;
 };
 
 // Different map pin styles
@@ -61,21 +64,13 @@ const getStrokeColor = (category: LocationType): string => {
   }
 }
 
-const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId, style }: MapMarkerProps) => {
-  const [showInfo, setShowInfo] = useState(false);
-  const [hoveringInfoWindow, setHoveringInfoWindow] = useState(false);
-
+const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId, style, setAnchorRef, setSelectedLocation }: MapMarkerProps) => {
+  const markerRef = useRef<google.maps.Marker | undefined>(undefined);
+  
   useEffect(() => {
-    console.log("I've been rerendered");
+    console.log("I've been rerendered", location.id);
   });
 
-  /*
-    When the user hovers over the marker, it will reveal the infowindow
-    When the user leaves the area, the infowindow closes
-  */
-  {
-    /* V1: There are manual open and close actions */
-  }
   return (
     <Marker
       key={location.id}
@@ -89,104 +84,22 @@ const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId, style }: M
         strokeWeight: 4,
         anchor: new google.maps.Point(0, 0),
       }}
-      onClick={() => setSelectedMarkerId(location.id)}
+      onClick={() => {
+        setSelectedMarkerId(location.id);
+        setSelectedLocation(location);
+      }}
+      onLoad={(marker) => {
+        markerRef.current = marker
+        if (setAnchorRef) {
+          setAnchorRef(marker);
+        }
+      }}
     >
-      {/* Style 2: Imgae on the side */}
-      {/* Style 1: Image on the top */}
-      {selectedMarkerId === location.id && <MapInfoWindow location={location} />}
-      {/* {selectedMarkerId === location.id && <InfoWindow options={infoWindowOptions}>
-        
-        <div
-          className="flex flex-col items-center w-[300px] h-full p-3 relative rounded-lg border-4 border-[#0000FF]"
-        >
-          <div className="absolute top-0 right-0 pt-4 pr-4 ">
-              <button onClick={close} className="p-2">
-                <X className="text-red-300" size={24} fill="rgb(115 115 115)" />
-              </button>
-          </div>
-          <div className="relative w-full h-[150px]">
-            <Image
-              className="object-cover rounded-lg bg-slate"
-              alt={location.name}
-              fill={true}
-              src={location.imageWebLink}
-            />
-          </div>
-          <p className="font-shantell text-lg mb-2 text-left mt-2">
-            {location.name}
-          </p>
-          <div>
-          <div className="font-josefin text-sm mb-3 flex flex-row items-center gap-2">
-            <div className={`font-bold px-2 rounded-sm py-[4px] bg-cherry-blossom-pink`}>
-              {formatCategory(location.category)}
-            </div>
-            <span>•</span>
-            <span className="text-base">Currently busy</span>
-          </div>
-            <Rating 
-            rating={location.rating}
-              style='full'
-              size={24}
-            />
-          </div>
-        </div>
-      </InfoWindow>} */}
+      {selectedMarkerId === location.id && markerRef.current &&
+        <InfoBoxCustom location={location} anchor={markerRef.current} />
+      }
     </Marker>
   );
-
-  {
-    /* V2: InfoWindow closes and opens based on hover actions*/
-  }
-  // return (
-  //   <Marker
-  //     key={location.id}
-  //     position={{ lat: location.latitude, lng: location.longitude }}
-  //     icon={{
-  //       path: mapPinFilledEdited,
-  //       fillColor: '#d1daaf',
-  //       fillOpacity: 1.0,
-  //       scale: 0.15,
-  //       strokeColor: '#869747',
-  //       strokeWeight: 4,
-  //       anchor: new google.maps.Point(0, 0),
-  //     }}
-  //     onMouseOver={() => setShowInfo(true)}
-  //     onMouseOut={() =>
-  //       setTimeout(() => {
-  //         if (!hoveringInfoWindow) {
-  //           setShowInfo(false);
-  //         }
-  //       }, 300)
-  //     }
-  //   >
-  //     {showInfo && (
-  //       <InfoWindow options={infoWindowOptions}>
-  //         <div
-  //           className="flex flex-col items-center w-full h-full"
-  //           onMouseEnter={() => {
-  //             setHoveringInfoWindow(true);
-  //           }}
-  //           onMouseLeave={() => {
-  //             // setShowInfo(false);
-  //             setHoveringInfoWindow(false);
-  //           }}
-  //         >
-  //           <div className="relative w-full h-[150px]">
-  //             <Image
-  //               className="object-cover rounded-lg bg-slate"
-  //               alt={location.name}
-  //               fill={true}
-  //               src={location.imageWebLink}
-  //             />
-  //           </div>
-  //           <div className="font-shantell text-lg mb-2 text-center mt-2">
-  //             {location.name}
-  //           </div>
-  //         </div>
-  //       </InfoWindow>
-  //     )}
-  //   </Marker>
-  // );
 };
 
 export default MapMarker;
