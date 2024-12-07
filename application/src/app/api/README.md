@@ -30,8 +30,9 @@ This document outlines the API routes for Coffee Spot
     1. [Upload Location thumbnail](#upload-location-thumbnail)
 6. [User Endpoints](#user-endpoints)
     1. [Get All Users](#get-all-users)
-    2. [Create User](#create-user)
-    3. [Update User Settings](#update-user-settings)
+    2. [Get Specific User](#get-specific-user)
+    3. [Create User](#create-user)
+    4. [Update User Settings](#update-user-settings)
 
 --- 
 
@@ -56,6 +57,7 @@ The `/api/` is structured as follows:
   - `/api/reviews/userReviews/[userId]`
 - `/api/upload`
 - `/api/users`
+  - `/api/users/[userid]`
 
 ---
 
@@ -416,13 +418,15 @@ The `/api/` is structured as follows:
 	{
 		"id": "review-id",
 		"rating": 3,
-		"description": "Place isn't great",
+    "busynessStatus": 3,
+		"content": "Place isn't great",
 		"creationDate": "2024-10-08T18:58:32.977Z"
 	},
 	{
 		"id": "review-id",
 		"rating": 5,
-		"description": "I like this library to study",
+    "busynessStatus": 3,
+		"content": "I like this library to study",
 		"creationDate": "2024-10-08T18:58:32.977Z"
 	}
 ]
@@ -437,7 +441,8 @@ The `/api/` is structured as follows:
 {
 	"id": "review-id",
 	"rating": 3,
-	"description": "Place isn't great",
+  "busynessStatus": 3,
+	"content": "Place isn't great",
 	"creationDate": "2024-10-08T18:58:32.977Z"
 }
 ```
@@ -452,6 +457,7 @@ The `/api/` is structured as follows:
 ```json
 {
   "rating": 5,
+  "busynessStatus": 3,
   "content": "Good place to study"
 }
 ```
@@ -466,7 +472,8 @@ The `/api/` is structured as follows:
   {
 	  "id": "review-id",
 	  "rating": 3,
-	  "description": "Place isn't great",
+    "busynessStatus": 3,
+	  "content": "Place isn't great",
 	  "creationDate": "2024-10-08T18:58:32.977Z"
   },
   ...
@@ -483,7 +490,7 @@ The `/api/` is structured as follows:
   {
 	  "id": "review-id",
 	  "rating": 3,
-	  "description": "Place isn't great",
+	  "content": "Place isn't great",
 	  "creationDate": "2024-10-08T18:58:32.977Z"
   },
   ...
@@ -522,6 +529,21 @@ The `/api/` is structured as follows:
   },
   ...
 ]
+```
+
+#### Get Specific User
+- **Endpoint:** `/api/users/${userid}`
+- **Method:** `GET`
+- **Description:** Get a specific user from the database
+- **Response Body:**
+```json
+{
+  "id": "user-id",
+  "username": "username",
+  "email": "example@example.com",
+  "role": "CUSTOMER",
+  "creationDate": "2024-10-08T18:58:32.977Z"
+}
 ```
 
 #### Create User

@@ -14,6 +14,7 @@ export async function GET() {
             select: {
                 id: true,
                 rating: true,
+                busynessStatus: true,
                 content: true,
                 creationDate: true
             }

@@ -38,8 +38,10 @@ export async function GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.nextUrl);
         const name = searchParams.get('name');
+        const rating = searchParams.get('rating');
         const category = searchParams.get('category');
         const hasWifi = searchParams.get('hasWifi');
+        const animalFriendliness = searchParams.get('animalFriendliness');
         const busynessStatus = searchParams.get('busynessStatus');
         const radius = searchParams.get('radius');
 
@@ -51,23 +53,30 @@ export async function GET(req: NextRequest) {
         const filter: {
             OR?: { name: { contains: string; mode: 'insensitive' } }[];
             category?: LocationType,
+            rating?: { gte: number };
             hasWifi?: boolean,
+            animalFriendliness?: boolean,
             busynessStatus?: number,
             radius?: number
         } = {};
 
         // if there are tokens, add them to the filter
-        if(tokens.length > 0) {
+        if (tokens.length > 0) {
             filter.OR = tokens.map(token => ({ name: { contains: token, mode: 'insensitive' } }));
         }
-        
+
         if (category) filter.category = category as LocationType;
+        if (rating) filter.rating = { gte: parseInt(rating) }; // Modify to use gte for rating comparison
         if (hasWifi) filter.hasWifi = hasWifi === 'true';
+        if (animalFriendliness) filter.animalFriendliness = animalFriendliness === 'true';
         if (busynessStatus) filter.busynessStatus = parseInt(busynessStatus);
         if (radius) filter.radius = parseInt(radius);
+        
+        //console.log("[INFO]: Filter: ", filter);
 
+        // If no filters are applied, return all locations
         const locations = await prisma.location.findMany({
-            where: filter,
+            where: Object.keys(filter).length > 0 ? filter : {}, // If there are filters, apply them; otherwise, return all locations
             include: { operatingHours: true }
         });
 

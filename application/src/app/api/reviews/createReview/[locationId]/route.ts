@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic'
 // defining the expected data for a review
 interface ReviewData {
     rating: number;
+    busynessStatus: number;
     content: string;
     userId: string;
 }
@@ -19,7 +20,7 @@ interface ReviewData {
  * @returns - the created review.
  */
 export async function POST(req: NextRequest, { params }: { params: { locationId: string } }) {
-    
+
     const session = await getServerSession(authOptions);
 
     if (!session) {
@@ -32,13 +33,14 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
 
         const requiredFields: (keyof ReviewData)[] = [
             'rating',
+            'busynessStatus',
             'content',
             //'userId'
         ]
 
         const missingFields = requiredFields.filter(field => !body[field] === undefined);
 
-        if(missingFields.length > 0) {
+        if (missingFields.length > 0) {
             return NextResponse.json({ error: `Missing fields: ${missingFields.join(', ')}` }, { status: 400 });
         }
 
@@ -48,7 +50,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
             }
         });
 
-        if(!location) {
+        if (!location) {
             return NextResponse.json({ error: "Location does not exist." }, { status: 400 });
         }
 
@@ -59,7 +61,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
             }
         });
 
-        if(!user) {
+        if (!user) {
             return NextResponse.json({ error: "User does not exist." }, { status: 400 });
         }
 
@@ -67,6 +69,7 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
         const review = await prisma.review.create({
             data: {
                 rating: body.rating,
+                busynessStatus: body.busynessStatus,
                 content: body.content,
                 locationId: locationId,
                 //userId: body.userId
@@ -81,8 +84,17 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
             }
         });
 
-        // calculate the average rating for the location
-        const avgRating = allReviews.reduce((sum, review) => sum + review.rating, 0) / allReviews.length;
+        // Calculate the average rating for the location
+        // round to nearest 2 decimal places
+        const avgRating = Math.round(
+            (allReviews.reduce((sum, review) => sum + review.rating, 0) / allReviews.length) * 100
+        ) / 100;
+
+        // Calculate the average busyness status for the location
+        // round to nearest 2 decimal places
+        const avgBusynessStatus = Math.round(
+            (allReviews.reduce((sum, review) => sum + review.busynessStatus, 0) / allReviews.length) * 100
+        ) / 100;
 
         // update the location's rating
         await prisma.location.update({
@@ -90,7 +102,8 @@ export async function POST(req: NextRequest, { params }: { params: { locationId:
                 id: locationId
             },
             data: {
-                rating: avgRating
+                rating: avgRating,
+                busynessStatus: avgBusynessStatus,
             }
         });
 

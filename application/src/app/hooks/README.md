@@ -43,12 +43,13 @@ await createLocation(formData, session);
   - `locationId`: The id of the given location
   - `content`: The comment / users thoughts
   - `rating`: A float between 1 - 5 Inclusive
+  - `busynessStatus`: A float between 1 - 5 Inclusive
   - `session`: The session object from useSession()
 - **Usage Example:**
 ```typescript
 const { createReview } = useCreateReview();
 ...
-await createReview(locationId, review, rating, session);
+await createReview(locationId, review, rating, busynessStatus, session);
 ```
 
 ### `useCreateUser.ts`
@@ -131,6 +132,28 @@ const { specificLocation, fetchSpecificLocation, loading } = useGetSpecificLocat
 fetchSpecificLocation(locationId);
 ```
 
+### `useGetSpecificReviews.ts`
+- **Purpose:** Handles getting all reviews for a location given a location id
+- **Parameters:**
+  - `locationId`: The id of the location
+- **Usage Example:**
+```typescript
+const { specificReviews, fetchSpecificReviews, loading } = useGetSpecificReviews();
+...
+fetchSpecificReviews(locationId);
+```
+
+### `useGetSpecificUserInfo.ts`
+- **Purpose:** Handles getting a single user's information
+- **Parameters:**
+  - `userid`: The id of the user
+- **Usage Example:**
+```typescript
+const { specificUserInfo, fetchSpecificUserInfo, loading } = useGetSpecificUserInfo();
+...
+fetchSpecificUserInfo(session?.user.id);
+```
+
 ### `useGetUserData.ts`
 - **Purpose:** Handles getting all users from the database
 - **Usage Example:**
@@ -150,6 +173,19 @@ const { usersBookmarks, fetchUsersBookmarks, loading } = useGetUsersBookmarks();
 ...
 if(session) {
   fetchUsersBookmarks(session.user.id);
+}
+```
+
+### `useGetUserReviews.ts`
+- **Purpose:** Handles getting all the reviews for a specific user.
+- **Parameters:**
+  - `userId`: The id of the user
+- **Usage Example:**
+```typescript
+const { usersReviews, fetchUsersReviews, loading } = useGetUsersReviews();
+...
+if(session) {
+  fetchUsersReviews(session.user.id);
 }
 ```
 

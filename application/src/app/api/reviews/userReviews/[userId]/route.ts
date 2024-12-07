@@ -25,6 +25,7 @@ export async function GET(req: NextRequest, { params }: { params: { userId: stri
                 id: true,
                 rating: true,
                 content: true,
+                busynessStatus: true,
                 creationDate: true,
                 location: {
                     select: {
