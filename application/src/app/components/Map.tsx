@@ -63,6 +63,13 @@ function Map({ locations }: MapProps) {
     console.log("Map has been rerendered");
   });
 
+  // If the user clicks on the map and not the info window, close the info window
+  useEffect(() => {
+    if (map) {
+
+    }
+  }, [])
+
   // If a location has been selected, pan to that location
   useEffect(() => {
     if (map && selectedLocation) {
@@ -88,6 +95,7 @@ function Map({ locations }: MapProps) {
       onLoad={onLoad}
       onUnmount={onUnmount}
       options={mapOptions}
+      onClick={() => setSelectedMarkerId(undefined)}
     >
       {locations && locations.map((location) => 
         <MapMarker 

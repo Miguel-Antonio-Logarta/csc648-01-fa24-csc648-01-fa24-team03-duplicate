@@ -6,7 +6,6 @@ import X from './icons/X';
 import Rating from './Rating';
 import { formatCategory } from '../utils/utils';
 import { LocationType } from '@prisma/client';
-import MapInfoWindow from './MapInfoWindow';
 import InfoBoxCustom from './InfoBoxCustom';
 
 type MapMarkerStyle = "default" | "bold" | "filled";
@@ -15,7 +14,7 @@ type MapMarkerProps = {
   location: LocationData;
   selectedMarkerId: number | undefined;
   setSelectedMarkerId: (_: number) => void;
-  setSelectedLocation: (_: LocationData) => void;
+  setSelectedLocation: (_: LocationData | undefined) => void;
   style: MapMarkerStyle;
   setAnchorRef?: (marker: google.maps.Marker) => void;
 };
@@ -71,6 +70,11 @@ const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId, style, set
     console.log("I've been rerendered", location.id);
   });
 
+  const handleInfoBoxClose = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    setSelectedLocation(undefined);
+  }
+
   return (
     <Marker
       key={location.id}
@@ -96,7 +100,7 @@ const MapMarker = ({ location, selectedMarkerId, setSelectedMarkerId, style, set
       }}
     >
       {selectedMarkerId === location.id && markerRef.current &&
-        <InfoBoxCustom location={location} anchor={markerRef.current} />
+        <InfoBoxCustom location={location} anchor={markerRef.current} handleClose={handleInfoBoxClose}/>
       }
     </Marker>
   );

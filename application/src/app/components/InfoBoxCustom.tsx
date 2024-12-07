@@ -11,12 +11,13 @@ import Rating from './Rating';
 import Image from 'next/image';
 import Wifi from './icons/Wifi';
 import Pets from './icons/Pets';
-import Button from './ui/Button';
 import Link from 'next/link';
+import X from './icons/X';
 
-type InfoBoxCustomProps = {
+type MapInfoBoxProps = {
   location: LocationData;
   anchor: google.maps.Marker;
+  handleClose: (_: any) => void; 
 };
 
 const getTriangleColors = (category: LocationType): string => {
@@ -33,7 +34,7 @@ const getTriangleColors = (category: LocationType): string => {
   }
 }
 
-const InfoBoxCustom = (props: InfoBoxCustomProps) => {
+const MapInfoBox = (props: MapInfoBoxProps) => {
   const [theme, setTheme] = useState(() => getCategoryColors(props.location.category));
 
   useEffect(() => console.log(props.anchor));
@@ -52,6 +53,11 @@ const InfoBoxCustom = (props: InfoBoxCustomProps) => {
       }}
     >
       <div className={`${styles["map-infobox"]} ${getTriangleColors(props.location.category)} ${theme.background} ${theme.border} relative w-[300px] rounded-lg flex shadow-md border-4 flex flex-col p-4 text-umber`}>
+        <div className="absolute top-0 right-0 pt-2 pr-2 ">
+              <button onClick={props.handleClose}>
+                <X className="text-red-300" size={24} fill="rgb(115 115 115)" />
+              </button>
+          </div>
         <div className='text-xl font-shantell font-medium mb-2 line-clamp-2'>{props.location.name}</div>
           <div className="font-josefin text-sm mb-3 flex flex-row items-center gap-2">
             <div className={`font-bold px-2 rounded-sm py-[4px] ${theme.categoryBackground}`}>
@@ -102,4 +108,4 @@ const InfoBoxCustom = (props: InfoBoxCustomProps) => {
   );
 };
 
-export default InfoBoxCustom;
+export default MapInfoBox;
