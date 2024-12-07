@@ -1,22 +1,29 @@
 type ButtonStyles = "rectangular" | "rounded" | "pill"
 
 type ButtonProps = {
-  bgColor: string;
+  // bgColor: string;
   style: `${Exclude<sizes, "xs" | "xl">}/${ButtonStyles}`;
+  className?: string;
+  children: React.ReactNode;
+  onClick: (e: unknown) => void; 
 }
 
 const Button = (props: ButtonProps) => {
+  if (props.style === "md/pill") {
+    return (
+      <button
+      className="bg-[#D1DAAF] border-[#D1DAAF] border-2 font-josefin px-4 py-2 shadow-md rounded-full hover:bg-white"
+        onClick={props.onClick}
+      >
+      {props.children}
+    </button>
+    )
+  }
   return (
-    <div>CONTENT</div>
+    <button className={props.className}>
+
+    </button>
   );
 };
-
-const Component = () => {
-  return(
-    <Button bgColor="red" style="md/rectangular">
-      
-    </Button>
-  )
-}
 
 export default Button;
