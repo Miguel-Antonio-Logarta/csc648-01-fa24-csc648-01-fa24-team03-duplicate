@@ -44,3 +44,37 @@ export function convertDay(input: number) {
     return 6;
   }
 }
+
+export function getCategoryColors(category: LocationType) {
+  switch (category) {
+    case "LIBRARY":
+      return ({
+        background: "bg-lavender-blush",
+        border: "border-cherry-blossom-pink",
+        categoryBackground: "bg-cherry-blossom-pink",
+        hover: ""
+      });
+    case "CAFE":
+      return ({
+        background: "bg-tea-green",
+        border: "border-olivine",
+        categoryBackground: "bg-olivine",
+        hover: ""
+      });
+    case "PARK":
+      return ({
+        background: "bg-columbia-blue",
+        border: "border-jordy-blue",
+        categoryBackground: "bg-jordy-blue",
+        hover: ""
+      });
+    default:
+      console.log(`${category} is not a valid category`)
+      return ({
+        background: "bg-white",
+        border: "border-black",
+        categoryBackground: "bg-black text-white",
+        hover: ""
+      });
+  }
+}

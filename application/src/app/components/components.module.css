@@ -29,12 +29,30 @@
     background: #db4034;
 }
 
-/* .red-line {
+/* Outer border of triangle of infobox*/
+.map-infobox::before {
+    content:'';
     position: absolute;
-    z-index: 0;
-    top: 0;
-    left: 80px;
-    min-height: 100%;
-    width: 1px;
-    background: #db4034;
-} */
+    top: 100%;
+    left: 50%;
+    margin-left: -20px;
+    width: 0;
+    height: 0;
+    border-left: solid 20px transparent;
+    border-right: solid 20px transparent;
+    z-index: 10;
+}
+  
+/* Inner background of triangle of infobox */
+.map-infobox::after {
+    content:'';
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 50%;
+    margin-left: -16px;
+    width: 0;
+    height: 0;
+    border-left: solid 16px transparent;
+    border-right: solid 16px transparent;
+    z-index: 10;
+}
