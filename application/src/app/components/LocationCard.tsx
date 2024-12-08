@@ -2,87 +2,132 @@ import React from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import Rating from './Rating';
+import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 
 interface LocationCardProps {
-  backgroundColor: string;
-  borderColor: string;
   id: string;
-  title: string;
-  subtitle: string;
+  name: string;
   rating: number;
   imageUrl: string;
+  category: string;
+  hasWifi: boolean;
+  animalFriendliness: boolean;
 }
 
-const LocationCard: React.FC<LocationCardProps> = ({ 
-  backgroundColor, 
-  borderColor,
-  id, 
-  title, 
-  subtitle, 
-  rating, 
-  imageUrl 
+const LocationCard: React.FC<LocationCardProps> = ({
+  id,
+  name,
+  rating,
+  imageUrl,
+  category,
+  hasWifi,
+  animalFriendliness,
 }) => {
+  const router = useRouter();
+
+  const backgroundColor = clsx({
+    'bg-olivine hover:bg-olivine': category === 'CAFE',
+    'bg-cherry-blossom-pink': category === 'LIBRARY',
+    'bg-gray': category === 'PARK',
+  });
+
+  const hoverColor = clsx({
+    'bg-tea-green-hover hover:bg-olivine': category === 'CAFE',
+    'bg-pink-hover hover:bg-cherry-blossom-pink': category === 'LIBRARY',
+    'bg-slate-200 hover:bg-gray': category === 'PARK',
+  });
+
+  const borderColors = clsx({
+    "border-olivine": category === "CAFE",
+    "border-cherry-blossom-pink": category === "LIBRARY",
+    "border-black": category === "PARK"
+  });
+
+
+  const handleClick = () => {
+    // open clicked location in new tab
+    //window.open(`/locationInfo/${id}`, '_blank');
+
+    // if want to redirect to locationInfo page
+    router.push(`/locationInfo/${id}`);
+  }
+
   return (
-    <article className={`grow px-16 py-11 w-full rounded-3xl border-solid border-[9px] max-md:px-5 max-md:mt-10 max-md:max-w-full ${backgroundColor} ${borderColor}`}>
-      <div className="flex gap-5 max-md:flex-col">
-        <div className="flex flex-col w-[34%] max-md:ml-0 max-md:w-full">
-          <div className="flex shrink-0 mx-auto h-36 rounded-xl bg-neutral-400 w-[152px] max-md:mt-10">
-            <Image src={imageUrl} alt={title} width={256} height={256} />
+    <div
+      onClick={handleClick}
+      className={`z-10 flex flex-col shadow-md rounded-lg border-4 p-6 cursor-pointer ${backgroundColor} ${hoverColor} ${borderColors}`}
+    >
+      <div className="flex flex-row gap-6">
+        {/* Image Section */}
+        <Image
+          className="w-32 h-32 object-cover rounded-lg bg-slate"
+          alt={name}
+          src={imageUrl}
+          width={256}
+          height={256}
+        />
+
+        {/* Text and Rating Section */}
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <div className="font-shantell text-xl mb-2 truncate">
+            {name}
           </div>
-        </div>
-        <div className="flex flex-col ml-5 w-[66%] max-md:ml-0 max-md:w-full">
-          <div className="flex flex-col items-start w-full max-md:mt-10">
-            <h2 className="self-stretch text-xl font-semibold text-stone-600 tracking-[2px]">
-              {title}
-            </h2>
-            <p className="mt-2.5 text-base tracking-widest text-stone-600">
-              {subtitle}
-            </p>
-            <div className="flex gap-6 mt-5">
-              {/* <StarRating rating={rating} /> */}
-              <Rating rating={rating} size={32} style='full'/>
-              {/* <span className="my-auto text-2xl text-stone-600 tracking-[2.4px]">
-                {rating.toFixed(2)}
-              </span> */}
-            </div>
-            <div className='font-josefin'>
-            Location Details
-            </div>
-            <Link href={`/locationInfo/${id}`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"> View Details</Link>
-            {/* <img //make as individual icons
-              loading="lazy" 
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/e9197e9dc0f9332e7157e8c35e4ae08655d77919c4ea037fa505b2315ad3c565?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225" 
-              alt="Location details" 
-              className="object-contain mt-4 max-w-full aspect-[5.46] w-[131px]" 
-            /> */}
+          <div className="font-shantell text-sm break-words">
+            {category}
           </div>
+          <div className="mt-2">
+            <Rating rating={rating} size={32} style="full" />
+          </div>
+
+          {/* Icons Section */}
+          <ul className="flex flex-row gap-2 mt-4 pl-[10px]">
+            <li>
+              {hasWifi && (
+                <div className="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      d="M6.01129 12.1871C9.31912 8.97669 14.6822 8.97669 17.99 12.1871M9.00596 15.0935C10.6599 13.4883 13.3414 13.4883 14.9953 15.0935M12.0006 18L12.0182 17.983M3 9.61811C7.97056 4.79396 16.0294 4.79396 21 9.61811"
+                      stroke="#715E50"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              )}
+            </li>
+
+            <li>
+              {animalFriendliness && (
+                <div className="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      d="M12 12C13.5 12 15.3 13.5 15.3 15.5C15.3 17.5 13.5 19 12 19C10.5 19 8.7 17.5 8.7 15.5C8.7 13.5 10.5 12 12 12ZM4.5 6C5.3 6 6.5 7.5 6.5 9C6.5 10.5 5.3 12 4.5 12C3.7 12 2.5 10.5 2.5 9C2.5 7.5 3.7 6 4.5 6ZM19.5 6C20.3 6 21.5 7.5 21.5 9C21.5 10.5 20.3 12 19.5 12C18.7 12 17.5 10.5 17.5 9C17.5 7.5 18.7 6 19.5 6ZM6 18C7 18 8.5 19.5 8.5 21C8.5 22.5 7 24 6 24C5 24 3.5 22.5 3.5 21C3.5 19.5 5 18 6 18ZM18 18C19 18 20.5 19.5 20.5 21C20.5 22.5 19 24 18 24C17 24 15.5 22.5 15.5 21C15.5 19.5 17 18 18 18Z"
+                      stroke="#715E50"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              )}
+            </li>
+          </ul>
         </div>
       </div>
-    </article>
-  );
-};
-
-interface StarRatingProps {
-  rating: number;
-}
-
-const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
-  const stars = Array(5).fill(null).map((_, index) => (
-    // <img 
-    //   key={index}
-    //   loading="lazy"
-    //   src={index < Math.floor(rating) ? "https://cdn.builder.io/api/v1/image/assets/TEMP/2826f8b07fc86866096715b9202c725dc1fda2b4f739e3772d9c463d36f9eb5d?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225" : "https://cdn.builder.io/api/v1/image/assets/TEMP/c11d328f5548efb7e5898c1b7d71921021fc2e6213956b23aa9c4c2fe8253cc4?placeholderIfAbsent=true&apiKey=dae5425d3b3c4cdc84ccb32ea9568225"}
-    //   alt={index < Math.floor(rating) ? "Filled star" : "Empty star"}
-    //   className="object-contain shrink-0 aspect-[1.06] w-[33px]"
-    // /> couldn't use builder
-    <div key={index}>
-      star
-    </div>
-  ));
-
-  return (
-    <div className="flex gap-1.5">
-      {stars}
     </div>
   );
 };
