@@ -15,6 +15,8 @@ interface Location {
   category: string;
   rating: number;
   imageWebLink: string;
+  hasWifi: boolean;
+  animalFriendliness: boolean;
 }
 
 export default function Home() {
@@ -58,21 +60,18 @@ export default function Home() {
           height={200}
           className="h-auto mb-2.5"
         />
-        {/* <div className="w-full">
-          {locations.map((location) => )}
-        </div> */}
         <div className="mt-2.5 w-full max-w-[1240px] max-md:max-w-full">
           <div className="grid justify-center grid-cols-2 gap-5 max-md:grid-cols-1">
             {locations.map((location: Location) => (
               <div key={location.id} className="flex flex-col">
                 <LocationCard
                   id={location.id}
-                  title={location.name}
-                  subtitle={location.category}
+                  name={location.name}
                   rating={location.rating}
                   imageUrl={location.imageWebLink}
-                  backgroundColor="bg-sage"
-                  borderColor="border-darkSage"
+                  category={location.category}
+                  hasWifi={location.hasWifi}
+                  animalFriendliness={location.animalFriendliness}
                 />
               </div>
             ))}
