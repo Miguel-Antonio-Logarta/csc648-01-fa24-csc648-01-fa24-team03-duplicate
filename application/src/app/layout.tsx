@@ -5,6 +5,8 @@ import { Josefin_Sans, Shantell_Sans } from "next/font/google"
 import Provider from "./context/Provider";
 import { Toaster } from "react-hot-toast";
 import SearchProvider from "./context/SearchContext";
+import Script from "next/script";
+import GoogleMapsLibraryProvider from "./context/GoogleMapsLibraryContext";
 
 // Backup fonts
 const geistSans = localFont({
@@ -45,15 +47,19 @@ export default function RootLayout({
     <html lang="en">
       {/* MUST WRAP PROVIDER AROUND ENTIRE HTML PAGES TO ACCESS SESSION DATA */}
       <Provider>
-        <SearchProvider>
-          <body
-            className={`${josefinSans.variable} ${shantellSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <Toaster />
-            {children}
-          </body>
-        </SearchProvider>
+        <GoogleMapsLibraryProvider>
+          <SearchProvider>
+            <body
+              className={`${josefinSans.variable} ${shantellSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              <Toaster />
+              {children}
+            </body>
+          </SearchProvider>
+        </GoogleMapsLibraryProvider>
       </Provider>
+      {/* Script used for Places API */}
+      {/* <Script src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}&libraries=places`} /> */}
     </html>
   );
 }
