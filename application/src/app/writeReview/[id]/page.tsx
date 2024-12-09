@@ -49,6 +49,10 @@ const Page = ({ params }: { params: { id: string } }) => {
         setReview(e.target.value);
     }
 
+    const handleCancel = () => {
+        router.back();
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!review) return;
@@ -86,7 +90,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                     {/* Not Implemented on Backend*/}
                     {/* <ImageAttachment /> */}
                     <div className="flex py-8 gap-2 justify-end p-smed mt-large -mb-2 text-2xl text-center whitespace-nowrap text-stone-50 tracking-[2.4px]">
-                        <button className='font-shantell bg-sage h-12 text-white p-large px-3 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5'>cancel</button>
+                        <button type="button" onClick={handleCancel} className='font-shantell bg-sage h-12 text-white p-large px-3 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5'>cancel</button>
                         <button
                             className={`font-shantell px-3 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5 transition duration-200 ${loading ? 'bg-blue-700 text-white cursor-not-allowed' : 'bg-blue-200 text-white'}`}
                             disabled={loading}
