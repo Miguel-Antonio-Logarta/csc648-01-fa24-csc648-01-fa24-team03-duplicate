@@ -26,18 +26,19 @@ export default function Home() {
   return (
     <div className="w-screen min-h-screen flex flex-col">
       <Navbar />
-      <div className="flex flex-row no-wrap relative shadow-inner w-screen h-96 bg-red-200 items-center">
+      <div className="flex flex-row no-wrap relative shadow-inner w-screen h-96 items-center justify-center">
         {/* <div className="h-full w-full bg-blue-200"> */}
-        <div className="flex flex-row no-wrap items-center z-10 px-32 gap-8">
+        <div className="flex flex-col items-center z-10 px-32 gap-8">
           <Image
+            className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
             loading="lazy"
             src="/logo/CoffeeSpotCropped.png"
             alt="Coffee Spot Logo"
             width={500}
             height={500}
           />
-          <div className="font-shantell font-bold text-white text-4xl stroke-1 stroke-[#243c5a]">
-            Find places to study and hang out!
+          <div className="font-shantell font-bold text-white text-4xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+            Find spots to work productively!
           </div>
         </div>
 
@@ -58,7 +59,7 @@ export default function Home() {
           alt="Featured Spots"
           width={500}
           height={200}
-          className="h-auto mb-2.5"
+          className="justify-self-start mb-2.5"
         />
         <div className="mt-2.5 w-full max-w-[1240px] max-md:max-w-full">
           <div className="grid justify-center grid-cols-2 gap-5 max-md:grid-cols-1">
