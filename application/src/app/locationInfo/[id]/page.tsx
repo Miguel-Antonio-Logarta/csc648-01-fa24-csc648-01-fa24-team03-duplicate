@@ -78,8 +78,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
                         {/* <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-sage rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50">Save</button> */}
                         <BookmarkButton locationId={id} />
                         <Link href={`/writeReview/${id}`}>
-                            <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-blue-200 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50">
-                                <Image src={Star} alt="clear star" />
+                            <button className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-blue-200 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50 hover:bg-blue-100 border-blue-200 border-2">
+                                <Image src={Star}  alt="clear star" />
                                 Write a Review!
                             </button>
                         </Link>
