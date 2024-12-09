@@ -7,6 +7,7 @@ import MarkerIcon from "./icons/Marker";
 import { LocationData } from "../api/locations/route";
 import Image from "next/image";
 import MapMarker from "./MapMarker";
+import { GoogleMapsLibraryContext } from "../context/GoogleMapsLibraryContext";
 
 
 type MapProps = {
@@ -45,10 +46,12 @@ const mapOptions: google.maps.MapOptions = {
 };
 
 function Map({ locations }: MapProps) {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
-  });
+  // const { isLoaded } = useJsApiLoader({
+  //   id: "google-map-script",
+  //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
+  // });
+
+  const { isLoaded } = useContext(GoogleMapsLibraryContext);
 
   // const { locations, selectedLocation, setSelectedLocation } = useContext(SearchContext);
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -62,13 +65,6 @@ function Map({ locations }: MapProps) {
   useEffect(() => {
     console.log("Map has been rerendered");
   });
-
-  // If the user clicks on the map and not the info window, close the info window
-  useEffect(() => {
-    if (map) {
-
-    }
-  }, [])
 
   // If a location has been selected, pan to that location
   useEffect(() => {
