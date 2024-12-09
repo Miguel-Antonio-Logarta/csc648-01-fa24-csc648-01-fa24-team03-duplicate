@@ -18,7 +18,7 @@ const NavbarUser = () => {
           {/* <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/about"}>About</Link></li> */}
           {/* <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/contact"}>Contact</Link></li> */}
           <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/"}>Home</Link></li>
-          <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/help"}>Help</Link></li>
+          {/* <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/help"}>Help</Link></li> */}
         </ul>
         <div className="flex no-wrap items-center gap-5">
           <Link
@@ -73,6 +73,7 @@ const NavbarUser = () => {
           <ul className="font-josefin flex no-wrap gap-x-6 mx-6">
             <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/"}>Home</Link></li>
             <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/admin"}>Dashboard/Analytics</Link></li>
+            <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/profile"}>My Profile</Link></li>
             {/* <li><Link className="flex items-center capitalize w-full h-full align-middle hover:underline" href={"/help"}>Help</Link></li> */}
           </ul>
           <div className="flex no-wrap items-center gap-5">
