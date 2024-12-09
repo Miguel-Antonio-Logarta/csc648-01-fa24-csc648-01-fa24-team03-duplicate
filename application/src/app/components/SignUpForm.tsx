@@ -28,7 +28,7 @@ const SignUpForm = (props: SignUpFormProps) => {
 
   return (
     <div 
-        className="flex h-screen w-screen fixed inset-x-0 items-center justify-center bg-black bg-opacity-25"
+        className="flex h-screen w-screen fixed inset-x-0 items-center justify-center bg-black bg-opacity-25 z-50"
         onClick={(e) => props.close()}
     >
       <div 
