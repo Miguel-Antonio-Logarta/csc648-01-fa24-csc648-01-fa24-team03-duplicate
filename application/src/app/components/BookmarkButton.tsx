@@ -58,7 +58,7 @@ const BookmarkButton = ({ locationId }: BookmarkButtonProps) => {
     if (usersBookmarks.some((bookmark: Bookmark) => bookmark.location.id === locationId)) {
         return (
             <div>
-                <button onClick={handleDeleteBookmark} className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-red-500 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50 hover:bg-white hover:text-red-500 border-red-500 border-2">
+                <button onClick={handleDeleteBookmark} className="flex gap-3.5 px-4 py-4 text-lg tracking-widest text-center bg-red-500 rounded-[100px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] text-stone-50 hover:bg-red-100 hover:text-red-500 border-red-500 border-2">
                     Unbookmark
                 </button>
             </div>
