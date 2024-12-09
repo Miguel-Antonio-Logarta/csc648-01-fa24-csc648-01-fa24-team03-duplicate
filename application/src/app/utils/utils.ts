@@ -49,24 +49,24 @@ export function getCategoryColors(category: LocationType) {
   switch (category) {
     case "LIBRARY":
       return ({
-        background: "bg-lavender-blush",
-        border: "border-cherry-blossom-pink",
-        categoryBackground: "bg-cherry-blossom-pink",
-        hover: ""
+        background: "bg-lavender-blush", // #FFE7EC 
+        border: "border-cherry-blossom-pink", // #F4A4B1
+        categoryBackground: "bg-cherry-blossom-pink", // #F4A4B1
+        hover: "hover:bg-pink-hover" // #FAC6CF
       });
     case "CAFE":
       return ({
-        background: "bg-tea-green",
-        border: "border-olivine",
-        categoryBackground: "bg-olivine",
-        hover: ""
+        background: "bg-tea-green", // #D1DAAF
+        border: "border-olivine", // #BBC887
+        categoryBackground: "bg-olivine", // #BBC887
+        hover: "hover:bg-tea-green-hover" // #C6D19B
       });
     case "PARK":
       return ({
-        background: "bg-columbia-blue",
-        border: "border-jordy-blue",
-        categoryBackground: "bg-jordy-blue",
-        hover: ""
+        background: "bg-columbia-blue", // #C6E2FF
+        border: "border-jordy-blue", // "#85c0ff"
+        categoryBackground: "bg-jordy-blue", // "#85c0ff"
+        hover: "hover:bg-sky-blue" // #A6D1FF
       });
     default:
       console.log(`${category} is not a valid category`)
@@ -76,5 +76,22 @@ export function getCategoryColors(category: LocationType) {
         categoryBackground: "bg-black text-white",
         hover: ""
       });
+  }
+}
+
+export const getBusynessStatus = (busyness: number): string => {
+  // Values go from 0 to 5
+  if (busyness >= 0 && busyness < 1) {
+    return "Not busy"
+  } else if (busyness < 2) {
+    return "A little busy"
+  } else if (busyness < 3) {
+    return "Somewhat busy"
+  } else if (busyness < 4) {
+    return "Busy"
+  } else if (busyness < 5) {
+    return "As busy as it gets"
+  } else {
+    return "Busyness: N/A"
   }
 }

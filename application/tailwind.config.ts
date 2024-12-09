@@ -24,6 +24,7 @@ const config: Config = {
         "tea-green-hover": "#C6D19B",
         "olivine": "#BBC887",
         "columbia-blue": "#C6E2FF",
+        "sky-blue": "#A6D1FF",
         "jordy-blue": "#85c0ff",
         "cherry-blossom-pink": "#F4A4B1",
         "pink-hover": "#FAC6CF",
