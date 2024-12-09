@@ -34,8 +34,10 @@ function selectColors(data: LocationData, isSelected: boolean) {
   } else {
     return {
       ...borderColors,
-      "bg-tea-green-hover hover:bg-olivine": data.category === "CAFE",
-      "bg-pink-hover hover:bg-cherry-blossom-pink": data.category === "LIBRARY",
+      // cafe bg color
+      "bg-tea-green hover:bg-olivine": data.category === "CAFE",
+      //fix library bg color
+      "bg-lavender-blush hover:bg-cherry-blossom-pink": data.category === "LIBRARY",
       "bg-slate-200 hover:bg-gray": data.category === "PARK"
     }
   }
@@ -50,6 +52,7 @@ function Listing({ data }: props) {
 
   const backgroundCategoryColors = clsx({
     "bg-olivine": data.category === "CAFE",
+    //fix props
     "bg-cherry-blossom-pink": data.category === "LIBRARY",
     "bg-gray": data.category === "PARK",
   })
