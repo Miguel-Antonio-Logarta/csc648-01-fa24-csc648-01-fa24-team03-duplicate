@@ -79,8 +79,10 @@ function Listing({ data }: props) {
             <div className={`font-bold px-2 rounded-sm py-[4px] ${backgroundCategoryColors}`}>
               {formatCategory(data.category)}
             </div>
-            <span>•</span>
-            <span className="text-base">Currently busy</span>
+
+            {/* should list average busyness here using busynessStatus not hardcoded. */}
+            {/* <span>•</span>
+            <span className="text-base">Currently busy</span> */}
           </div>
           <Rating
             className="mb-2"
