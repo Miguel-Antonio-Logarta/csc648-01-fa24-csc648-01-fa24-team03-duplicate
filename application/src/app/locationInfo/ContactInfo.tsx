@@ -3,6 +3,7 @@ import { DayOfWeek } from "@prisma/client";
 import { convertDay, convertTo12HourFormat } from '../utils/utils';
 
 interface Location {
+  name: string;
   address: string;
   phoneNumber: string;
   operatingHours: OperatingHour[];
@@ -18,7 +19,7 @@ interface LocationPageProps {
   location: Location;
 }
 
-function ContactInfo({ location: { address, phoneNumber, operatingHours } }: LocationPageProps) {
+function ContactInfo({ location: { name, address, phoneNumber, operatingHours } }: LocationPageProps) {
   
   // stupid code
   let range;
@@ -31,7 +32,7 @@ function ContactInfo({ location: { address, phoneNumber, operatingHours } }: Loc
     <address className="grow shrink self-stretch text-base tracking-widest leading-5 text-stone-600 w-[269px] not-italic">
       <span className="text-stone-600">{address}</span>
       <br />
-      <a href="https://www.google.com/search?sca_esv=d0f66aa95515e8fe&sxsrf=ADLYWILB9KLq5xT5IIGvzSItV04hR-ktDA:1729105734314&q=j.+paul+leonard+library+hours&ludocid=9418746274217317569&sa=X&ved=2ahUKEwilosrozJOJAxVfJjQIHaZtC30Q6BN6BAgkEAI" className="underline text-stone-600" target="_blank" rel="noopener noreferrer">
+      <a href={`https://www.google.com/search?sca_esv=d0f66aa95515e8fe&sxsrf=ADLYWILB9KLq5xT5IIGvzSItV04hR-ktDA:1729105734314&q=${name} operating hours`} className="underline text-stone-600" target="_blank" rel="noopener noreferrer">
         Hours
       </a>
       <span className="text-stone-600">: {range ? `${convertTo12HourFormat(range.openTime)} - ${convertTo12HourFormat(range.closeTime)}` : 'Closed'}</span>
