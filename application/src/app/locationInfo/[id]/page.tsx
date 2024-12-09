@@ -55,7 +55,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                                         width={512}
                                         height={512}
                                         alt="Location Image"
-                                        className="border-8 border-cherry-blossom-pink rounded-lg"
+                                        className="w-128 h-128 object-cover border-8 border-cherry-blossom-pink rounded-lg"
                                     />
                                 </section>
                                 <ReviewSection reviews={reviews} />

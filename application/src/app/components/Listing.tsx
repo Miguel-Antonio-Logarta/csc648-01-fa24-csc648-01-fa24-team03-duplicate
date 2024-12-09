@@ -6,10 +6,11 @@ import Wifi from "./icons/Wifi";
 import ChargingAvailable from "./icons/ChargingAvailable";
 import Pets from "./icons/Pets";
 import Rating from "./Rating";
-import { formatCategory } from "../utils/utils";
+import { formatCategory, getBusynessStatus, getCategoryColors } from "../utils/utils";
 import Link from "next/link";
 import ListingControls from "./ListingControls";
 import clsx from "clsx";
+import { useState } from "react";
 
 type props = {
   data: LocationData;
@@ -34,8 +35,10 @@ function selectColors(data: LocationData, isSelected: boolean) {
   } else {
     return {
       ...borderColors,
-      "bg-tea-green-hover hover:bg-olivine": data.category === "CAFE",
-      "bg-pink-hover hover:bg-cherry-blossom-pink": data.category === "LIBRARY",
+      // cafe bg color
+      "bg-tea-green hover:bg-olivine": data.category === "CAFE",
+      //fix library bg color
+      "bg-lavender-blush hover:bg-cherry-blossom-pink": data.category === "LIBRARY",
       "bg-slate-200 hover:bg-gray": data.category === "PARK"
     }
   }
@@ -50,21 +53,22 @@ function Listing({ data }: props) {
 
   const backgroundCategoryColors = clsx({
     "bg-olivine": data.category === "CAFE",
+    //fix props
     "bg-cherry-blossom-pink": data.category === "LIBRARY",
     "bg-gray": data.category === "PARK",
   })
 
   const bgColors = clsx(selectColors(data, false));
 
+  const [themeColors, setThemeColors] = useState(getCategoryColors(data.category))
+
   return (
-    <Link href={`/locationInfo/${data.id}`} target="_blank" className={`flex flex-col shadow-md rounded-lg border-4 ${bgColors}`}>
+    <Link href={`/locationInfo/${data.id}`} target="_blank" className={`flex flex-col shadow-md rounded-lg border-4 ${themeColors.background} ${themeColors.hover} ${themeColors.border}`}>
       <div
-        // onClick={() => selectLocation(data)}
         className="flex flex-row no-wrap gap-6 cursor-pointer p-6"
       >
         <div className="flex items-center">
           <div className="relative w-[150px] h-[150px] self-start">
-            {/* Add a placeholder image for when it is loading... */}
             <Image
               className="object-cover rounded-lg bg-slate"
               alt={data.name}
@@ -74,15 +78,15 @@ function Listing({ data }: props) {
           </div>
         </div>
         <div className="flex flex-col grow">
-          <div className="font-shantell text-xl mb-2">{data.name}</div>
+          <div className="font-shantell text-xl mb-2 font-medium">{data.name}</div>
           <div className="font-josefin text-sm mb-3 flex flex-row items-center gap-2">
-            <div className={`font-bold px-2 rounded-sm py-[4px] ${backgroundCategoryColors}`}>
+            <div className={`font-bold px-2 rounded-sm py-[4px] ${themeColors.categoryBackground}`}>
               {formatCategory(data.category)}
             </div>
 
             {/* should list average busyness here using busynessStatus not hardcoded. */}
-            {/* <span>•</span>
-            <span className="text-base">Currently busy</span> */}
+            <span>•</span>
+            <span className="text-base">Busyness: {getBusynessStatus(data.busynessStatus)} ({data.busynessStatus})</span>
           </div>
           <Rating
             className="mb-2"
@@ -92,7 +96,7 @@ function Listing({ data }: props) {
           />
           <div className="flex flex-row gap-3">
             {data.hasWifi && (
-              <div className="text-sm rounded-lg flex flex-row gap-1">
+              <div className="text-sm rounded-lg flex flex-row gap-2">
                 <Wifi size={16} />
                 Wifi available
               </div>
@@ -104,8 +108,8 @@ function Listing({ data }: props) {
               </div>
             )} */}
             {data.animalFriendliness && (
-              <div className=" text-xs font-bold rounded-lg flex flex-row gap-2 items-center p-2 align-middle">
-                <Pets size={14} />
+              <div className=" text-sm rounded-lg flex flex-row gap-2">
+                <Pets size={16} />
                 Pets allowed
               </div>
             )}

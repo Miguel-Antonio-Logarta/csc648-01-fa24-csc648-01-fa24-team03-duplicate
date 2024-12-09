@@ -1,13 +1,8 @@
 import { useState, useCallback, memo, useContext, useEffect } from "react";
-import { GoogleMap, InfoBox, InfoWindow, useJsApiLoader } from "@react-google-maps/api";
-import { Marker } from "@react-google-maps/api";
-import { SearchContext } from "../context/SearchContext";
-import { renderToString } from "react-dom/server";
-import MarkerIcon from "./icons/Marker";
+import { GoogleMap } from "@react-google-maps/api";
 import { LocationData } from "../api/locations/route";
-import Image from "next/image";
 import MapMarker from "./MapMarker";
-
+import { GoogleMapsLibraryContext } from "../context/GoogleMapsLibraryContext";
 
 type MapProps = {
   locations: LocationData[] | undefined;
@@ -45,12 +40,7 @@ const mapOptions: google.maps.MapOptions = {
 };
 
 function Map({ locations }: MapProps) {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
-  });
-
-  // const { locations, selectedLocation, setSelectedLocation } = useContext(SearchContext);
+  const { isLoaded } = useContext(GoogleMapsLibraryContext);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | undefined>(undefined);
   const [selectedLocation, setSelectedLocation] = useState<LocationData | undefined>(undefined);
@@ -62,13 +52,6 @@ function Map({ locations }: MapProps) {
   useEffect(() => {
     console.log("Map has been rerendered");
   });
-
-  // If the user clicks on the map and not the info window, close the info window
-  useEffect(() => {
-    if (map) {
-
-    }
-  }, [])
 
   // If a location has been selected, pan to that location
   useEffect(() => {

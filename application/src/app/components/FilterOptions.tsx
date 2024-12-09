@@ -58,7 +58,7 @@ const FilterOptions: React.FC<FilterOptionsProps> = ({ filters, setFilters }) =>
 
   return (
     (
-      <div className="flex flex-col items-start text-left justify-start p-6 bg-blue-50 rounded-lg font-shantell">
+      <div className="flex flex-col items-start text-left justify-start p-6 bg-blue-50 rounded-lg font-josefin">
         <h2 className="text-2xl font-bold mb-6 text-blue-900">Filter by</h2>
 
         {/* Distance Filter */}

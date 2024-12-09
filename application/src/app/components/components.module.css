@@ -56,3 +56,21 @@
     border-right: solid 16px transparent;
     z-index: 10;
 }
+
+.left-triangle {
+    content: '';
+    width: 25px;
+    height: 20px;
+    margin-top: 8px;
+    clip-path: polygon(30% 100%, 100% 100%, 100% 0);
+    background-color: #C6737F;
+}
+
+.right-triangle {
+    content: '';
+    width: 25px;
+    height: 20px;
+    margin-top: 8px;
+    clip-path: polygon(70% 100%, 0 100%, 0 0);
+    background-color: #C6737F;
+}

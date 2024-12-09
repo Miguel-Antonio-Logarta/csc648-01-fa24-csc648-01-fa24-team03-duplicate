@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import styles from './components.module.css';
 import { LocationType } from '@prisma/client';
-import { formatCategory, getCategoryColors } from '../utils/utils';
+import { formatCategory, getBusynessStatus, getCategoryColors } from '../utils/utils';
 import Rating from './Rating';
 import Image from 'next/image';
 import Wifi from './icons/Wifi';
@@ -64,7 +64,7 @@ const MapInfoBox = (props: MapInfoBoxProps) => {
               {formatCategory(props.location.category)}
             </div>
             <span>•</span>
-            <span className="text-base">Currently busy</span>
+            <span className="text-base">{getBusynessStatus(props.location.busynessStatus)}</span>
           </div>
         <div className="relative w-full h-[100px] mb-4">
             {/* Add a placeholder image for when it is loading... */}
