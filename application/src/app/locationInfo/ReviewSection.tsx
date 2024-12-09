@@ -4,6 +4,7 @@ import ReviewCard from './ReviewCard';
 interface Review {
   id: string;
   rating: number;
+  busynessStatus: number;
   content: string;
   creationDate: string;
   userId: string;
@@ -27,7 +28,7 @@ const ReviewSection = async ({ reviews } : ReviewProps) => {
     <section>
       <h2 className="text-xl font-bold whitespace-nowrap text-stone-600 tracking-[2px] mb-6">Reviews</h2>
       {reviews.map((review, index) => (
-        <ReviewCard key={index} author={review.user.username} rating={review.rating} review={review.content} />
+        <ReviewCard key={index} author={review.user.username} rating={review.rating} review={review.content} creationDate={review.creationDate} />
       ))}
     </section>
   );

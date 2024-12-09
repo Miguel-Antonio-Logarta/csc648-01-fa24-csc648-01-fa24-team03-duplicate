@@ -1,37 +1,43 @@
-"use client"
+'use client';
 
-import { createContext, useState } from "react"
-import { LocationData } from "../api/locations/route"
+import { createContext, useState } from 'react';
 
 type SearchContextProps = {
-    children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 type SearchContextType = {
-    locations: LocationData[];
-    setLocations: (_: LocationData[]) => void;
-    setSelectedLocation: (_: LocationData) => void;
-    selectedLocation: LocationData | null;
-}
+  search: string;
+  setSearch: (_: string) => void;
+  geolocation: google.maps.LatLng | undefined;
+  setGeolocation: (_: google.maps.LatLng | undefined) => void;
+  filters: unknown;
+  setFilters: (_: unknown) => void;
+};
 
 export const SearchContext = createContext<SearchContextType>(null!);
 
 const SearchProvider = ({ children }: SearchContextProps) => {
-    const [locations, setLocations] = useState<LocationData[]>([]);
-    const [selectedLocation, setSelectedLocation] = useState<LocationData | null>(null);
+  const [search, setSearch] = useState<string>('');
+  const [geolocation, setGeolocation] = useState<
+    google.maps.LatLng | undefined
+  >(undefined);
 
-    const values = {
-        locations: locations,
-        setLocations: setLocations,
-        selectedLocation: selectedLocation,
-        setSelectedLocation: setSelectedLocation
-    }
+  // Once filters is implemented, we will create a type for this
+  const [filters, setFilters] = useState<unknown>(undefined);
 
-    return (
-        <SearchContext.Provider value={values}>
-            {children}
-        </SearchContext.Provider>
-    )
-}
+  const values = {
+    search: search,
+    setSearch: setSearch,
+    geolocation: geolocation,
+    setGeolocation: setGeolocation,
+    filters: filters,
+    setFilters: setFilters,
+  };
 
-export default SearchProvider
+  return (
+    <SearchContext.Provider value={values}>{children}</SearchContext.Provider>
+  );
+};
+
+export default SearchProvider;

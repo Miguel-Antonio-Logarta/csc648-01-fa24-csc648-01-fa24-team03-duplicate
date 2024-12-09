@@ -58,16 +58,16 @@ export async function POST(req: NextRequest) {
     ];
 
     // Check if all required fields are provided
-    const missingFields = requiredFields.filter(field => !body[field] === undefined);
+const missingFields = requiredFields.filter(field => body[field] == null);
 
-    if (missingFields.length > 0) {
-      return NextResponse.json({ error: `Missing fields: ${missingFields.join(', ')}` }, { status: 400 });
-    }
+if (missingFields.length > 0) {
+  return NextResponse.json({ error: `Missing fields: ${missingFields.join(', ')}` }, { status: 400 });
+}
 
     const conditions: { username?: string; email?: string }[] = [{ username: body.username }];
 
     // only check for email if it is provided, email is technically optional
-    if(body.email && body.email.trim() !== '') {
+    if (body.email && body.email.trim() !== '') {
       conditions.push({ email: body.email })
     }
 
@@ -83,6 +83,12 @@ export async function POST(req: NextRequest) {
         { error: "username or email already exists" },
         { status: 400 }
       );
+    }
+
+    if (body.password.length < 6) {
+      return NextResponse.json(
+        { error: "Password must be at least 6 characters long." },
+        { status: 400 });
     }
 
     // hash the password before storing it in the database
@@ -130,7 +136,6 @@ export async function PATCH(req: NextRequest) {
   }
 
   try {
-
     const { email, password, settings } = await req.json();
     const userId = session.user.id;
 
@@ -152,7 +157,7 @@ export async function PATCH(req: NextRequest) {
     const updateData: any = {};
 
     // if they provided a request to change emails
-    if (email) {
+    if (email && email.length !== 0) {
       // check if email is already taken
       const existingEmail = await prisma.user.findFirst({
         where: { email },
@@ -167,7 +172,14 @@ export async function PATCH(req: NextRequest) {
     }
 
     // if they provided a request to change passwords
+    // password cannot be blank and must be at least 6 characters long
     if (password) {
+      if (password.length < 6) {
+        return NextResponse.json(
+          { error: "Password must be at least 6 characters long." },
+          { status: 400 });
+      }
+
       // hash the password before storing it in the database
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(password, salt);

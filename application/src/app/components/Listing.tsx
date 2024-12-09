@@ -8,18 +8,11 @@ import Pets from "./icons/Pets";
 import Rating from "./Rating";
 import { formatCategory } from "../utils/utils";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import ListingControls from "./ListingControls";
-import Modal from "./Modal";
 import clsx from "clsx";
-import { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../context/SearchContext";
 
-// Now do I move 
 type props = {
   data: LocationData;
-  selectLocation: (data: LocationData) => void;
-  isSelected: boolean;
 };
 
 function selectColors(data: LocationData, isSelected: boolean) {
@@ -53,9 +46,7 @@ function selectColors(data: LocationData, isSelected: boolean) {
  *   - Add review counter
  *   - Add "charging available" feature
  */
-function Listing({ data, selectLocation, isSelected }: props) {
-  // const { selectedLocation } = useContext(SearchContext);
-  // const [clickStatus, setClickStatus] = useState<"DEFAULT" | "SELECTED" | ""
+function Listing({ data }: props) {
 
   const backgroundCategoryColors = clsx({
     "bg-olivine": data.category === "CAFE",
@@ -63,12 +54,12 @@ function Listing({ data, selectLocation, isSelected }: props) {
     "bg-gray": data.category === "PARK",
   })
 
-  const bgColors = clsx(selectColors(data, isSelected));
+  const bgColors = clsx(selectColors(data, false));
 
   return (
-    <div className={`flex flex-col shadow-md rounded-lg border-4 ${bgColors}`}>
+    <Link href={`/locationInfo/${data.id}`} target="_blank" className={`flex flex-col shadow-md rounded-lg border-4 ${bgColors}`}>
       <div
-        onClick={() => selectLocation(data)}
+        // onClick={() => selectLocation(data)}
         className="flex flex-row no-wrap gap-6 cursor-pointer p-6"
       >
         <div className="flex items-center">
@@ -88,13 +79,16 @@ function Listing({ data, selectLocation, isSelected }: props) {
             <div className={`font-bold px-2 rounded-sm py-[4px] ${backgroundCategoryColors}`}>
               {formatCategory(data.category)}
             </div>
-            <span>•</span>
-            <span className="text-base">Currently busy</span>
+
+            {/* should list average busyness here using busynessStatus not hardcoded. */}
+            {/* <span>•</span>
+            <span className="text-base">Currently busy</span> */}
           </div>
           <Rating
             className="mb-2"
             rating={data.rating}
             size={20}
+            style="full"
           />
           <div className="flex flex-row gap-3">
             {data.hasWifi && (
@@ -103,7 +97,6 @@ function Listing({ data, selectLocation, isSelected }: props) {
                 Wifi available
               </div>
             )}
-            {/* <div>{data.id}, {selectedLocation?.id}</div> */}
             {/* {data.ch && (
               <div className="text-sm rounded-lg flex flex-row gap-1">
                 <ChargingAvailable size={16} />
@@ -117,13 +110,10 @@ function Listing({ data, selectLocation, isSelected }: props) {
               </div>
             )}
           </div>
-          <div className="flex justify-end">
-            {/* <Link href={`/quickInfo/${data.id}`} className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">View Details</Link> */}
-          </div>
         </div>
       </div>
       <ListingControls data={data}/>
-    </div>
+    </Link>
   );
 }
 

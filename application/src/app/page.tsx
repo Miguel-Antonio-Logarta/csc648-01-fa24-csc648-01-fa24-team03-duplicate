@@ -15,17 +15,17 @@ interface Location {
   category: string;
   rating: number;
   imageWebLink: string;
+  hasWifi: boolean;
+  animalFriendliness: boolean;
 }
 
 export default function Home() {
 
-  const { locations, loading, error } = useGetLocationData();
-  const {count, setCount} = useCount({startingVal: 0});
+  const { locations } = useGetLocationData();
 
   return (
     <div className="w-screen min-h-screen flex flex-col">
       <Navbar />
-      <div>{count} <button onClick={() => setCount(count + 1)}>Click me</button></div>
       <div className="flex flex-row no-wrap relative shadow-inner w-screen h-96 bg-red-200 items-center">
         {/* <div className="h-full w-full bg-blue-200"> */}
         <div className="flex flex-row no-wrap items-center z-10 px-32 gap-8">
@@ -51,7 +51,7 @@ export default function Home() {
         />
       </div>
 
-      <section className="flex flex-col items-center px-16 py-2.5 w-full bg-stone-50 max-md:px-5 max-md:max-w-full">
+      <section className="flex flex-col items-center px-16 pt-2.5 pb-5 w-full bg-stone-50 max-md:px-5 max-md:max-w-full">
         <Image
           loading="lazy"
           src="/featuredSpots.png"
@@ -60,28 +60,25 @@ export default function Home() {
           height={200}
           className="h-auto mb-2.5"
         />
-        {/* <div className="w-full">
-          {locations.map((location) => )}
-        </div> */}
         <div className="mt-2.5 w-full max-w-[1240px] max-md:max-w-full">
           <div className="grid justify-center grid-cols-2 gap-5 max-md:grid-cols-1">
             {locations.map((location: Location) => (
               <div key={location.id} className="flex flex-col">
                 <LocationCard
                   id={location.id}
-                  title={location.name}
-                  subtitle={location.category}
+                  name={location.name}
                   rating={location.rating}
                   imageUrl={location.imageWebLink}
-                  backgroundColor="bg-sage"
-                  borderColor="border-darkSage"
+                  category={location.category}
+                  hasWifi={location.hasWifi}
+                  animalFriendliness={location.animalFriendliness}
                 />
               </div>
             ))}
           </div>
         </div>
       </section>
-      <section className="flex flex-col items-center my-8 p-16 p-2.5 w-full text-center border-slate-200 border-t-2">
+      {/* <section className="flex flex-col items-center my-8 p-16 p-2.5 w-full text-center border-slate-200 border-t-2">
         <h1>Check Out the Other Pages!</h1>
         <div className="flex flex-col gap-5 w-96">
           <Link href="prototype" className={componentStyles.button}>
@@ -94,7 +91,7 @@ export default function Home() {
             See our about page →
           </Link>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

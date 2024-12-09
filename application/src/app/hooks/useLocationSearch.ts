@@ -29,10 +29,8 @@ const useLocationSearch = (queryParams: string) => {
                 setLoading(false);
             }
         };
-
-        if(queryParams.length > 0) {
-            fetchFilteredLocations();
-        }
+        
+        fetchFilteredLocations();
     }, [queryParams]);
 
     return { locations, loading, error };

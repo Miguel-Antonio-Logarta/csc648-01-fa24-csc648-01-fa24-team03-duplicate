@@ -4,9 +4,11 @@ type Props = {
   visible: boolean;
   children?: React.ReactNode;
   close: (e: React.SyntheticEvent) => void;
+  onConfirm?: (e: React.SyntheticEvent) => void;
+  onCancel?: (e: React.SyntheticEvent) => void;
 };
 
-const Modal = ({ visible, children, close }: Props) => {
+const Modal = ({ visible, children, close, onConfirm, onCancel }: Props) => {
   if (!visible) {
     return null;
   } else {
@@ -32,10 +34,16 @@ const Modal = ({ visible, children, close }: Props) => {
                   yet.
                 </p>
                 <div className="flex flex-row no-wrap gap-3 justify-end">
-                  <button className="rounded-md rounded-md border-2 py-1 px-4 hover:bg-black hover:text-white hover:border-black">
+                <button
+                    className="rounded-md border-2 py-1 px-4 hover:bg-black hover:text-white hover:border-black"
+                    onClick={onCancel}
+                  >
                     Cancel
                   </button>
-                  <button className="rounded-md rounded-md py-1 px-4 bg-[#C6E2FF] hover:bg-blue-400">
+                  <button
+                    className="rounded-md py-1 px-4 bg-[#C6E2FF] hover:bg-blue-400"
+                    onClick={onConfirm}
+                  >
                     Action
                   </button>
                 </div>

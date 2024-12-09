@@ -84,7 +84,8 @@ model LocationGallery {
 
 model Review {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  rating Float
+  rating Float // 1 - 5 stars
+  busynessStatus Float // 1 - 5 busy
   content String
   images String[]
   creationDate DateTime @default(now())

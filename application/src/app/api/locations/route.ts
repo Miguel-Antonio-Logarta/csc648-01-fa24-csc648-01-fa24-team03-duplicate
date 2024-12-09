@@ -32,6 +32,17 @@ export interface OperatingHour {
     closeTime: string;
 }
 
+// Define the order of the days numerically.
+const dayOrder = {
+    MONDAY: 0,
+    TUESDAY: 1,
+    WEDNESDAY: 2,
+    THURSDAY: 3,
+    FRIDAY: 4,
+    SATURDAY: 5,
+    SUNDAY: 6
+};
+
 /**
  * @Endpoint - GET /api/locations
  * @description - Fetches all locations with their operating hours.
@@ -46,15 +57,18 @@ export async function GET() {
                         day: true,
                         openTime: true,
                         closeTime: true
-                    },
-                    orderBy: {
-                        // Need to order the operating hours by day of the week, starting from Monday
-                        // One would think we would do this by day: 'asc', but that doesn't work
-                        id: 'asc'
                     }
                 }
             }
         });
+
+        // Manually sort the operating hours by the numeric day order
+        locations.forEach(location => {
+            location.operatingHours.sort((a, b) => {
+                return dayOrder[a.day] - dayOrder[b.day];
+            });
+        });
+
         return NextResponse.json(locations);
     } catch (error: any) {
         console.log(`[ERROR]: Error in GET of api/locations/route.ts: ${error}`);
